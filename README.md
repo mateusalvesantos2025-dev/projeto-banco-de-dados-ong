@@ -202,10 +202,29 @@
 ## 7. Justificativa Técnica
 > Visão 7.1: Explicar as escolhas da modelagem do BD para a ONG.
 
-* **Escolha da Chave Primária e Entidade Principal:** A entidade `BENEFICIÁRIO` foi definida como o pivô central do sistema, utilizando `id_beneficiario` como Chave Primária (PK) autoincrementada. Essa escolha garante unicidade absoluta mesmo em casos de beneficiários sem CPF ou NIS no momento do primeiro atendimento.
-* **Normalização das Entidades de Apoio (`COMPOSIÇÃO_FAMILIAR`, `TRABALHO` e `REFERÊNCIA_FAMILIAR`):** A separação dessas informações em entidades próprias com cardinalidade (0,n) evita a presença de atributos multivalorados ou repetitivos dentro de `BENEFICIÁRIO`, respeitando as regras de normalização de banco de dados e permitindo o registro de históricos ocupacionais e familiares.
-* **Decisão Consciente sobre Redundância (`idade` x `data_nascimento`):** O atributo `idade` na entidade `COMPOSIÇÃO_FAMILIAR` e na ficha principal pode ser derivado da `data_nascimento`. A equipe optou por mantê-lo explicitamente no modelo conceitual por estrita **fidelidade à fonte primária (ficha de atendimento impressa da ONG)**, garantindo que os dados históricos coletados manualmente sejam preservados sem perda de contexto operacional.
-* **Modelagem do Bloco de Encaminhamentos:** Em virtude da ficha física possuir um rol fixo de 30 opções de múltipla escolha para encaminhamentos, a modelagem transformou esse fluxo em uma estrutura de associação de N:M entre `ATENDIMENTO` e `ENCAMINHAMENTO_ATENDIMENTO`. Isso impede a criação de 30 colunas do tipo booleano no banco de dados e garante escalabilidade caso a ONG adicione novos serviços no futuro.
+### Escolha das Entidades e Atribuição de Atributos
+* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `possui_deficiencia`, etc.). O endereço foi modelado como atributo composto (`logradouro`, `número`, `bairro`, `cidade`, `estado`, `cep`) para permitir pesquisas geográficas detalhadas.
+* **TRABALHO:** Isolou-se as informações socioeconômicas (`renda_mensal`, `situacao_profissional`, `empresa`, `ocupacao_atual`) da tabela principal para suportar alterações de renda e histórico ocupacional sem poluir o cadastro do beneficiário.
+* **COMPOSIÇÃO_FAMILIAR:** Derivada do bloco "Quem mora com você". Guarda `nome`, `idade` e `parentesco_vinculo` dos moradores da mesma residência.
+* **REFERÊNCIA_FAMILIAR:** Derivada do bloco de contatos externos/emergência. Armazena `nome`, `parentesco_vinculo`, `telefone` e `endereco` completo do contato.
+* **DEMANDA_INICIAL:** Mapeia as necessidades relatadas no atendimento inicial, registrando `descricao` e `data_registro`.
+* **ENCAMINHAMENTO:** Mapeia as ações institucionais (CRAS, saúde, habitação, etc.), registrando `tipo_encaminhamento`, `descricao` e `data_encaminhamento`.
+
+---
+
+### Relacionamentos e Cardinalidades
+* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) TRABALHO:** O beneficiário pode não possuir vínculo de trabalho cadastrado (0) ou possuir múltiplos registros/históricos (n).
+* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR:** O assistido pode morar sozinho (0) ou registrar múltiplos membros familiares (n).
+* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR:** Permite cadastrar de zero a múltiplas referências de apoio externo.
+* **BENEFICIÁRIO (0,n) --- APRESENTA --- (0,n) DEMANDA_INICIAL:** Um beneficiário pode passar por múltiplos atendimentos ao longo do tempo, registrando diferentes demandas.
+* **BENEFICIÁRIO (0,n) --- RECEBE --- (0,n) ENCAMINHAMENTO:** Um assistido pode não receber encaminhamentos no primeiro contato ou receber diversos durante seu acompanhamento social.
+
+---
+
+### Decisões de Abstração e Alternativas Rejeitadas
+* **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
+* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos (`filho_1`, `filho_2`) ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
+* **Histórico Atemporal:** Transformar demandas e encaminhamentos em entidades independentes com datas permite rastrear a evolução do atendimento do cidadão ao invés de sobrescrever suas informações a cada retorno.
 
 ---
 
