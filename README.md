@@ -5,17 +5,19 @@
 
 ---
 
-## 0. Processo
+# 0. Processo
 
-### Triagem dos dados e DER
+## Triagem dos dados e DER
 
-## 1. Diagnóstico do status e a organização
+# 1. Diagnóstico do status e a organização
 
 ### Visão 1: O Acesso e levantamento do grupo
 
 * **Nome e/ou sigla da organização:** Organização Social Nossa Senhora de Fátima (CNPJ: 32.667.614/0001-18).
   * **E-mail:** [ongnossasenhoradefatima@gmail.com](mailto:ongnossasenhoradefatima@gmail.com)
   * **Site:** [www.ongnossasenhoradefatima.com.br](http://www.ongnossasenhoradefatima.com.br)
+  * **Assistente Social Responsável:** Maria Aparecida Fernandes Ferreira de Souza
+  * **Telefone:** (11) 96972-4382
 * **Acesso à ONG:** Contato direto por meio de voluntariado ativo no setor de um dos integrantes do grupo e entrevista presencial com a equipe técnica.
 * **Descreva o porte:** Organização de pequeno porte, atendendo fixamente cerca de 250 famílias cadastradas na região. Conta com o Presidente e 5 voluntários recorrentes de forma fixa.
 * **Serviços e como dados eram gerados:** Triagem e atendimento social presencial, encaminhamentos para moradia, saúde mental (AMA, CAPS, UBS), assistência jurídica e moradia universitária, além de distribuição de cestas básicas. Os dados eram gerados exclusivamente em formato manual através de fichas de atendimento impressas.
