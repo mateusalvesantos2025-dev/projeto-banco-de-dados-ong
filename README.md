@@ -215,12 +215,12 @@
 > Visão 7.1: Explicar as escolhas da modelagem do BD para a ONG.
 
 ### Escolha das Entidades e Atribuição de Atributos
-* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `possui_deficiencia`, etc.). O endereço foi modelado como atributo composto (`logradouro`, `número`, `bairro`, `cidade`, `estado`, `cep`) para permitir pesquisas geográficas detalhadas.
-* **TRABALHO:** Isolou-se as informações socioeconômicas (`renda_mensal`, `situacao_profissional`, `empresa`, `ocupacao_atual`) da tabela principal para suportar alterações de renda e histórico ocupacional sem poluir o cadastro do beneficiário.
-* **COMPOSIÇÃO_FAMILIAR:** Derivada do bloco "Quem mora com você". Guarda `nome`, `idade` e `parentesco_vinculo` dos moradores da mesma residência.
-* **REFERÊNCIA_FAMILIAR:** Derivada do bloco de contatos externos/emergência. Armazena `nome`, `parentesco_vinculo`, `telefone` e `endereco` completo do contato.
-* **DEMANDA_INICIAL:** Mapeia as necessidades relatadas no atendimento inicial, registrando `descricao` e `data_registro`.
-* **ENCAMINHAMENTO:** Mapeia as ações institucionais (CRAS, saúde, habitação, etc.), registrando `tipo_encaminhamento`, `descricao` e `data_encaminhamento`.
+* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `possui_deficiencia`, `tipo_deficiencia`, etc.). O endereço foi modelado como atributo composto (`logradouro`, `numero`, `bairro`, `cidade`, `estado`, `cep`) para permitir pesquisas geográficas detalhadas.
+* **TRABALHO:** Isolou-se as informações socioeconômicas (`renda_mensal`, `situacao_profissional`, `empresa`, `ocupacao_atual`, `endereco_trabalho`, etc.) da tabela principal para suportar histórico profissional sem poluir o cadastro do beneficiário.
+* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, identificada unicamente por `id_familiar`.
+* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `parentesco_vinculo`, `telefone` e o endereço composto da pessoa de contato externo para emergências.
+* **DEMANDA_INICIAL:** Mapeia as necessidades relatadas na triagem inicial através da chave `id_demanda`, registrando `descricao` e `data_registro`.
+* **ENCAMINHAMENTO:** Mapeia as ações institucionais (CRAS, saúde, habitação, etc.) através da chave `id_encaminhamento`, registrando `tipo_encaminhamento`, `descricao` e `data_encaminhamento`.
 
 ---
 
