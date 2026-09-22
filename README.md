@@ -50,7 +50,7 @@
 
 * **[RNF01] Segurança e Privacidade (LGPD):** Acesso restrito e hierarquizado (dados sensíveis de triagem visíveis apenas pela assistente social e psicóloga).
 * **[RNF02] Usabilidade:** Interface simples, intuitiva e acessível para facilitar o uso pela equipe técnica e voluntários.
-* **[RNF03] Desempenho:** Resposta rápida em consultas e cadastros.
+* **[RNF03] Desempenho:** As operações de consulta e salvar cadastros devem retornar em **até 2 segundos**, garantindo uma navegação fluida para o usuário.
 * **[RNF04] Disponibilidade:** Sistema disponível em tempo integral, com suporte a acessos simultâneos e atualizações em tempo real.
 * **[RNF05] Backup:** Rotinas automatizadas de backup e recuperação de dados.
 * **[RNF06] Escalabilidade e Integração:** Arquitetura modular preparada para o crescimento da base de usuários e para futuras integrações com sistemas externos.
