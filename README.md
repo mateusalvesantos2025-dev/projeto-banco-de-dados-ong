@@ -1,7 +1,11 @@
 # Projeto de Modelagem Conceitual (DER) - Organização Social Nossa Senhora de Fátima
 
-> **Instruções de uso:** Substitua o conteúdo em [parênteses ou colchetes] com as informações do seu projeto.
-> Preencha cada seção abaixo, mantendo os títulos. Apenas remova esta nota de orientações ao final do seu projeto. O "README" é renderizado especialmente no perfil do seu projeto, então use justificativas para manter visual agradável.
+**Integrantes / Autores:**
+* Gabriel Simões da Silva (RGM 47327383)
+* Henrique Novais de Oliveira (RGM 47046996)
+* Leandro Miranda da Silva (RGM 47397349)
+* Mateus Alves dos Santos (RGM 47435887)
+* Washington de Souza Silva (RGM 49080156)
 
 ---
 
