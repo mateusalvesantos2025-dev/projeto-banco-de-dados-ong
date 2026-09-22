@@ -189,16 +189,18 @@
 
 ### Entidades Reconhecidas
 * **`BENEFICIÁRIO`**: Centraliza os dados individuais e cadastrais do cidadão atendido.
-* **`TRABALHO` / `COMPOSIÇÃO_FAMILIAR` / `REFERÊNCIA_FAMILIAR`**: Armazenam detalhes operacionais e sociais sem poluir a entidade principal.
-* **`DEMANDA_INICIAL` / `ATENDIMENTO`**: Registram o histórico de atendimentos e a triagem socioassistencial.
-* **`ENCAMINHAMENTO`**: Registra as ações executadas e os direcionamentos externos efetuados.
+* **`TRABALHO`**: Armazena o perfil ocupacional, renda e dados do local de trabalho.
+* **`COMPOSIÇÃO_FAMILIAR`**: Guarda as informações dos membros que residem no mesmo domicílio.
+* **`REFERÊNCIA_FAMILIAR`**: Armazena os contatos externos e de emergência do beneficiário.
+* **`DEMANDA_INICIAL`**: Registra as necessidades declaradas durante as triagens.
+* **`ENCAMINHAMENTO`**: Registra os direcionamentos e encaminhamentos externos efetuados.
 
 ### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO**: Um beneficiário pode ter múltiplos registros históricos ou atuais de trabalho cadastrados.
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR**: Um beneficiário pode cadastrar múltiplos membros familiares dependentes.
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode ter até 3 contatos de emergência cadastrados.
-* **BENEFICIÁRIO (1,1) --- APRESENTA --- (0,n) DEMANDA_INICIAL**: Um beneficiário pode apresentar diversas demandas em atendimentos distintos.
-* **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENCAMINHAMENTO**: Um beneficiário pode receber variados encaminhamentos ao longo do seu acompanhamento social.
+* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) TRABALHO**: Um beneficiário pode ter cadastrado nenhum ou múltiplos registros de trabalho.
+* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR**: Um beneficiário pode possuir de zero a múltiplos integrantes familiares cadastrados.
+* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode ter cadastrado de zero a múltiplas referências de apoio externo.
+* **BENEFICIÁRIO (0,n) --- APRESENTA --- (0,n) DEMANDA_INICIAL**: Um beneficiário pode registrar nenhuma ou múltiplas demandas ao longo do tempo.
+* **BENEFICIÁRIO (0,n) --- RECEBE --- (0,n) ENCAMINHAMENTO**: Um beneficiário pode receber de zero a múltiplos encaminhamentos durante seu acompanhamento.
 
 ---
 
