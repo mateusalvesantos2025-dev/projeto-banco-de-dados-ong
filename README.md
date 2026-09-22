@@ -207,7 +207,7 @@
 ## 6. Diagrama Entidade-Relacionamento (DER)
 > Visão 6.1: O seu DER para a ONG
 
-![Diagrama Entidade-Relacionamento](1000321831.jpg)
+![Diagrama Entidade-Relacionamento](./IMG-20260916-WA0017.jpg)
 
 *(Certifique-se de que a imagem `1000321831.jpg` esteja subida na raiz do repositório no GitHub)*
 
