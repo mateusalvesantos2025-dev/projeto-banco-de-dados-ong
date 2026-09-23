@@ -192,15 +192,17 @@
 * **`TRABALHO`**: Armazena o perfil ocupacional, renda e dados do local de trabalho.
 * **`COMPOSIÇÃO_FAMILIAR`**: Guarda as informações dos membros que residem no mesmo domicílio.
 * **`REFERÊNCIA_FAMILIAR`**: Armazena os contatos externos e de emergência do beneficiário.
-* **`DEMANDA_INICIAL`**: Registra as necessidades declaradas durante as triagens.
-* **`ENCAMINHAMENTO`**: Registra os direcionamentos e encaminhamentos externos efetuados.
+* **`ATENDIMENTO`**: Registra as sessões de triagem, demandas iniciais e profissionais responsáveis.
+* **`PROFISSIONAL_RESPONSAVEL`**: Cadastra a equipe técnica que realiza os atendimentos na ONG.
+* **`ENCAMINHAMENTO_ATENDIMENTO`**: Registra os direcionamentos e encaminhamentos externos gerados a partir de um atendimento.
 
 ### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) TRABALHO**: Um beneficiário pode ter cadastrado nenhum ou múltiplos registros de trabalho.
-* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR**: Um beneficiário pode possuir de zero a múltiplos integrantes familiares cadastrados.
-* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode ter cadastrado de zero a múltiplas referências de apoio externo.
-* **BENEFICIÁRIO (0,n) --- APRESENTA --- (0,n) DEMANDA_INICIAL**: Um beneficiário pode registrar nenhuma ou múltiplas demandas ao longo do tempo.
-* **BENEFICIÁRIO (0,n) --- RECEBE --- (0,n) ENCAMINHAMENTO**: Um beneficiário pode receber de zero a múltiplos encaminhamentos durante seu acompanhamento.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO**: Um beneficiário pode ter um registro de trabalho, e cada registro de trabalho pertence a pelo menos um beneficiário.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR**: Um beneficiário vincula-se a membros da família, e cada membro pertence a pelo menos um beneficiário.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode registrar referências de apoio, e cada referência está vinculada a pelo menos um beneficiário.
+* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO**: Um beneficiário pode solicitar atendimentos, e cada atendimento atende a pelo menos um beneficiário.
+* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO**: Um profissional conduz atendimentos, e cada atendimento deve ser conduzido por pelo menos um profissional.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO**: Um atendimento pode gerar encaminhamentos, e todo encaminhamento é originado a partir de um atendimento.
 
 ---
 
@@ -217,12 +219,31 @@
 > Visão 7.1: Explicar as escolhas da modelagem do BD para a ONG.
 
 ### Escolha das Entidades e Atribuição de Atributos
-* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `possui_deficiencia`, `tipo_deficiencia`, etc.). O endereço foi modelado como atributo composto (`logradouro`, `numero`, `bairro`, `cidade`, `estado`, `cep`) para permitir pesquisas geográficas detalhadas.
-* **TRABALHO:** Isolou-se as informações socioeconômicas (`renda_mensal`, `situacao_profissional`, `empresa`, `ocupacao_atual`, `endereco_trabalho`, etc.) da tabela principal para suportar histórico profissional sem poluir o cadastro do beneficiário.
-* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, identificada unicamente por `id_familiar`.
-* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `parentesco_vinculo`, `telefone` e o endereço composto da pessoa de contato externo para emergências.
-* **DEMANDA_INICIAL:** Mapeia as necessidades relatadas na triagem inicial através da chave `id_demanda`, registrando `descricao` e `data_registro`.
-* **ENCAMINHAMENTO:** Mapeia as ações institucionais (CRAS, saúde, habitação, etc.) através da chave `id_encaminhamento`, registrando `tipo_encaminhamento`, `descricao` e `data_encaminhamento`.
+* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado como atributo composto (`numero`, `bairro`, `cidade`, `estado`, `cep`, `logradouro`) para detalhamento geográfico.
+* **TRABALHO:** Isolou-se as informações socioeconômicas (`renda_atual`, `situacao_ocupacional`, `empresa_trabalho`, `ocupacao_atual`, `telefone_trabalho`, etc.) e o endereço do local de trabalho de forma composta (`numero`, `bairro`, `cidade`, `estado`, `cep`, `logradouro`).
+* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `nome_social`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, identificada unicamente por `id_membro`.
+* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `nome_social`, `parentesco_vinculo`, `telefone` e o endereço composto (`numero`, `bairro`, `cidade`, `estado`, `cep`, `logradouro`) da pessoa de contato externo para emergências.
+* **ATENDIMENTO:** Mapeia os encontros entre a equipe técnica e o assistido através da chave `id_atendimento`, vinculando o `id_profissional`, a `data_atendimento` e a `demanda_inicial`.
+* **PROFISSIONAL_RESPONSAVEL:** Controla o cadastro da equipe com `id_profissional`, `nome`, `nome_social`, `funcao` e `registro_profissional`.
+* **ENCAMINHAMENTO_ATENDIMENTO:** Mapeia as ações institucionais através das chaves `id_atendimento` e `tipo_encaminhamento`, registrando `detalhe_outros`.
+
+---
+
+### Relacionamentos e Cardinalidades
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** O histórico/registro de trabalho relaciona-se diretamente com a entidade Beneficiário de forma unívoca do lado do trabalho.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** Mapeia os dependentes e demais membros vinculados ao cadastro.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência vinculada ao assistido.
+* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante.
+* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e assinatura dos atendimentos realizados.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos sociais concedidos.
+
+---
+
+### Decisões de Abstração e Alternativas Rejeitadas
+* **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
+* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos (`filho_1`, `filho_2`) ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
+* **Histórico Atemporal:** Transformar atendimentos e encaminhamentos em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do atendimento do cidadão sem sobrescrever dados históricos.
+
 
 ---
 
