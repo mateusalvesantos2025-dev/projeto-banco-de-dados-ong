@@ -228,13 +228,13 @@
 
 ---
 
-### Relacionamentos e Cardinalidades
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** No diagrama, o relacionamento de posse com a entidade Trabalho indica cardinalidade `(1,n)` no lado do Beneficiário e `(1,1)` no lado da entidade Trabalho.
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` do lado do Beneficiário e `(1,n)` do lado da Composição Familiar.
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento.
-* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas.
-* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e registro dos atendimentos com cardinalidade `(1,n)` em ambos os lados.
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos concedidos, mapeado como `(1,n)` em ambos os lados no DER.
+### Relacionamentos e Cardinalidades (baseados no DER)
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** No diagrama, o relacionamento de posse com a entidade Trabalho indica cardinalidade `(1,n)` no lado do Beneficiário e `(1,1)` no lado da entidade Trabalho[span_1](start_span)[span_1](end_span).
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` no lado da entidade Beneficiário e `(1,n)` no lado da Composição Familiar[span_2](start_span)[span_2](end_span).
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento no DER[span_3](start_span)[span_3](end_span).
+* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas[span_4](start_span)[span_4](end_span).
+* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e registro dos atendimentos com cardinalidade `(1,n)` em ambos os lados[span_5](start_span)[span_5](end_span).
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos concedidos, mapeado como `(1,n)` em ambos os lados no DER[span_6](start_span)[span_6](end_span).
 
 ---
 
@@ -242,23 +242,6 @@
 * **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
 * **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos (`filho_1`, `filho_2`) ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
 * **Histórico Atemporal:** Transformar atendimentos e encaminhamentos em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do atendimento do cidadão sem sobrescrever dados históricos.
-
-
----
-
-### Relacionamentos e Cardinalidades
-* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) TRABALHO:** O beneficiário pode não possuir vínculo de trabalho cadastrado (0) ou possuir múltiplos registros/históricos (n).
-* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR:** O assistido pode morar sozinho (0) ou registrar múltiplos membros familiares (n).
-* **BENEFICIÁRIO (0,n) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR:** Permite cadastrar de zero a múltiplas referências de apoio externo.
-* **BENEFICIÁRIO (0,n) --- APRESENTA --- (0,n) DEMANDA_INICIAL:** Um beneficiário pode passar por múltiplos atendimentos ao longo do tempo, registrando diferentes demandas.
-* **BENEFICIÁRIO (0,n) --- RECEBE --- (0,n) ENCAMINHAMENTO:** Um assistido pode não receber encaminhamentos no primeiro contato ou receber diversos durante seu acompanhamento social.
-
----
-
-### Decisões de Abstração e Alternativas Rejeitadas
-* **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
-* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos (`filho_1`, `filho_2`) ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
-* **Histórico Atemporal:** Transformar demandas e encaminhamentos em entidades independentes com datas permite rastrear a evolução do atendimento do cidadão ao invés de sobrescrever suas informações a cada retorno.
 
 ---
 
