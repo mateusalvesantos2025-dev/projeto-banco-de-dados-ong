@@ -198,8 +198,8 @@
 * **`ENCAMINHAMENTO_ATENDIMENTO`**: Registra os direcionamentos e encaminhamentos externos gerados a partir de um atendimento.
 
 ### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO**: Um beneficiário pode ter um registro de trabalho, e cada registro de trabalho pertence a pelo menos um beneficiário.
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR**: Cada membro da composição familiar pertence a um único beneficiário, e um beneficiário pode possuir um ou mais membros familiares cadastrados.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) TRABALHO**: Um beneficiário pode possuir um ou mais históricos/registros de trabalho (1,n), e cada registro de trabalho pertence a apenas um beneficiário (1,1).
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR**: Cada membro da composição familiar pertence a um único beneficiário (1,1), e um beneficiário pode possuir um ou mais membros familiares cadastrados (1,n).
 * **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode registrar referências de apoio, e cada referência está vinculada a beneficiários no sistema.
 * **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO**: Um beneficiário pode solicitar atendimentos, e cada atendimento atende a beneficiários.
 * **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO**: Um profissional conduz atendimentos, e cada atendimento deve ser conduzido por profissionais habilitados.
@@ -229,7 +229,7 @@
 ---
 
 ### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** No diagrama, o relacionamento de posse com a entidade Trabalho indica cardinalidade `(1,n)` no lado do Beneficiário e `(1,1)` no lado da entidade Trabalho.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) TRABALHO:** O diagrama estabelece a cardinalidade `(1,1)` no lado da entidade Beneficiário e `(1,n)` no lado da entidade Trabalho, permitindo rastrear o histórico ocupacional do assistido.
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` no lado da entidade Beneficiário e `(1,n)` no lado da Composição Familiar.
 * **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento no DER.
 * **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas.
