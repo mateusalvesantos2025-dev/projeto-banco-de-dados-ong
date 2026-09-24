@@ -199,11 +199,11 @@
 
 ### Relacionamentos e Cardinalidades (baseados no DER)
 * **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO**: Um beneficiário pode ter um registro de trabalho, e cada registro de trabalho pertence a pelo menos um beneficiário.
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR**: Um beneficiário vincula-se a membros da família, e cada membro pertence a pelo menos um beneficiário.
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode registrar referências de apoio, e cada referência está vinculada a pelo menos um beneficiário.
-* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO**: Um beneficiário pode solicitar atendimentos, e cada atendimento atende a pelo menos um beneficiário.
-* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO**: Um profissional conduz atendimentos, e cada atendimento deve ser conduzido por pelo menos um profissional.
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO**: Um atendimento pode gerar encaminhamentos, e todo encaminhamento é originado a partir de um atendimento.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR**: Cada membro da composição familiar pertence a um único beneficiário, e um beneficiário pode possuir um ou mais membros familiares cadastrados.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode registrar referências de apoio, e cada referência está vinculada a beneficiários no sistema.
+* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO**: Um beneficiário pode solicitar atendimentos, e cada atendimento atende a beneficiários.
+* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO**: Um profissional conduz atendimentos, e cada atendimento deve ser conduzido por profissionais habilitados.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO**: Um atendimento pode gerar encaminhamentos, e todo encaminhamento é originado a partir de atendimentos.
 
 ---
 
@@ -229,12 +229,12 @@
 ---
 
 ### Relacionamentos e Cardinalidades
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** O histórico/registro de trabalho relaciona-se diretamente com a entidade Beneficiário de forma unívoca do lado do trabalho.
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** Mapeia os dependentes e demais membros vinculados ao cadastro.
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência vinculada ao assistido.
-* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante.
-* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e assinatura dos atendimentos realizados.
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos sociais concedidos.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** No diagrama, o relacionamento de posse com a entidade Trabalho indica cardinalidade `(1,n)` no lado do Beneficiário e `(1,1)` no lado da entidade Trabalho.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` do lado do Beneficiário e `(1,n)` do lado da Composição Familiar.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento.
+* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas.
+* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e registro dos atendimentos com cardinalidade `(1,n)` em ambos os lados.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos concedidos, mapeado como `(1,n)` em ambos os lados no DER.
 
 ---
 
