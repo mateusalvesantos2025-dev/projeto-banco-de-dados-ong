@@ -229,12 +229,12 @@
 ---
 
 ### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** No diagrama, o relacionamento de posse com a entidade Trabalho indica cardinalidade `(1,n)` no lado do Beneficiário e `(1,1)` no lado da entidade Trabalho[span_1](start_span)[span_1](end_span).
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` no lado da entidade Beneficiário e `(1,n)` no lado da Composição Familiar[span_2](start_span)[span_2](end_span).
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento no DER[span_3](start_span)[span_3](end_span).
-* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas[span_4](start_span)[span_4](end_span).
-* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e registro dos atendimentos com cardinalidade `(1,n)` em ambos os lados[span_5](start_span)[span_5](end_span).
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos concedidos, mapeado como `(1,n)` em ambos os lados no DER[span_6](start_span)[span_6](end_span).
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,1) TRABALHO:** No diagrama, o relacionamento de posse com a entidade Trabalho indica cardinalidade `(1,n)` no lado do Beneficiário e `(1,1)` no lado da entidade Trabalho.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` no lado da entidade Beneficiário e `(1,n)` no lado da Composição Familiar.
+* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento no DER.
+* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas.
+* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e registro dos atendimentos com cardinalidade `(1,n)` em ambos os lados.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos concedidos, mapeado como `(1,n)` em ambos os lados no DER.
 
 ---
 
