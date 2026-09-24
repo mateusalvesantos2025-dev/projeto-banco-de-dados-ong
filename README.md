@@ -212,8 +212,6 @@
 
 ![Diagrama Entidade-Relacionamento](diagrama-der.jpg)
 
-*(Certifique-se de que a imagem `1000321831.jpg` esteja subida na raiz do repositório no GitHub)*
-
 ---
 
 ## 7. Justificativa Técnica
