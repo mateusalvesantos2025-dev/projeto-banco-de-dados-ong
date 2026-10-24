@@ -160,118 +160,109 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 * **Tipo:** Legislação e Governança de Dados.
 ---
 
-## 4. Dicionário de Dados Conceitual (Preliminar)
-> Visão 4.1: Organização dos dados e regras associadas ao Dicionário.
+## 4. Dicionário de Dados Conceitual (Atualizado)
 
 ### 4.1 Entidade: Beneficiário
-*(Reflete a Seção "Dados do Beneficiário", "Filiação", "Educação" e "Trabalho" - Pág. 1 da ficha)*
+*(Reflete a Seção "Dados do Beneficiário", "Filiação" e "Educação" da ficha)*
 
 | Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | `id_beneficiario` | Identificador único do beneficiário no sistema | Gerado automaticamente no cadastro; nunca reutilizado | Numérico (PK) | Sequencial | Sim |
-| `nis` | Número de Identificação Social no CadÚnico | Cruzamento com CRAS/CREAS/SAS e programas de renda | Categórico | Texto | Não |
+| `nis` | Número de Identificação Social no CadÚnico | Cruzamento com CRAS/CREAS/SAS | Categórico | Texto | Não |
 | `cras_creas_sas` | Unidade socioassistencial vinculada | Indica o equipamento público que acompanha o caso | Categórico | Texto | Não |
 | `nome_completo` | Nome civil do beneficiário | Campo básico e obrigatório de identificação | Categórico | Texto | Sim |
 | `nome_social` | Nome de preferência do beneficiário | Priorizado no atendimento presencial | Categórico | Texto | Não |
 | `sexo` | Sexo do beneficiário | Campo de marcação única | Categórico | (F, M) | Sim |
 | `orientacao_sexual` | Orientação sexual autodeclarada | Dado sensível (LGPD); acesso restrito | Categórico | (Hetero, Homo, Bi, LGBTQIA+, Outros) | Não |
-| `data_nascimento` | Data de nascimento do beneficiário | Base para cálculo de idade e benefícios (ex. BPC) | Data | DD/MM/AAAA | Sim |
-| `naturalidade` | Município e estado de nascimento | Perfil socioeconômico sem uso restritivo | Categórico | Texto | Não |
-| `cor_raca` | Cor/raça autodeclarada | Dado sensível (LGPD); fins estatísticos de equidade | Categórico | (Branco, Negro, Indígena, Pardo) | Não |
-| `pessoa_com_deficiencia` | Indica se possui deficiência e o CID | Dado sensível (LGPD); priorização de encaminhamentos | Categórico | (Não; Sim - CID) | Não |
-| `tem_alergias` | Indica se possui alergias relevantes | Relevante para doações de alimentos e eventos | Categórico | (Não; Sim - Qual) | Não |
+| `data_nascimento` | Data de nascimento do beneficiário | Base para cálculo de idade e benefícios | Data | DD/MM/AAAA | Sim |
+| `naturalidade` | Município e estado de nascimento | Perfil socioeconômico | Categórico | Texto | Não |
+| `cor_raca` | Cor/raça autodeclarada | Dado sensível (LGPD); fins estatísticos | Categórico | (Branco, Negro, Indígena, Pardo) | Não |
+| `pessoa_com_deficiencia` | Indica se possui deficiência e o CID | Dado sensível (LGPD); priorização | Categórico | (Não; Sim - CID) | Não |
+| `tem_alergias` | Indica se possui alergias relevantes | Relevante para doações de alimentos | Categórico | (Não; Sim - Qual) | Não |
 | `cpf` | Número do CPF | Identificador único complementar; evita duplicidade | Categórico | 000.000.000-00 | Não |
 | `rg_numero` | Número do RG | Documento de identificação civil | Categórico | Texto | Não |
 | `rg_orgao_uf_emissor` | Órgão emissor e UF do RG | Detalha a origem do documento | Categórico | Texto (ex: SSP/SP) | Não |
 | `rg_data_emissao` | Data de emissão do RG | Verifica atualização do documento | Data | DD/MM/AAAA | Não |
-| `rg_ano_emissao` | Ano de emissão do RG | Campo específico presente na ficha física | Numérico | AAAA | Não |
-| `estado_civil` | Estado civil do beneficiário | Lista fechada de opções cadastrais | Categórico | (Solteiro, Casado, Divorciado, Viúvo, etc.) | Não |
-| `endereco` | Endereço residencial do beneficiário | Necessário para visitas e distribuição de doações | Categórico | Texto | Sim |
-| `bairro` | Bairro de residência | Mapeamento territorial de atuação (ex.: Mooca) | Categórico | Texto | Não |
-| `cidade_estado` | Cidade e estado de residência | Complemento de localização | Categórico | Texto | Não |
+| `estado_civil` | Estado civil do beneficiário | Lista fechada de opções cadastrais | Categórico | (Solteiro, Casado, Divorciado, Viúvo) | Não |
+| `endereco` | Endereço residencial do beneficiário | Necessário para visitas e doações | Categórico | Texto | Sim |
+| `bairro` | Bairro de residência | Mapeamento territorial de atuação | Categórico | Texto | Não |
 | `cep` | CEP do endereço residencial | Triagem e localização territorial | Categórico | 00000-000 | Não |
-| `telefone` | Telefone principal de contato | Agendamento e aviso de atendimentos/eventos | Categórico | (00) 00000-0000 | Não |
+| `telefone` | Telefone principal de contato | Agendamento e aviso de atendimentos | Categórico | (00) 00000-0000 | Não |
 | `nome_mae` | Nome da mãe do beneficiário | Filiação complementar para identificação | Categórico | Texto | Não |
 | `nome_pai` | Nome do pai do beneficiário | Filiação complementar | Categórico | Texto | Não |
-| `escolaridade` | Nível de escolaridade concluído | Orienta encaminhamentos para EJA/cursos técnicos | Categórico | (Analfabeto, Fundamental, Médio, Superior) | Não |
-| `estuda_atualmente` | Indica se estuda no momento e onde | Planejamento de encaminhamentos educacionais | Categórico | (Não; Sim - Onde) | Não |
-| `profissao_habilidades` | Profissão ou habilidades autodeclaradas | Encaminhamento a vagas de trabalho e capacitação | Categórico | Texto livre | Não |
-| `situacao_ocupacional` | Situação de trabalho atual | Avaliação de vulnerabilidade socioeconômica | Categórico | (Empregado, Desempregado, BPC, Autônomo) | Não |
-| `renda_atual` | Renda mensal individual | Dado financeiro restrito; dimensiona o apoio | Numérico | Decimal (R$) | Não |
-| `empresa_trabalho` | Nome da empresa onde trabalha | Preenchido apenas para trabalhadores formais/informais | Categórico | Texto | Não |
-| `endereco_trabalho` | Endereço do local de trabalho | Complementa perfil ocupacional | Categórico | Texto | Não |
-| `cep_trabalho` | CEP do local de trabalho | Detalhe territorial do trabalho | Categórico | 00000-000 | Não |
-| `bairro_trabalho` | Bairro do local de trabalho | Detalhe territorial do trabalho | Categórico | Texto | Não |
-| `distrito_trabalho` | Distrito do local de trabalho | Detalhe territorial do trabalho | Categórico | Texto | Não |
-| `telefone_trabalho` | Telefone do local de trabalho | Contato profissional alternativo | Categórico | (00) 00000-0000 | Não |
-| `ocupacao_atual` | Ocupação exercida no momento | Identificação de subemprego ou função real | Categórico | Texto | Não |
-| `recebe_transferencia_renda` | Indica se recebe benefício social | Evita duplicidade de concessões financeiras | Categórico | (Não; Sim - Qual) | Não |
+| `escolaridade` | Nível de escolaridade concluído | Orienta encaminhamentos para EJA/cursos | Categórico | (Analfabeto, Fundamental, Médio, Superior) | Não |
+| `estuda_atualmente` | Indica se estuda no momento e onde | Planejamento de encaminhamentos | Categórico | (Não; Sim - Onde) | Não |
+| `recebe_transferencia_renda` | Indica se recebe benefício social | Evita duplicidade de concessões | Categórico | (Não; Sim - Qual) | Não |
 | `recebe_bpc` | Indica se recebe BPC | Priorização socioassistencial | Categórico | (Não; Sim - Idoso; Sim - PcD) | Não |
 
----
+### 4.2 Entidade: Trabalho
+*(Reflete o Bloco de Perfil Ocupacional e Renda da ficha — Separado conforme exigência da modelagem)*
 
-### 4.2 Entidade: Membro_Familia
-*(Reflete a Tabela "Composição Familiar - Quem mora com você", Pág. 2 da ficha)*
+| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| `id_trabalho` | Identificador único do registro de trabalho | Gerado a cada registro profissional vinculado | Numérico (PK) | Sequencial | Sim |
+| `id_beneficiario` | Beneficiário titular do vínculo trabalhista | Relaciona o trabalho ao beneficiário correspondente | Numérico (FK) | Existir em Beneficiário | Sim |
+| `situacao_ocupacional` | Situação de trabalho atual | Avaliação de vulnerabilidade socioeconômica | Categórico | (Empregado, Desempregado, Autônomo) | Sim |
+| `profissao_habilidades` | Profissão ou habilidades autodeclaradas | Encaminhamento a vagas e capacitação | Categórico | Texto livre | Não |
+| `renda_atual` | Renda mensal individual | Dado financeiro restrito; dimensiona o apoio | Numérico | Decimal (R$) | Não |
+| `empresa_trabalho` | Nome da empresa onde trabalha | Preenchido para vínculos formais ou informais | Categórico | Texto | Não |
+| `ocupacao_atual` | Ocupação exercida no momento | Identificação da função real exercida | Categórico | Texto | Não |
+| `telefone_trabalho` | Telefone do local de trabalho | Contato profissional alternativo | Categórico | (00) 00000-0000 | Não |
+
+### 4.3 Entidade: Membro_Familia
+*(Reflete a Tabela "Composição Familiar", Pág. 2 da ficha)*
 
 | Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | `id_membro` | Identificador único do integrante | Gerado a cada dependente cadastrado | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário titular do cadastro | Um integrante pertence a 1 beneficiário | Numérico (FK) | Existir em Beneficiário | Sim |
-| `nome` | Nome do familiar | Limite máximo de até 5 integrantes por ficha | Categórico | Texto | Sim |
-| `idade` | Idade do familiar no cadastro | Dimensiona cestas e encaminhamentos familiares | Numérico | Inteiro | Sim |
-| `parentesco_vinculo` | Relação de parentesco com o titular | Identifica dependência (filho, cônjuge, mãe, etc.) | Categórico | Texto | Sim |
+| `id_beneficiario` | Beneficiário titular do cadastro | Vincula o dependente ao titular | Numérico (FK) | Existir em Beneficiário | Sim |
+| `nome` | Nome do familiar | Limite máximo de até 5 integrantes | Categórico | Texto | Sim |
+| `idade` | Idade do familiar no cadastro | Dimensiona cestas e encaminhamentos | Numérico | Inteiro | Sim |
+| `parentesco_vinculo` | Relação de parentesco com o titular | Identifica dependência (filho, cônjuge, etc.) | Categórico | Texto | Sim |
 
----
-
-### 4.3 Entidade: Referencia_Familiar
+### 4.4 Entidade: Referencia_Familiar
 *(Reflete o Bloco "Referência Familiar", Pág. 2 da ficha)*
 
 | Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | `id_referencia` | Identificador único da referência | Gerado a cada contato adicionado | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário titular do cadastro | Uma referência pertence a 1 beneficiário | Numérico (FK) | Existir em Beneficiário | Sim |
+| `id_beneficiario` | Beneficiário titular do cadastro | Vincula a referência ao beneficiário | Numérico (FK) | Existir em Beneficiário | Sim |
 | `nome` | Nome do contato de referência | Limite de até 3 referências de emergência | Categórico | Texto | Sim |
-| `parentesco_vinculo` | Grau de relação/vínculo | Ex.: vizinho, amigo, parente distante | Categórico | Texto | Não |
-| `telefone` | Telefone de contato da referência | Usado quando o beneficiário está inacessível | Categórico | (00) 00000-0000 | Não |
-| `endereco` | Endereço da referência | Localização alternativa em caso de urgência | Categórico | Texto | Não |
+| `parentesco_vinculo` | Grau de relação/vínculo | Ex.: vizinho, amigo, parente | Categórico | Texto | Não |
+| `telefone` | Telefone de contato da referência | Usado em caso de inacessibilidade | Categórico | (00) 00000-0000 | Não |
 
----
-
-### 4.4 Entidade: Atendimento
-*(Reflete o Bloco "Demanda Inicial Apresentada" + Assinatura do Técnico, Pág. 2 da ficha)*
+### 4.5 Entidade: Atendimento
+*(Reflete o Bloco "Demanda Inicial Apresentada" + Assinatura)*
 
 | Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
 | :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_atendimento` | Identificador único do atendimento | Permite histórico de múltiplos atendimentos por pessoa | Numérico (PK) | Sequencial | Sim |
+| `id_atendimento` | Identificador único do atendimento | Permite histórico de múltiplos atendimentos | Numérico (PK) | Sequencial | Sim |
 | `id_beneficiario` | Beneficiário atendido | Todo atendimento pertence a 1 beneficiário | Numérico (FK) | Existir em Beneficiário | Sim |
 | `id_profissional` | Técnico responsável pela sessão | Exige identificação do profissional habilitado | Numérico (FK) | Existir em Profissional | Sim |
-| `data_atendimento` | Data de realização do atendimento | Data da sessão técnica (São Paulo, DD/MM/AAAA) | Data | DD/MM/AAAA | Sim |
-| `demanda_inicial` | Necessidade declarada na triagem | Origina os encaminhamentos sociais subsequentes | Categórico | Texto livre | Sim |
-
----
-
-### 4.5 Entidade: Encaminhamento_Atendimento
-*(Tabela Relacional - Reflete o Bloco "Encaminhamentos Realizados", Pág. 2 da ficha)*
-
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_atendimento` | Atendimento que gerou a ação | Mapeia múltiplos encaminhamentos por atendimento | Numérico (FK/PK) | Existir em Atendimento | Sim |
-| `tipo_encaminhamento` | Categoria do encaminhamento | Domínio fechado de 30 opções padronizadas | Categórico (PK) | Lista de 30 Opções | Sim |
-| `detalhe_outros` | Especificação para "Outros" | Preenchido apenas se o tipo for "Outros. Qual?" | Categórico | Texto | Não |
+| `data_atendimento` | Data de realização do atendimento | Data da sessão técnica | Data | DD/MM/AAAA | Sim |
+| `demanda_inicial` | Necessidade declarada na triagem | Origina os encaminhamentos sociais | Categórico | Texto livre | Sim |
 
 * **Domínio de `tipo_encaminhamento` (30 opções padronizadas):** Atualização cadastral CAD Único/PTR; Inclusão em programa de transferência de renda; Inclusão no BPC; Orientação de débito de contas de consumo; Regularização de documentação civil; Transporte Urbano (Bilhete Único Especial); Passagem Intermunicipal/Interestadual; Alimentação (Bom Prato/Cesta Básica); Solicitação de Carteira do Idoso; INSS (orientação/aposentadoria/auxílio); Inserção Rede Socioassistencial Básica; Inserção Rede Socioassistencial Especial; Inserção Rede Socioassistencial Local; Inserção Rede Setorial SAS Mooca; Orientação ao Imigrante; Habitação Social (MCMV/CDHU/COHAB); Capacitação Profissional; Inserção no mercado de trabalho; Educação (EJA/Técnico/Faculdade); Tratamento de Saúde; Curso de Informática; Curso de Idiomas; Curso de Educação Financeira; Defesa e proteção ao Idoso; Defesa e proteção à PcD; Defesa e proteção à mulher; Defesa e proteção à criança e adolescente; Defesa dos direitos LGBTQIA+; Defesa e proteção animal; Outros. Qual?
 
----
 
-### 4.6 Entidade: Profissional_Responsavel
-*(Reflete a Assinatura do Técnico, Rodapé da Pág. 2 da ficha)*
+### 4.6 Entidade: Encaminhamento_Atendimento
+*(Tabela Relacional - Mapeia os encaminhamentos gerados por atendimento)*
+
+| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| `id_atendimento` | Atendimento que gerou a ação | Chave estrangeira e primária composta | Numérico (FK/PK) | Existir em Atendimento | Sim |
+| `tipo_encaminhamento` | Categoria do encaminhamento | Domínio fechado de opções padronizadas | Categórico (PK) | Lista padronizada | Sim |
+| `detalhe_outros` | Especificação para "Outros" | Preenchido apenas se o tipo for "Outros" | Categórico | Texto | Não |
+
+### 4.7 Entidade: Profissional_Responsavel
+*(Reflete a Assinatura do Técnico)*
 
 | Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | `id_profissional` | Identificador único do técnico | Gerado no cadastro da equipe técnica | Numérico (PK) | Sequencial | Sim |
-| `nome` | Nome completo do profissional | Identificação do responsável (ex: "Maria Fernandes") | Categórico | Texto | Sim |
-| `funcao` | Cargo/função exercida na ONG | Controla níveis de acesso a dados sensíveis | Categórico | Texto (ex.: Assistente Social) | Sim |
-| `registro_profissional` | Número no conselho de classe | Validação legal e profissional (ex.: CRESS/CRP) | Categórico | Texto | Sim |
+| `nome` | Nome completo do profissional | Identificação do responsável técnico | Categórico | Texto | Sim |
+| `funcao` | Cargo/função exercida na ONG | Controla níveis de acesso a dados sensíveis | Categórico | Texto | Sim |
+| `registro_profissional` | Número no conselho de classe | Validação legal (ex.: CRESS/CRP) | Categórico | Texto | Sim |
 
 ---
 
