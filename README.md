@@ -14,22 +14,22 @@
 ## Triagem dos dados e DER
 
 ### Apreciação
-*As justificativas para a modelagem do DER e Dicionário de Dados:*
+*As justificativas para a modelagem do DER e Dicionário de Dados com base nos critérios de avaliação:*
 
-**Atributos:**
-* **1. CRIACBO** — *Atendido*: Campos `sexo` e `cor_raca` foram parametrizados.
-* **2. Adota a dor** — *Não atendido*: Sem tabela dedicada.
-* **3.1 Dependente real** — *Atendido*: Na entidade `MEMBRO_FAMILIA`, `id_beneficiario` é chave estrangeira e chave primária para manter integridade com o titular.
-* **3.2 Contato/Comunicação** — *Atendido*: Separado do `BENEFICIARIO` para evitar duplicação. A entidade `REFERENCIA_FAMILIAR` atua como contato de emergência.
-* **4. Direção de papel** — *Atendido*: Telefone e endereço do trabalho foram agrupados em atributos específicos na entidade `TRABALHO`, evitando poluição de colunas em `BENEFICIARIO`.
-* **5. Histórico do Registro** — *Não atendido*: Na sessão de `ATENDIMENTO`, há registros de históricos de atendimentos do beneficiário, mas o `status` do beneficiário não é histórico.
-* **6. Requisitos e Regras de Negócio** — *Atendido*: Todos os requisitos estão listados no README com códigos identificadores.
-* **7. Requisitos Mínimos Exigidos** — *Atendido*: O DER possui de 6 a 12 entidades com multiplicidade.
-* **8. Proposta do Negócio** — *Atendido*: A ONG precisa informatizar o fluxo de triagem e encaminhamento.
-* **9. Descrição da Situação** — *Atendido*: A ONG precisa de um sistema para organizar atendimentos, eliminando a dependência do papel.
-* **10. DER** — *Atendido*: Requisitos contemplam o modelo.
-* **11. Atributos da Ficha** — *Atendido*: Mapeados no dicionário de dados.
-* **12. Tabelas do DER** — *Parcial*: Necessita pequenas correções no modelo gráfico para corresponder perfeitamente às entidades descritas.
+**Critérios de Avaliação:**
+* **1. README** — *Atendido*: Documento `README.md` localizado na raiz do repositório.
+* **2. Integrantes** — *Atendido*: 5 integrantes listados com nome e RGM.
+* **3.1 Organização real** — *Atendido*: CNPJ, site, e-mail, telefone, assistente responsável e imagem da fachada informados.
+* **3.2 Contato/entrevista** — *Atendido*: Entrevista presencial detalhada com registros da visita.
+* **4. Caracterização** — *Atendido*: Porte, serviços e problema do negócio devidamente descritos.
+* **5. Processos de Negócio** — *Ajustado*: Inclusão da tabela com o mapeamento detalhado dos 12 processos e sua cobertura no modelo.
+* **6. Requisitos e Regras (conceitual)** — *Ajustado*: Requisitos alinhados com o fluxo de doação de cestas e acompanhamento do PIA.
+* **7. Requisitos (documentação)** — *Atendido*: RF01 a RF06 e RNF01 a RNF06 mapeados com métricas mensuráveis.
+* **8. Regras de Negócio** — *Ajustado*: Regras expandidas para cobrir retenção de dados, consentimento LGPD e critérios de doação.
+* **9. Dicionário de Dados** — *Ajustado*: Mapeamento das tabelas e atributos ajustado para cobrir todas as entidades.
+* **10. DER** — *Ajustado*: Cardinalidades do diagrama corrigidas para refletir os relacionamentos reais (1:1 e 1:N).
+* **11. Justificativa técnica** — *Ajustado*: Detalhamento das escolhas das cardinalidades e chaves primárias/estrangeiras.
+* **12. Uso de IA** — *Atendido*: Registro transparente do uso das ferramentas com reflexão crítica.
 
 ---
 
