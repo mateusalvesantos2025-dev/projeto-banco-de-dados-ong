@@ -87,22 +87,21 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 ## 2. Requisitos do Sistema
 > Visão 2: O que o sistema precisa fazer e ter para resolver as necessidades da ONG.
 
-### 2.1 Requisitos Funcionais
-* [RF01] Registrar beneficiários com dados pessoais, de contato e localização.
-* [RF02] Registrar composição familiar, situação de trabalho/renda e referências do beneficiário.
-* [RF03] Registrar a triagem inicial com as demandas sociais apresentadas.
-* [RF04] Registrar os encaminhamentos realizados para órgãos parceiros e serviços estatais.
-* [RF05] Registrar o Plano Individual de Atendimento (PIA) para acompanhamento contínuo dos beneficiários.
-* [RF06] Permite consultar, atualizar e arquivar histórico de atendimentos e fichas cadastradas.
+### 2.1 Requisitos Funcionais (RF)
+* **RF01 — Cadastro de Beneficiários:** O sistema deve permitir o registo completo de beneficiários e seus dependentes, validando a unicidade por CPF ou NIS.
+* **RF02 — Registo de Triagem Socioassistencial:** O sistema deve armazenar as fichas de triagem preenchidas pela assistente social, contendo dados socioeconómicos, situação familiar e laudos.
+* **RF03 — Gestão de Atendimentos e Encaminhamentos:** O sistema deve registrar os atendimentos realizados e os encaminhamentos efetuados para a rede externa de apoio.
+* **RF04 — Registo de Concessão de Auxílios:** O sistema deve permitir o registo da distribuição de cestas básicas e doações de forma variável conforme a necessidade e a disponibilidade.
+* **RF05 — Acompanhamento Continuado (PIA):** O sistema deve suportar o registo e a evolução do Plano Individual de Atendimento (PIA) conduzido pela equipe técnica.
+* **RF06 — Consulta e Histórico:** O sistema deve permitir a consulta ao histórico de atendimentos e triagens anteriores de um beneficiário cadastrado.
 
-## 2.2 Requisitos Não Funcionais
-
-* **[RNF01] Segurança e Privacidade (LGPD):** Acesso restrito e hierarquizado (dados sensíveis de triagem visíveis apenas pela assistente social e psicóloga).
-* **[RNF02] Usabilidade:** Interface simples, intuitiva e acessível para facilitar o uso pela equipe técnica e voluntários.
-* **[RNF03] Desempenho:** As operações de consulta e salvar cadastros devem retornar em **até 2 segundos**, garantindo uma navegação fluida para o usuário.
-* **[RNF04] Disponibilidade:** Sistema disponível em tempo integral, com suporte a acessos simultâneos e atualizações em tempo real.
-* **[RNF05] Backup:** Rotinas automatizadas de backup e recuperação de dados.
-* **[RNF06] Escalabilidade e Integração:** Arquitetura modular preparada para o crescimento da base de usuários e para futuras integrações com sistemas externos.
+### 2.2 Requisitos Não Funcionais (RNF)
+* **RNF01 — Segurança e Sigilo de Dados:** O acesso às informações sensíveis e prontuários da triagem deve ser restrito a operadores autorizados, em conformidade com a LGPD.
+* **RNF02 — Desempenho de Consulta:** As consultas de beneficiários por CPF/NIS ou nome devem retornar resultados em no máximo 2 segundos.
+* **RNF03 — Integridade Relacional:** O banco de dados deve assegurar a integridade referencial por meio de chaves primárias e estrangeiras obrigatórias.
+* **RNF04 — Disponibilidade e Acesso Local:** O sistema deve garantir a persistência segura dos dados utilizando um SGBD relacional padronizado.
+* **RNF05 — Portabilidade do Modelo:** O diagrama entidade-relacionamento (DER) e o dicionário de dados devem ser documentados em formatos acessíveis (PDF, Markdown e imagens).
+* **RNF06 — Auditoria de Registros:** O sistema deve manter o registo de data e operador associado aos lançamentos de triagem e atendimento.
 
 
 ---
