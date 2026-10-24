@@ -25,20 +25,20 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 | Processo mapeado | Tipo | Situação |
 | :--- | :--- | :--- |
-| Atendimento de recepção (suporte/encaminhamento de demandas) | Arrecadação | Parcial (via ficha) |
-| Cadastro de beneficiários e dependentes | Arrecadação | Ausente |
-| Cadastro de atestados e situação familiar | Armazenamento | Coberta |
-| Triagem socioassistencial e social | Armazenamento | Coberta |
-| Encaminhamento e redes externas | Armazenamento | Coberta |
-| Acompanhamento de famílias (PIA) | Atendimento | Parcial (só assistente social) |
-| Montagem e entrega de cestas básicas (conforme doações e necessidade variável) | Arrecadação | Parcial (via ficha) |
-| Passeios e eventos sociais | Arrecadação | Parcial (via ficha) |
-| Estoque de alimentos e doação | Físico | Ausente |
-| Gestão e histórico de prontuários | Físico | Ausente |
-| Agenda de atendimentos | Físico | Ausente |
-| Prestação de contas | Físico | Ausente |
+| Recepção e acolhimento inicial do cidadão | Atendimento | Coberta |
+| Triagem socioassistencial e anamnese social | Triagem | Coberta |
+| Cadastro completo de beneficiários e dependentes | Cadastro | Coberta |
+| Registro de atestados, laudos e vulnerabilidade familiar | Armazenamento | Coberta |
+| Encaminhamento para redes externas (saúde, habitação, jurídica) | Atendimento | Coberta |
+| Acompanhamento familiar continuado (PIA) | Acompanhamento | Parcial (suportado via histórico de atendimentos) |
+| Avaliação e concessão de cestas básicas / auxílio alimentação | Doação/Auxílio | Parcial (registrado como tipo de encaminhamento) |
+| Controle de passeios e eventos socioeducativos | Atendimento | Parcial (registrado via ficha de atendimento) |
+| Gestão e histórico de prontuários do beneficiário | Gestão | Coberta (através do id_beneficiario e atendimentos) |
+| Gestão de estoque físico de alimentos e doações | Físico | Ausente (fora do escopo do modelo conceitual) |
+| Agenda de atendimentos e escala de profissionais | Operacional | Ausente (não previsto na ficha atual) |
+| Prestação de contas e relatórios socioassistenciais (CRAS/SAS) | Relatório | Ausente (requer agregação de dados em fase futura) |
 
-*Legenda: Coberta = Processo atende no sistema; Ausente = Processo sem cobertura no modelo; Parcial = Apenas parte do processo é coberto.*
+*Legenda: Coberta = Processo totalmente mapeado no modelo conceitual; Parcial = Processo coberto de forma indireta ou limitada; Ausente = Processo sem cobertura no modelo atual.*
 
 ---
 
