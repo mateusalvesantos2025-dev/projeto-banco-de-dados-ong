@@ -13,6 +13,65 @@
 
 ## Triagem dos dados e DER
 
+### Apreciação
+*As justificativas para a modelagem do DER e Dicionário de Dados:*
+
+**Atributos:**
+* **1. CRIACBO** — *Atendido*: Campos `sexo` e `cor_raca` foram parametrizados.
+* **2. Adota a dor** — *Não atendido*: Sem tabela dedicada.
+* **3.1 Dependente real** — *Atendido*: Na entidade `MEMBRO_FAMILIA`, `id_beneficiario` é chave estrangeira e chave primária para manter integridade com o titular.
+* **3.2 Contato/Comunicação** — *Atendido*: Separado do `BENEFICIARIO` para evitar duplicação. A entidade `REFERENCIA_FAMILIAR` atua como contato de emergência.
+* **4. Direção de papel** — *Atendido*: Telefone e endereço do trabalho foram agrupados em atributos específicos na entidade `TRABALHO`, evitando poluição de colunas em `BENEFICIARIO`.
+* **5. Histórico do Registro** — *Não atendido*: Na sessão de `ATENDIMENTO`, há registros de históricos de atendimentos do beneficiário, mas o `status` do beneficiário não é histórico.
+* **6. Requisitos e Regras de Negócio** — *Atendido*: Todos os requisitos estão listados no README com códigos identificadores.
+* **7. Requisitos Mínimos Exigidos** — *Atendido*: O DER possui de 6 a 12 entidades com multiplicidade.
+* **8. Proposta do Negócio** — *Atendido*: A ONG precisa informatizar o fluxo de triagem e encaminhamento.
+* **9. Descrição da Situação** — *Atendido*: A ONG precisa de um sistema para organizar atendimentos, eliminando a dependência do papel.
+* **10. DER** — *Atendido*: Requisitos contemplam o modelo.
+* **11. Atributos da Ficha** — *Atendido*: Mapeados no dicionário de dados.
+* **12. Tabelas do DER** — *Parcial*: Necessita pequenas correções no modelo gráfico para corresponder perfeitamente às entidades descritas.
+
+---
+
+### Tabela dos Processos do Negócio (Tabela I)
+
+| Processo mapeado | Tipo | Situação |
+| :--- | :--- | :--- |
+| Atendimento de recepção (suporte/encaminhamento de demandas) | Arrecadação | Parcial (via cartão) |
+| Cadastro de beneficiários e dependentes | Arrecadação | Ausente |
+| Cadastro de atestados e situação familiar | Armazenamento | Coberta |
+| Triagem socioassistencial e social | Armazenamento | Coberta |
+| Encaminhamento e redes externas | Armazenamento | Coberta |
+| Acompanhamento de famílias (PIA) | Atendimento | Parcial (só assistente social) |
+| Montagem e entrega de cestas básicas (conforme doações e necessidade variável) | Arrecadação | Parcial (via cartão) |
+| Passeios e eventos sociais | Arrecadação | Parcial (via cartão) |
+| Estoque de alimentos e doação | Físico | Ausente |
+| Gestão e histórico de prontuários | Físico | Ausente |
+| Agenda de atendimentos | Físico | Ausente |
+| Prestação de contas | Físico | Ausente |
+
+*Legenda: Cobrir no DER / Processo atende no sistema; Ausente = Processo sem cobertura; Parcial = Apenas parte do processo é coberto.*
+
+---
+
+### Tabela das Regras de Negócio (Tabela II)
+
+| Regra mapeada | O que faz | Situação |
+| :--- | :--- | :--- |
+| Permite apenas um CPF/NIS por beneficiário | Validação | Coberta (RN01) |
+| Sigilo de triagem / acesso restrito | Triagem | Coberta (RN02) |
+| Triagem obrigatória antes de encaminhar | Triagem | Coberta (RN03) |
+| PIA para atendimento contínuo | Acompanhamento | Coberta (RN04) |
+| Limite de membros (5) e referências (3) por ficha | Validação | Parcial (só no dicionário) |
+| Avaliação social / triagem para auxílio de alimentação variável | Triagem | Parcial (só no dicionário) |
+| Controle de duplicidade para cestas/apoio | Doação | Ausente |
+| Periodicidade de entrega de cesta conforme doações | Doação | Ausente |
+| Controle de acesso dos operadores | Sistema | Ausente |
+| Consentimento e limitação de dados sensíveis (LGPD) | Legislação | Ausente |
+| Prestação de contas e relatórios para ONGs | Relatório | Ausente |
+
+*Legenda: Cobrir no DER / Regra mapeada com suporte no modelo; Ausente = Regra sem cobertura; Parcial = Apenas no dicionário de dados.*
+
 # 1. Diagnóstico do status e a organização
 
 ### Visão 1: O Acesso e levantamento do grupo
