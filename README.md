@@ -324,16 +324,24 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 ---
 
 ## 8. Uso de Inteligência Artificial
-> Registro de uso de ferramentas de IA no apoio à estruturação técnico-acadêmica do projeto.
+> Registro detalhado do uso de ferramentas de Inteligência Artificial no apoio à estruturação técnico-acadêmica, modelagem conceitual e validação de dados do projeto.
 
-* **Ferramenta de IA utilizada:** Google Gemini.
-* **Etapa de uso:** Estruturação da documentação em Markdown, adaptação da entrevista e transcrição do Dicionário de Dados Conceitual para as tabelas do esqueleto oficial do projeto.
-* **Motivação:** Agilizar a organização dos requisitos levantados em campo e garantir que o modelo textual do `README.md` seguisse estritamente o padrão solicitado pelo professor.
-* **Prompt(s) utilizados:** *"Organize as informações da entrevista e o PDF do dicionário de dados da ONG no esqueleto Markdown exigido pelo professor."*
-* **Resposta recebida:** Código Markdown estruturado com tabelas, justificativas técnicas e alinhamento do DER.
-* **Fontes e verificações:** O grupo revisou todas as tabelas e justificativas em relação à ficha física e às respostas obtidas na entrevista com a assistente social.
-* **Rejeições/Correções:** Ajustes nos nomes dos atributos para manter o padrão `snake_case` e preservação integral dos 30 itens de domínio de encaminhamento.
-* **Reflexão crítica:** A IA foi essencial para acelerar a formatação visual e estrutural, mas o conhecimento técnico do grupo e o contato real com a ONG foram determinantes para validar a consistência das regras de negócio e a utilidade do sistema.
+* **Ferramentas de IA utilizadas:** Google Gemini, OpenAI ChatGPT e Anthropic Claude.
+* **Etapas de uso:** 
+  * Estruturação e formatação da documentação técnica em Markdown e transcrição do Dicionário de Dados.
+  * Compreensão profunda e refinamento dos fluxos operacionais e regras de negócio da Organização Social.
+  * Mapeamento e análise crítica de riscos de modelagem e restrições legais (como conformidade com a LGPD).
+  * Construção, refinamento e validação detalhada do dicionário de dados conceitual por entidades.
+  * Verificação rigorosa de cardinalidades e relacionamentos, eliminando ambiguidades lógicas e pontas duplas indevidas.
+  * Identificação e correção iterativa de possíveis erros conceituais, estruturais e de normalização (1FN).
+* **Motivação:** Elevar o rigor técnico do projeto utilizando uma abordagem multilocal/multimodelos, permitindo cruzar diferentes perspectivas arquiteturais das IAs para garantir que o modelo relacional estivesse robusto, livre de inconsistências e alinhado às melhores práticas de bancos de dados, além de atender estritamente aos critérios de correção do professor.
+* **Prompt(s) utilizados (exemplos):** 
+  * *"Analise as regras de negócio e a ficha de triagem da ONG Nossa Senhora de Fátima para identificar potenciais riscos de modelagem, falhas de normalização e inconsistências estruturais."*
+  * *"Com base nos apontamentos do professor, ajude a revisar e corrigir as cardinalidades dos relacionamentos (substituindo pontas duplas 1,n por 1,1 e 0,n onde aplicável) e a isolar a entidade Trabalho de forma normalizada."*
+  * *"Organize a documentação técnica e estruture as tabelas do dicionário de dados conceitual no esqueleto Markdown exigido."*
+* **Fontes e verificações:** O grupo submeteu as propostas das IAs a uma curadoria rigorosa, cruzando cada sugestão diretamente com a ficha física real da ONG, com a teoria de modelagem relacional de banco de dados e com as observações apontadas na avaliação docente.
+* **Rejeições/Correções:** Diversas sugestões iniciais geradas pelas IAs precisaram de ajustes manuais, como a readequação de nomes de atributos para o padrão `snake_case`, a correção de cardinalidades que vieram inicialmente ambíguas e a adaptação de termos genéricos para a realidade específica da assistência social brasileira (CRAS, CADÚnico, PIA).
+* **Reflexão crítica:** O uso conjunto do Gemini, ChatGPT e Claude funcionou como um comitê de revisão técnica de alta eficiência, acelerando a depuração de erros e a formatação documental. No entanto, o discernimento técnico, a tomada de decisões de projeto, a validação com a assistente social da ONG e a responsabilidade integral pelo código e pela modelagem permaneceram exclusivamente sob o controle do grupo.
 
 ---
 
