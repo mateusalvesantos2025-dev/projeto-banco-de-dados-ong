@@ -323,13 +323,6 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ---
 
-### Decisões de Abstração e Alternativas Rejeitadas
-* **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
-* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos (`filho_1`, `filho_2`) ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
-* **Histórico Atemporal:** Transformar atendimentos e encaminhamentos em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do atendimento do cidadão sem sobrescrever dados históricos.
-
----
-
 ## 8. Uso de Inteligência Artificial
 > Registro de uso de ferramentas de IA no apoio à estruturação técnico-acadêmica do projeto.
 
