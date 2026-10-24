@@ -37,14 +37,14 @@
 
 | Processo mapeado | Tipo | Situação |
 | :--- | :--- | :--- |
-| Atendimento de recepção (suporte/encaminhamento de demandas) | Arrecadação | Parcial (via cartão) |
+| Atendimento de recepção (suporte/encaminhamento de demandas) | Arrecadação | Parcial (via ficha) |
 | Cadastro de beneficiários e dependentes | Arrecadação | Ausente |
 | Cadastro de atestados e situação familiar | Armazenamento | Coberta |
 | Triagem socioassistencial e social | Armazenamento | Coberta |
 | Encaminhamento e redes externas | Armazenamento | Coberta |
 | Acompanhamento de famílias (PIA) | Atendimento | Parcial (só assistente social) |
-| Montagem e entrega de cestas básicas (conforme doações e necessidade variável) | Arrecadação | Parcial (via cartão) |
-| Passeios e eventos sociais | Arrecadação | Parcial (via cartão) |
+| Montagem e entrega de cestas básicas (conforme doações e necessidade variável) | Arrecadação | Parcial (via ficha) |
+| Passeios e eventos sociais | Arrecadação | Parcial (via ficha) |
 | Estoque de alimentos e doação | Físico | Ausente |
 | Gestão e histórico de prontuários | Físico | Ausente |
 | Agenda de atendimentos | Físico | Ausente |
