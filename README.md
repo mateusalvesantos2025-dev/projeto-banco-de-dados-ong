@@ -47,18 +47,19 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | Regra mapeada | O que faz | Situação |
 | :--- | :--- | :--- |
 | Permite apenas um CPF/NIS por beneficiário | Validação | Coberta (RN01) |
-| Sigilo de triagem / acesso restrito | Triagem | Coberta (RN02) |
-| Triagem obrigatória antes de encaminhar | Triagem | Coberta (RN03) |
-| PIA para atendimento contínuo | Acompanhamento | Coberta (RN04) |
-| Limite de membros (5) e referências (3) por ficha | Validação | Parcial (só no dicionário) |
-| Avaliação social / triagem para auxílio de alimentação variável | Triagem | Parcial (só no dicionário) |
-| Controle de duplicidade para cestas/apoio | Doação | Ausente |
-| Periodicidade de entrega de cesta conforme doações | Doação | Ausente |
-| Controle de acesso dos operadores | Sistema | Ausente |
-| Consentimento e limitação de dados sensíveis (LGPD) | Legislação | Ausente |
-| Prestação de contas e relatórios para ONGs | Relatório | Ausente |
+| Sigilo de triagem e acesso restrito (LGPD) | Triagem | Coberta (RN02) |
+| Triagem socioassistencial obrigatória antes do encaminhamento | Triagem | Coberta (RN03) |
+| Acompanhamento continuado (PIA) vinculado ao histórico | Acompanhamento | Coberta (RN04) |
+| Limite de membros na composição familiar e referências | Validação | Coberta (via Dicionário e Tabelas Relacionadas) |
+| Avaliação social obrigatória para concessão de auxílios | Triagem | Coberta (via Atendimento e Encaminhamentos) |
+| Concessão variável de cestas conforme doações e vulnerabilidade | Doação | Coberta (RN05 / Registrada no Atendimento) |
+| Controle de duplicidade e histórico na entrega de auxílios | Doação | Coberta (RN06 / Histórico de Atendimentos) |
+| Obrigatoriedade de registro do profissional responsável (CRESS/CRP) | Triagem | Coberta (via Entidade Profissional) |
+| Periodicidade de entrega de cesta conforme doações | Doação | Parcial (registrada no fluxo de atendimento) |
+| Controle de estoque físico de alimentos | Doação | Ausente (fora do escopo do modelo de dados) |
+| Prestação de contas e relatórios para órgãos parceiros (CRAS/SAS) | Relatório | Ausente (requer agregação em fase futura) |
 
-*Legenda: Coberta = Regra mapeada com suporte no modelo; Ausente = Regra sem cobertura; Parcial = Presente apenas no dicionário de dados.*
+*Legenda: Coberta = Regra mapeada com suporte direto nas entidades e atributos do modelo; Parcial = Presente no fluxo mas sem automação de estoque; Ausente = Regra sem cobertura no modelo conceitual atual.*
 
 
 # 1. Diagnóstico do status e a organização
