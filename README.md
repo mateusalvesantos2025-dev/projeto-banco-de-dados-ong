@@ -271,20 +271,20 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ### Entidades Reconhecidas
 * **`BENEFICIÁRIO`**: Centraliza os dados individuais e cadastrais do cidadão atendido.
-* **`TRABALHO`**: Armazena o perfil ocupacional, renda e dados do local de trabalho.
+* **`TRABALHO`**: Armazena o perfil ocupacional, renda e dados do local de trabalho de forma isolada do beneficiário.
 * **`COMPOSIÇÃO_FAMILIAR`**: Guarda as informações dos membros que residem no mesmo domicílio.
-* **`REFERÊNCIA_FAMILIAR`**: Armazena os contatos externos e de emergência do beneficiário.
+* **`REFERÊNCIA_FAMILIAR`**: Armazena os contactos externos e de emergência do beneficiário.
 * **`ATENDIMENTO`**: Registra as sessões de triagem, demandas iniciais e profissionais responsáveis.
-* **`PROFISSIONAL_RESPONSAVEL`**: Cadastra a equipe técnica que realiza os atendimentos na ONG.
+* **`PROFISSIONAL_RESPONSAVEL`**: Cadastra a equipa técnica que realiza os atendimentos na ONG.
 * **`ENCAMINHAMENTO_ATENDIMENTO`**: Registra os direcionamentos e encaminhamentos externos gerados a partir de um atendimento.
 
-### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) TRABALHO**: Um beneficiário pode possuir registros de trabalho no sistema, e cada registro de trabalho vincula-se a beneficiários.
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR**: Cada membro da composição familiar pertence a um único beneficiário (1,1), e um beneficiário pode possuir um ou mais membros familiares cadastrados (1,n).
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR**: Um beneficiário pode registrar referências de apoio, e cada referência está vinculada a beneficiários no sistema.
-* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO**: Um beneficiário pode solicitar atendimentos, e cada atendimento atende a beneficiários.
-* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO**: Um profissional conduz atendimentos, e cada atendimento deve ser conduzido por profissionais habilitados.
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO**: Um atendimento pode gerar encaminhamentos, e todo encaminhamento é originado a partir de atendimentos.
+### Relacionamentos e Cardinalidades Corrigidas
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO**: Um beneficiário pode possuir registos de trabalho associados ao seu perfil ocupacional, e cada registo de trabalho pertence a um único beneficiário.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR**: Cada membro da composição familiar pertence obrigatoriamente a um único beneficiário titular, e um beneficiário pode possuir vários membros familiares cadastrados.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR**: Um beneficiário titular pode registar referências de apoio, e cada referência está vinculada a um único beneficiário.
+* **BENEFICIÁRIO (1,1) --- SOLICITA --- (0,n) ATENDIMENTO**: Um beneficiário pode solicitar múltiplos atendimentos ao longo do tempo, e cada atendimento está vinculado a um único beneficiário solicitante.
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- CONDUZ --- (0,n) ATENDIMENTO**: Um profissional da equipa técnica pode conduzir vários atendimentos, e cada atendimento é conduzido por um único profissional responsável.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO**: Um atendimento pode gerar um ou mais encaminhamentos externos, resolvido estruturalmente pela tabela associativa.
 
 ---
 
