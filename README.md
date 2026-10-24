@@ -299,23 +299,27 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 > Visão 7.1: Explicar as escolhas da modelagem do BD para a ONG.
 
 ### Escolha das Entidades e Atribuição de Atributos
-* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado como atributo composto (`numero`, `bairro`, `cidade`, `estado`, `cep`, `logradouro`) para detalhamento geográfico.
-* **TRABALHO:** Isolou-se as informações socioeconômicas (`renda_atual`, `situacao_ocupacional`, `empresa_trabalho`, `ocupacao_atual`, `telefone_trabalho`, etc.) e o endereço do local de trabalho de forma composta (`numero`, `bairro`, `cidade`, `estado`, `cep`, `logradouro`).
+* **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado para detalhamento geográfico.
+* **TRABALHO:** Entidade isolada para armazenar as informações socioeconômicas e ocupacionais (`renda_atual`, `situacao_ocupacional`, `empresa_trabalho`, `ocupacao_atual`, `telefone_trabalho`), garantindo a normalização adequada em relação aos dados pessoais do beneficiário.
 * **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `nome_social`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, identificada unicamente por `id_membro`.
-* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `nome_social`, `parentesco_vinculo`, `telefone` e o endereço composto (`numero`, `bairro`, `cidade`, `estado`, `cep`, `logradouro`) da pessoa de contato externo para emergências.
+* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `nome_social`, `parentesco_vinculo`, `telefone` e endereço da pessoa de contato externo para emergências.
 * **ATENDIMENTO:** Mapeia os encontros entre a equipe técnica e o assistido através da chave `id_atendimento`, vinculando o `id_profissional`, a `data_atendimento` e a `demanda_inicial`.
 * **PROFISSIONAL_RESPONSAVEL:** Controla o cadastro da equipe com `id_profissional`, `nome`, `nome_social`, `funcao` e `registro_profissional`.
-* **ENCAMINHAMENTO_ATENDIMENTO:** Mapeia as ações institucionais através das chaves `id_atendimento` e `tipo_encaminhamento`, registrando `detalhe_outros`.
+* **ENCAMINHAMENTO_ATENDIMENTO:** Tabela associativa que mapeia as ações institucionais através das chaves estrangeiras provenientes de `ATENDIMENTO` para assegurar a integridade referencial.
 
----
+### Relacionamentos e Cardinalidades Corrigidas
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO:** Um beneficiário pode possuir registros de trabalho associados ao seu perfil ocupacional, e cada registro de trabalho pertence a um único beneficiário.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR:** Cada membro da composição familiar pertence obrigatoriamente a um único beneficiário titular, e um beneficiário pode possuir vários membros familiares cadastrados.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR:** Um beneficiário titular pode registrar referências de apoio, e cada referência está vinculada a um único beneficiário.
+* **BENEFICIÁRIO (1,1) --- SOLICITA --- (0,n) ATENDIMENTO:** Um beneficiário pode solicitar múltiplos atendimentos ao longo do tempo, e cada atendimento está vinculado a um único beneficiário solicitante.
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- CONDUZ --- (0,n) ATENDIMENTO:** Um profissional da equipe técnica pode conduzir vários atendimentos, e cada atendimento é conduzido por um único profissional responsável.
+* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Um atendimento pode gerar um ou mais encaminhamentos externos, resolvido estruturalmente pela tabela associativa.
 
-### Relacionamentos e Cardinalidades (baseados no DER)
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) TRABALHO:** O diagrama estabelece a cardinalidade `(1,n)` em ambas as extremidades do relacionamento de posse com a entidade Trabalho.
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (1,n) COMPOSIÇÃO_FAMILIAR:** O diagrama estabelece a cardinalidade `(1,1)` no lado da entidade Beneficiário e `(1,n)` no lado da Composição Familiar.
-* **BENEFICIÁRIO (1,n) --- POSSUI --- (1,n) REFERÊNCIA_FAMILIAR:** Mapeia a rede de contatos e emergência do assistido com cardinalidade `(1,n)` em ambas as extremidades do relacionamento no DER.
-* **BENEFICIÁRIO (1,n) --- SOLICITA --- (1,n) ATENDIMENTO:** Cada atendimento prestado vincula-se ao cidadão solicitante com cardinalidade `(1,n)` em ambas as pontas.
-* **PROFISSIONAL_RESPONSAVEL (1,n) --- CONDUZ --- (1,n) ATENDIMENTO:** Assegura a responsabilidade técnica e registro dos atendimentos com cardinalidade `(1,n)` em ambos os lados.
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Garante a rastreabilidade entre as triagens e os encaminhamentos concedidos, mapeado como `(1,n)` em ambos os lados no DER.
+### Decisões de Abstração e Alternativas Rejeitadas
+* **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
+* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família, dados de trabalho ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
+* **Correção de Cardinalidades Ambíguas:** Eliminaram-se as cardinalidades duplas `(1,n)` em ambas as pontas apontadas na avaliação anterior, substituindo-as por associações estruturalmente corretas `(1,1) para (0,n)` em relações de 1 para N.
+* **Histórico Atemporal:** Transformar atendimentos e encaminhamentos em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do atendimento do cidadão sem sobrescrever dados históricos.
 
 ---
 
