@@ -13,23 +13,11 @@
 
 ## Triagem dos dados e DER
 
-### Apreciação
-*As justificativas para a modelagem do DER e Dicionário de Dados com base nos critérios de avaliação:*
+O fluxo operacional da Organização Social Nossa Senhora de Fátima baseia-se no atendimento de portas abertas para a população em situação de vulnerabilidade. A partir da entrevista presencial realizada pela assistente social, é feito o preenchimento da ficha de triagem (coleta de dados pessoais, ocupacionais, composição familiar e demandas sociais). 
 
-**Critérios de Avaliação:**
-* **1. README** — *Atendido*: Documento `README.md` localizado na raiz do repositório.
-* **2. Integrantes** — *Atendido*: 5 integrantes listados com nome e RGM.
-* **3.1 Organização real** — *Atendido*: CNPJ, site, e-mail, telefone, assistente responsável e imagem da fachada informados.
-* **3.2 Contato/entrevista** — *Atendido*: Entrevista presencial detalhada com registros da visita.
-* **4. Caracterização** — *Atendido*: Porte, serviços e problema do negócio devidamente descritos.
-* **5. Processos de Negócio** — *Ajustado*: Inclusão da tabela com o mapeamento detalhado dos 12 processos e sua cobertura no modelo.
-* **6. Requisitos e Regras (conceitual)** — *Ajustado*: Requisitos alinhados com o fluxo de doação de cestas e acompanhamento do PIA.
-* **7. Requisitos (documentação)** — *Atendido*: RF01 a RF06 e RNF01 a RNF06 mapeados com métricas mensuráveis.
-* **8. Regras de Negócio** — *Ajustado*: Regras expandidas para cobrir retenção de dados, consentimento LGPD e critérios de doação.
-* **9. Dicionário de Dados** — *Ajustado*: Mapeamento das tabelas e atributos ajustado para cobrir todas as entidades.
-* **10. DER** — *Ajustado*: Cardinalidades do diagrama corrigidas para refletir os relacionamentos reais (1:1 e 1:N).
-* **11. Justificativa técnica** — *Ajustado*: Detalhamento das escolhas das cardinalidades e chaves primárias/estrangeiras.
-* **12. Uso de IA** — *Atendido*: Registro transparente do uso das ferramentas com reflexão crítica.
+Com base no diagnóstico da triagem, a ONG realiza o atendimento direto (como a montagem e concessão de cestas básicas conforme a disponibilidade de doações e necessidade do beneficiário) ou efetua encaminhamentos externos para a rede socioassistencial e órgãos parceiros (saúde mental, assistência jurídica, habitação e empregabilidade).
+
+Abaixo estão mapeados os processos do negócio e as regras operacionais identificadas na organização, bem como a cobertura atual prevista no modelo de dados conceitual.
 
 ---
 
@@ -50,7 +38,7 @@
 | Agenda de atendimentos | Físico | Ausente |
 | Prestação de contas | Físico | Ausente |
 
-*Legenda: Cobrir no DER / Processo atende no sistema; Ausente = Processo sem cobertura; Parcial = Apenas parte do processo é coberto.*
+*Legenda: Coberta = Processo atende no sistema; Ausente = Processo sem cobertura no modelo; Parcial = Apenas parte do processo é coberto.*
 
 ---
 
@@ -70,7 +58,8 @@
 | Consentimento e limitação de dados sensíveis (LGPD) | Legislação | Ausente |
 | Prestação de contas e relatórios para ONGs | Relatório | Ausente |
 
-*Legenda: Cobrir no DER / Regra mapeada com suporte no modelo; Ausente = Regra sem cobertura; Parcial = Apenas no dicionário de dados.*
+*Legenda: Coberta = Regra mapeada com suporte no modelo; Ausente = Regra sem cobertura; Parcial = Presente apenas no dicionário de dados.*
+
 
 # 1. Diagnóstico do status e a organização
 
