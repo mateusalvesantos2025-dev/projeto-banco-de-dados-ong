@@ -107,15 +107,58 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ---
 
-## 3. Regras de Negócio
-> Visão 3.1: Quais são as regras do negócio?
-* **RN01 (Cadastro Único):** Cada beneficiário é identificado unicamente por CPF ou NIS, evitando duplicidade de atendimento.
-* **RN02 (Sigilo de Informações):** Apenas profissionais credenciados (Assistente Social / Psicóloga) possuem permissão para visualizar e alterar detalhes da triagem e diagnósticos sociais.
-* **RN03 (Obrigatoriedade na Triagem):** Toda solicitação de assistência ou encaminhamento exige o preenchimento prévio dos dados fundamentais de triagem social.
-* **RN04 (Continuidade via PIA):** Atendimentos contínuos e acompanhamentos em abrigos exigem a vinculação de um Plano Individual de Atendimento (PIA).
+# 3. Regras de Negócio (RN)
 
-> "Por que essa regra?"
-* A **RN01** impede fraudes e garante distribuição justa de recursos. A **RN02** assegura o cumprimento estrito da LGPD e protege a privacidade dos atendidos. As regras **RN03** e **RN04** padronizam o atendimento técnico, garantindo que o histórico do beneficiário seja preservado para prestação de contas e encaminhamentos efetivos.
+ As regras de negócio abaixo definem as restrições operacionais, validações de dados e requisitos legais que orientam a modelagem do banco de dados e a rotina da instituição.
+
+---
+
+### RN01 — Unicidade de Identificação (CPF/NIS)
+* **Descrição:** Cada beneficiário cadastrado no sistema deve possuir apenas um registro ativo associado ao seu número de CPF ou NIS (Número de Identificação Social).
+* **Motivação:** Evitar cadastros duplicados de uma mesma pessoa ou família no sistema da ONG.
+* **Tipo:** Validação de Dados / Restrição do Banco.
+
+---
+
+### RN02 — Sigilo e Restrição de Acesso às Triagens (LGPD)
+* **Descrição:** Os dados coletados durante a triagem socioassistencial (informações financeiras, relatórios de vulnerabilidade e prontuários) são confidenciais e restritos à equipe de assistência social autorizada.
+* **Motivação:** Garantir o cumprimento da Lei Geral de Proteção de Dados (LGPD) e a privacidade dos atendidos.
+* **Tipo:** Segurança e Controle de Acesso.
+
+---
+
+### RN03 — Triagem Obrigatória Prévia
+* **Descrição:** Nenhum beneficiário poderá receber encaminhamentos para a rede externa de apoio ou participar de programas continuados sem que haja pelo menos um registro de triagem social válido e atualizado.
+* **Motivação:** Garantir que os auxílios sejam destinados prioritariamente às famílias que realmente passam por avaliação de vulnerabilidade.
+* **Tipo:** Regra de Processo / Fluxo de Atendimento.
+
+---
+
+### RN04 — Acompanhamento Continuado (PIA)
+* **Descrição:** Famílias inseridas no Plano Individual de Atendimento (PIA) devem ter seus registros de acompanhamento vinculados ao histórico do atendimento social conduzido pela assistente social.
+* **Motivação:** Permitir a evolução temporal do quadro socioeconômico da família e o acompanhamento das metas de autonomia.
+* **Tipo:** Acompanhamento / Histórico.
+
+---
+
+### RN05 — Concessão Variável de Cestas Básicas e Doações
+* **Descrição:** A distribuição de cestas básicas e itens de doação não possui quantidade fixa por beneficiário; ela varia estritamente em função da disponibilidade de estoque/doações e do grau de necessidade apurado na triagem.
+* **Motivação:** Refletir a realidade operacional da ONG, onde a oferta depende de doadores e a demanda é priorizada pela assistente social.
+* **Tipo:** Regra Operacional de Doação.
+
+---
+
+### RN06 — Controle de Duplicidade na Entrega de Auxílios
+* **Descrição:** O sistema deve permitir o registro de cada entrega efetuada (data e itens) para evitar que o mesmo beneficiário receba auxílios duplicados no mesmo ciclo de distribuição sem nova avaliação social.
+* **Motivação:** Assegurar a distribuição justa e transparente dos recursos limitados da ONG.
+* **Tipo:** Regra de Controle e Auditoria.
+
+---
+
+### RN07 — Retenção e Consentimento de Dados Sensíveis
+* **Descrição:** O cadastro de informações socioeconômicas e laudos exige o consentimento do titular (ou responsável legal), mantendo o histórico de atendimentos arquivado pelo período legal estipulado para ONGs e serviços socioassistenciais.
+* **Motivação:** Conformidade jurídica e respaldo legal na prestação de contas.
+* **Tipo:** Legislação e Governança de Dados.
 ---
 
 ## 4. Dicionário de Dados Conceitual (Preliminar)
