@@ -130,37 +130,45 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 ---
 
 ### RN03 — Triagem Obrigatória Prévia
-* **Descrição:** Nenhum beneficiário poderá receber encaminhamentos para a rede externa de apoio ou participar de programas continuados sem que haja pelo menos um registro de triagem social válido e atualizado.
-* **Motivação:** Garantir que os auxílios sejam destinados prioritariamente às famílias que realmente passam por avaliação de vulnerabilidade.
+* **Descrição:** Nenhum beneficiário poderá receber encaminhamentos para a rede externa de apoio, participar de programas continuados ou receber auxílios materiais sem que haja pelo menos um registro de triagem social válido e atualizado.
+* **Motivação:** Garantir que os auxílios e encaminhamentos sejam destinados prioritariamente às famílias que realmente passam por avaliação de vulnerabilidade.
 * **Tipo:** Regra de Processo / Fluxo de Atendimento.
 
 ---
 
-### RN04 — Acompanhamento Continuado (PIA)
-* **Descrição:** Famílias inseridas no Plano Individual de Atendimento (PIA) devem ter seus registros de acompanhamento vinculados ao histórico do atendimento social conduzido pela assistente social.
-* **Motivação:** Permitir a evolução temporal do quadro socioeconômico da família e o acompanhamento das metas de autonomia.
+### RN04 — Acompanhamento Continuado e PIA
+* **Descrição:** Famílias inseridas no Plano Individual de Atendimento (PIA) devem ter seus registros de acompanhamento, evolução temporal e metas vinculados diretamente ao histórico conduzido pela equipe técnica.
+* **Motivação:** Permitir a evolução temporal do quadro socioeconômico da família e o acompanhamento estruturado das metas de autonomia.
 * **Tipo:** Acompanhamento / Histórico.
 
 ---
 
 ### RN05 — Concessão Variável de Cestas Básicas e Doações
-* **Descrição:** A distribuição de cestas básicas e itens de doação não possui quantidade fixa por beneficiário; ela varia estritamente em função da disponibilidade de estoque/doações e do grau de necessidade apurado na triagem.
-* **Motivação:** Refletir a realidade operacional da ONG, onde a oferta depende de doadores e a demanda é priorizada pela assistente social.
+* **Descrição:** A distribuição de cestas básicas e itens de doação não possui quantidade fixa por beneficiário; ela varia estritamente em função da disponibilidade de estoque/doações de parceiros e do grau de necessidade apurado na triagem.
+* **Motivação:** Refletir a realidade operacional da ONG, onde a oferta depende de doadores externos e a demanda é priorizada pela assistente social.
 * **Tipo:** Regra Operacional de Doação.
 
 ---
 
-### RN06 — Controle de Duplicidade na Entrega de Auxílios
-* **Descrição:** O sistema deve permitir o registro de cada entrega efetuada (data e itens) para evitar que o mesmo beneficiário receba auxílios duplicados no mesmo ciclo de distribuição sem nova avaliação social.
-* **Motivação:** Assegurar a distribuição justa e transparente dos recursos limitados da ONG.
-* **Tipo:** Regra de Controle e Auditoria.
+### RN06 — Critério de Elegibilidade e Periodicidade de Auxílios
+* **Descrição:** A concessão de cestas básicas por família observa critérios de elegibilidade baseados na renda per capita apurada na triagem e respeita um intervalo mínimo de periodicidade entre as entregas, salvo em situações de calamidade avaliadas pela equipe.
+* **Motivação:** Assegurar a distribuição justa, transparente e rotativa dos recursos limitados da instituição entre as famílias cadastradas.
+* **Tipo:** Regra de Controle de Doação.
 
 ---
 
-### RN07 — Retenção e Consentimento de Dados Sensíveis
-* **Descrição:** O cadastro de informações socioeconômicas e laudos exige o consentimento do titular (ou responsável legal), mantendo o histórico de atendimentos arquivado pelo período legal estipulado para ONGs e serviços socioassistenciais.
-* **Motivação:** Conformidade jurídica e respaldo legal na prestação de contas.
+### RN07 — Consentimento, Retenção e Ciclo de Vida de Dados (LGPD)
+* **Descrição:** O cadastro de informações socioeconômicas e laudos exige o consentimento expresso do titular (ou responsável legal), mantendo o histórico de prontuários arquivado pelo período estipulado pelas normativas do terceiro setor e de assistência social, com posterior descarte seguro.
+* **Motivação:** Garantir conformidade jurídica, respaldo legal na prestação de contas e respeito à privacidade dos assistidos.
 * **Tipo:** Legislação e Governança de Dados.
+
+---
+
+### RN08 — Prestação de Contas e Relatórios Socioassistenciais
+* **Descrição:** O sistema deve permitir a agregação de dados consolidados sobre o volume de atendimentos, perfil dos assistidos e número de cestas distribuídas para a elaboração de relatórios destinados a órgãos parceiros (CRAS, SAS e doadores).
+* **Motivação:** Atender às obrigações estatutárias da ONG e prestar contas de forma transparente sobre a aplicação dos recursos e doações recebidas.
+* **Tipo:** Governança e Relatoria.
+
 ---
 
 ## 4. Dicionário de Dados Conceitual (Atualizado)
