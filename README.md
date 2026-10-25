@@ -15,7 +15,7 @@
 
 O fluxo operacional da Organização Social Nossa Senhora de Fátima baseia-se no atendimento de portas abertas para a população em situação de vulnerabilidade. A partir da entrevista presencial realizada pela assistente social, é feito o preenchimento da ficha de triagem (coleta de dados pessoais, ocupacionais, composição familiar e demandas sociais). 
 
-Com base no diagnóstico da triagem, a ONG realiza o atendimento direto (como a montagem e concessão de cestas básicas conforme a disponibilidade de doações e necessidade do beneficiário) ou efetua encaminhamentos externos para a rede socioassistencial e órgãos parceiros (saúde mental, assistência jurídica, habitação e empregabilidade).
+Adicionalmente, a instituição gerencia o recebimento de doações de mantimentos de parceiros estratégicos (como o Banco de Alimentos e o projeto Cidade Invisível), a distribuição variável de cestas básicas conforme o diagnóstico de vulnerabilidade e o planejamento de atividades socioeducativas e de lazer para os assistidos.
 
 Abaixo estão mapeados os processos do negócio e as regras operacionais identificadas na organização, bem como a cobertura atual prevista no modelo de dados conceitual.
 
@@ -30,13 +30,15 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | Cadastro completo de beneficiários e dependentes | Cadastro | Coberta |
 | Registro de atestados, laudos e vulnerabilidade familiar | Armazenamento | Coberta |
 | Encaminhamento para redes externas (saúde, habitação, jurídica) | Atendimento | Coberta |
-| Acompanhamento familiar continuado (PIA) | Acompanhamento | Parcial (suportado via histórico de atendimentos) |
-| Avaliação e concessão de cestas básicas / auxílio alimentação | Doação/Auxílio | Parcial (registrado como tipo de encaminhamento) |
+| Acompanhamento familiar continuado via PIA | Acompanhamento | Coberta (suportado pela entidade PIA) |
+| Avaliação, montagem e concessão de cestas básicas e auxílios | Doação/Auxílio | Coberta (suportado pela entidade Entrega_Cesta) |
+| Recebimento de doações de parceiros (Banco de Alimentos, etc.) | Arrecadação | Coberta (registrado no fluxo de doações e auxílios) |
 | Controle de passeios e eventos socioeducativos | Atendimento | Parcial (registrado via ficha de atendimento) |
-| Gestão e histórico de prontuários do beneficiário | Gestão | Coberta (através do id_beneficiario e atendimentos) |
-| Gestão de estoque físico de alimentos e doações | Físico | Ausente (fora do escopo do modelo conceitual) |
-| Agenda de atendimentos e escala de profissionais | Operacional | Ausente (não previsto na ficha atual) |
-| Prestação de contas e relatórios socioassistenciais (CRAS/SAS) | Relatório | Ausente (requer agregação de dados em fase futura) |
+| Gestão e histórico de prontuários do beneficiário | Gestão | Coberta (através de chaves e histórico de atendimentos) |
+| Gestão de estoque físico de alimentos e doações | Físico | Ausente (fora do escopo do modelo conceitual relacional) |
+| Captação e escala de voluntários | Apoio | Ausente (fora do escopo do modelo atual) |
+| Agenda de atendimentos e escala de profissionais | Operacional | Parcial (suportado pelo cadastro de Profissionais) |
+| Prestação de contas e relatórios socioassistenciais (CRAS/SAS) | Relatório | Coberta (via agregação de dados de atendimento e entregas) |
 
 *Legenda: Coberta = Processo totalmente mapeado no modelo conceitual; Parcial = Processo coberto de forma indireta ou limitada; Ausente = Processo sem cobertura no modelo atual.*
 
