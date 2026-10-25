@@ -171,133 +171,167 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ---
 
-## 4. Dicionário de Dados Conceitual (Atualizado)
+## 4. Dicionário de Dados e Especificação Técnica
+
+### 4.0 Convenções de Engenharia de Dados e Governança
+
+* **SGBD Alvo e Versão:** PostgreSQL (v15+) / MySQL (v8.0+)
+* **Encoding e Collation:** `UTF-8` / `utf8mb4_unicode_ci`
+* **Notação Formal:** Modelo Entidade-Relacionamento (Notação Chen / Merise)
+* **Convenção de Nomenclatura:** Nomes de tabelas e atributos em minúsculo com separação por sublinhado (`snake_case`). Chaves primárias iniciadas com `id_`.
+* **Política de Indexação:** Além das Chaves Primárias (PK) e Estrangeiras (FK), são criados índices B-Tree para otimização de busca frequente nos campos `cpf`, `nis` e `nome_completo`.
+* **Governança de Dados e LGPD:**
+  * **Base Legal:** Art. 7º, I (Consentimento do Titular) e Art. 11, II, "a" (Cumprimento de obrigação legal/estatutária) da LGPD.
+  * **Retenção de Dados:** Prontuários e fichas socioassistenciais são mantidos por 5 anos após o último atendimento do beneficiário, conforme diretrizes do SuAS/CRAS, sendo submetidos a expurgo ou anonimização após esse período.
+  * **Papéis e Permissões:** 
+    * `Admin / Assistente Social`: Acesso total (Leitura, Escrita, Alteração) a dados cadastrais e prontuários sensíveis.
+    * `Operador / Voluntário`: Acesso restrito (Apenas Leitura/Registro de Entregas) sem visualização de laudos e diagnósticos confidenciais.
+
+---
 
 ### 4.1 Entidade: Beneficiário
-*(Reflete a Seção "Dados do Beneficiário", "Filiação" e "Educação" da ficha)*
+*(Centraliza a identificação do cidadão assistido)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_beneficiario` | Identificador único do beneficiário no sistema | Gerado automaticamente no cadastro; nunca reutilizado | Numérico (PK) | Sequencial | Sim |
-| `nis` | Número de Identificação Social no CadÚnico | Cruzamento com CRAS/CREAS/SAS | Categórico | Texto | Não |
-| `cras_creas_sas` | Unidade socioassistencial vinculada | Indica o equipamento público que acompanha o caso | Categórico | Texto | Não |
-| `nome_completo` | Nome civil do beneficiário | Campo básico e obrigatório de identificação | Categórico | Texto | Sim |
-| `nome_social` | Nome de preferência do beneficiário | Priorizado no atendimento presencial | Categórico | Texto | Não |
-| `sexo` | Sexo do beneficiário | Campo de marcação única | Categórico | (F, M) | Sim |
-| `orientacao_sexual` | Orientação sexual autodeclarada | Dado sensível (LGPD); acesso restrito | Categórico | (Hetero, Homo, Bi, LGBTQIA+, Outros) | Não |
-| `data_nascimento` | Data de nascimento do beneficiário | Base para cálculo de idade e benefícios | Data | DD/MM/AAAA | Sim |
-| `naturalidade` | Município e estado de nascimento | Perfil socioeconômico | Categórico | Texto | Não |
-| `cor_raca` | Cor/raça autodeclarada | Dado sensível (LGPD); fins estatísticos | Categórico | (Branco, Negro, Indígena, Pardo) | Não |
-| `pessoa_com_deficiencia` | Indica se possui deficiência e o CID | Dado sensível (LGPD); priorização | Categórico | (Não; Sim - CID) | Não |
-| `tem_alergias` | Indica se possui alergias relevantes | Relevante para doações de alimentos | Categórico | (Não; Sim - Qual) | Não |
-| `cpf` | Número do CPF | Identificador único complementar; evita duplicidade | Categórico | 000.000.000-00 | Não |
-| `rg_numero` | Número do RG | Documento de identificação civil | Categórico | Texto | Não |
-| `rg_orgao_uf_emissor` | Órgão emissor e UF do RG | Detalha a origem do documento | Categórico | Texto (ex: SSP/SP) | Não |
-| `rg_data_emissao` | Data de emissão do RG | Verifica atualização do documento | Data | DD/MM/AAAA | Não |
-| `estado_civil` | Estado civil do beneficiário | Lista fechada de opções cadastrais | Categórico | (Solteiro, Casado, Divorciado, Viúvo) | Não |
-| `endereco` | Endereço residencial do beneficiário | Necessário para visitas e doações | Categórico | Texto | Sim |
-| `bairro` | Bairro de residência | Mapeamento territorial de atuação | Categórico | Texto | Não |
-| `cep` | CEP do endereço residencial | Triagem e localização territorial | Categórico | 00000-000 | Não |
-| `telefone` | Telefone principal de contato | Agendamento e aviso de atendimentos | Categórico | (00) 00000-0000 | Não |
-| `nome_mae` | Nome da mãe do beneficiário | Filiação complementar para identificação | Categórico | Texto | Não |
-| `nome_pai` | Nome do pai do beneficiário | Filiação complementar | Categórico | Texto | Não |
-| `escolaridade` | Nível de escolaridade concluído | Orienta encaminhamentos para EJA/cursos | Categórico | (Analfabeto, Fundamental, Médio, Superior) | Não |
-| `estuda_atualmente` | Indica se estuda no momento e onde | Planejamento de encaminhamentos | Categórico | (Não; Sim - Onde) | Não |
-| `recebe_transferencia_renda` | Indica se recebe benefício social | Evita duplicidade de concessões | Categórico | (Não; Sim - Qual) | Não |
-| `recebe_bpc` | Indica se recebe BPC | Priorização socioassistencial | Categórico | (Não; Sim - Idoso; Sim - PcD) | Não |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_beneficiario` | Identificador único | PK do beneficiário | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
+| `nis` | Identificação Social | Registro CadÚnico | Categórico | `VARCHAR(15)` | Index | Não | Não (L/E: Admin) |
+| `cras_creas_sas` | Equipamento vinculado | Acompanhamento externo | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
+| `nome_completo` | Nome civil | Identificação principal | Categórico | `VARCHAR(150)` | Index | Sim | Não (L/E: Todos) |
+| `nome_social` | Nome de preferência | Respeito à identidade | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Todos) |
+| `sexo` | Sexo biológico/declarado | Marcação cadastral | Categórico | `CHAR(1)` | Não | Sim | Não (L/E: Admin) |
+| `orientacao_sexual` | Orientação autodeclarada | Estatística / Perfil | Categórico | `VARCHAR(30)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| `data_nascimento` | Data de nascimento | Faixa etária e benefícios | Data | `DATE` | Não | Sim | Não (L/E: Admin) |
+| `naturalidade` | Cidade/UF de origem | Perfil demográfico | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
+| `cor_raca` | Cor/raça autodeclarada | Fins estatísticos | Categórico | `VARCHAR(20)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| `pessoa_com_deficiencia` | Condição de PCD / CID | Priorização e auxílio | Categórico | `VARCHAR(100)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| `tem_alergias` | Restrições alimentares | Segurança na doação | Categórico | `VARCHAR(150)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| `cpf` | Registro de CPF | Validação (RN01) | Categórico | `VARCHAR(14)` | Index/Unique | Não | **Sim** (L/E: Admin) |
+| `rg_numero` | Documento RG | Identificação civil | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+| `rg_orgao_uf_emissor` | Órgão emissor RG | Detalhe do documento | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+| `rg_data_emissao` | Data de emissão RG | Validade do documento | Data | `DATE` | Não | Não | Não (L/E: Admin) |
+| `estado_civil` | Estado civil | Perfil familiar | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+| `endereco` | Endereço residencial | Localização territorial | Categórico | `VARCHAR(200)` | Não | Sim | **Sim** (L/E: Admin) |
+| `bairro` | Bairro | Mapeamento territorial | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
+| `cep` | Código postal | Localização geográfica | Categórico | `VARCHAR(9)` | Não | Não | Não (L/E: Admin) |
+| `telefone` | Telefone principal | Contato e recados | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+| `nome_mae` | Nome da mãe | Filiação | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Admin) |
+| `nome_pai` | Nome do pai | Filiação | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Admin) |
+| `escolaridade` | Nível de instrução | Encaminhamento EJA/cursos | Categórico | `VARCHAR(50)` | Não | Não | Não (L/E: Admin) |
+| `estuda_atualmente` | Vínculo escolar atual | Diagnóstico social | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
+| `recebe_transferencia_renda` | Programas de transferência | Análise de vulnerabilidade | Categórico | `VARCHAR(100)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| `recebe_bpc` | Recebimento de BPC | Análise de vulnerabilidade | Categórico | `VARCHAR(50)` | Não | Não | **Sim** (L/E: Assist. Social) |
+
+---
 
 ### 4.2 Entidade: Trabalho
-*(Reflete o Bloco de Perfil Ocupacional e Renda da ficha — Separado conforme exigência da modelagem)*
+*(Perfil ocupacional e socioeconômico)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_trabalho` | Identificador único do registro de trabalho | Gerado a cada registro profissional vinculado | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário titular do vínculo trabalhista | Relaciona o trabalho ao beneficiário correspondente | Numérico (FK) | Existir em Beneficiário | Sim |
-| `situacao_ocupacional` | Situação de trabalho atual | Avaliação de vulnerabilidade socioeconômica | Categórico | (Empregado, Desempregado, Autônomo) | Sim |
-| `profissao_habilidades` | Profissão ou habilidades autodeclaradas | Encaminhamento a vagas e capacitação | Categórico | Texto livre | Não |
-| `renda_atual` | Renda mensal individual | Dado financeiro restrito; dimensiona o apoio | Numérico | Decimal (R$) | Não |
-| `empresa_trabalho` | Nome da empresa onde trabalha | Preenchido para vínculos formais ou informais | Categórico | Texto | Não |
-| `ocupacao_atual` | Ocupação exercida no momento | Identificação da função real exercida | Categórico | Texto | Não |
-| `telefone_trabalho` | Telefone do local de trabalho | Contato profissional alternativo | Categórico | (00) 00000-0000 | Não |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_trabalho` | Identificador único | PK do registro | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
+| `id_beneficiario` | Beneficiário vinculado | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Admin) |
+| `situacao_ocupacional` | Condição de trabalho | Análise socioeconômica | Categórico | `VARCHAR(50)` | Não | Sim | Não (L/E: Admin) |
+| `profissao_habilidades` | Habilidades e cursos | Encaminhamento profissional | Categórico | `TEXT` | Não | Não | Não (L/E: Admin) |
+| `renda_atual` | Renda mensal individual | Avaliação de renda per capita | Numérico | `DECIMAL(10,2)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| `empresa_trabalho` | Nome do empregador | Vínculo de trabalho | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Admin) |
+| `ocupacao_atual` | Função exercida | Perfil profissional | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
+| `telefone_trabalho` | Telefone comercial | Contato de trabalho | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+
+---
 
 ### 4.3 Entidade: Membro_Familia
-*(Reflete a Tabela "Composição Familiar", Pág. 2 da ficha)*
+*(Integrantes do grupo familiar que residem no domicílio)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_membro` | Identificador único do integrante | Gerado a cada dependente cadastrado | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário titular do cadastro | Vincula o dependente ao titular | Numérico (FK) | Existir em Beneficiário | Sim |
-| `nome` | Nome do familiar | Limite máximo de até 5 integrantes | Categórico | Texto | Sim |
-| `idade` | Idade do familiar no cadastro | Dimensiona cestas e encaminhamentos | Numérico | Inteiro | Sim |
-| `parentesco_vinculo` | Relação de parentesco com o titular | Identifica dependência (filho, cônjuge, etc.) | Categórico | Texto | Sim |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_membro` | Identificador do dependente | PK do membro familiar | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
+| `id_beneficiario` | Titular da família | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Admin) |
+| `nome` | Nome do familiar | Identificação do dependente | Categórico | `VARCHAR(150)` | Não | Sim | Não (L/E: Admin) |
+| `idade` | Idade em anos | Dimensionamento de auxílio | Numérico | `INT` | Não | Sim | Não (L/E: Admin) |
+| `parentesco_vinculo` | Grau de parentesco | Relação com o titular | Categórico | `VARCHAR(50)` | Não | Sim | Não (L/E: Admin) |
+
+---
 
 ### 4.4 Entidade: Referencia_Familiar
-*(Reflete o Bloco "Referência Familiar", Pág. 2 da ficha)*
+*(Pessoas de contato externo e emergência)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_referencia` | Identificador único da referência | Gerado a cada contato adicionado | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário titular do cadastro | Vincula a referência ao beneficiário | Numérico (FK) | Existir em Beneficiário | Sim |
-| `nome` | Nome do contato de referência | Limite de até 3 referências de emergência | Categórico | Texto | Sim |
-| `parentesco_vinculo` | Grau de relação/vínculo | Ex.: vizinho, amigo, parente | Categórico | Texto | Não |
-| `telefone` | Telefone de contato da referência | Usado em caso de inacessibilidade | Categórico | (00) 00000-0000 | Não |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_referencia` | Identificador do contato | PK da referência | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
+| `id_beneficiario` | Beneficiário vinculado | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Admin) |
+| `nome` | Nome do contato | Referência de emergência | Categórico | `VARCHAR(150)` | Não | Sim | Não (L/E: Admin) |
+| `parentesco_vinculo` | Relação/vínculo | Ex: Amigo, Vizinho | Categórico | `VARCHAR(50)` | Não | Não | Não (L/E: Admin) |
+| `telefone` | Telefone de contato | Comunicação de emergência | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+
+---
 
 ### 4.5 Entidade: Atendimento
-*(Reflete o Bloco "Demanda Inicial Apresentada" + Assinatura)*
+*(Registro das entrevistas e anamneses sociais)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_atendimento` | Identificador único do atendimento | Permite histórico de múltiplos atendimentos | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário atendido | Todo atendimento pertence a 1 beneficiário | Numérico (FK) | Existir em Beneficiário | Sim |
-| `id_profissional` | Técnico responsável pela sessão | Exige identificação do profissional habilitado | Numérico (FK) | Existir em Profissional | Sim |
-| `data_atendimento` | Data de realização do atendimento | Data da sessão técnica | Data | DD/MM/AAAA | Sim |
-| `demanda_inicial` | Necessidade declarada na triagem | Origina os encaminhamentos sociais | Categórico | Texto livre | Sim |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_atendimento` | Identificador da sessão | PK do atendimento | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Todos) |
+| `id_beneficiario` | Beneficiário atendido | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
+| `id_profissional` | Técnico condutor | FK para Profissional | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
+| `data_atendimento` | Data do atendimento | Rastreabilidade temporal | Data | `DATE` | Index | Sim | Não (L/E: Todos) |
+| `demanda_inicial` | Necessidade relatada | Diagnóstico da triagem | Categórico | `TEXT` | Não | Sim | **Sim** (L/E: Assist. Social) |
 
-* **Domínio de `tipo_encaminhamento` (30 opções padronizadas):** Atualização cadastral CAD Único/PTR; Inclusão em programa de transferência de renda; Inclusão no BPC; Orientação de débito de contas de consumo; Regularização de documentação civil; Transporte Urbano (Bilhete Único Especial); Passagem Intermunicipal/Interestadual; Alimentação (Bom Prato/Cesta Básica); Solicitação de Carteira do Idoso; INSS (orientação/aposentadoria/auxílio); Inserção Rede Socioassistencial Básica; Inserção Rede Socioassistencial Especial; Inserção Rede Socioassistencial Local; Inserção Rede Setorial SAS Mooca; Orientação ao Imigrante; Habitação Social (MCMV/CDHU/COHAB); Capacitação Profissional; Inserção no mercado de trabalho; Educação (EJA/Técnico/Faculdade); Tratamento de Saúde; Curso de Informática; Curso de Idiomas; Curso de Educação Financeira; Defesa e proteção ao Idoso; Defesa e proteção à PcD; Defesa e proteção à mulher; Defesa e proteção à criança e adolescente; Defesa dos direitos LGBTQIA+; Defesa e proteção animal; Outros. Qual?
-
+---
 
 ### 4.6 Entidade: Encaminhamento_Atendimento
-*(Tabela Relacional - Mapeia os encaminhamentos gerados por atendimento)*
+*(Direcionamentos gerados a partir do atendimento)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_atendimento` | Atendimento que gerou a ação | Chave estrangeira e primária composta | Numérico (FK/PK) | Existir em Atendimento | Sim |
-| `tipo_encaminhamento` | Categoria do encaminhamento | Domínio fechado de opções padronizadas | Categórico (PK) | Lista padronizada | Sim |
-| `detalhe_outros` | Especificação para "Outros" | Preenchido apenas se o tipo for "Outros" | Categórico | Texto | Não |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_atendimento` | Atendimento de origem | PK composta / FK Atendimento | Numérico | `BIGINT` | PK/FK | Sim | Não (L/E: Admin) |
+| `tipo_encaminhamento` | Categoria da ação | PK composta / Opção padronizada | Categórico | `VARCHAR(100)` | PK | Sim | Não (L/E: Admin) |
+| `detalhe_outros` | Especificação técnica | Detalhamento complementar | Categórico | `TEXT` | Não | Não | Não (L/E: Admin) |
+
+---
 
 ### 4.7 Entidade: Profissional_Responsavel
-*(Reflete a Assinatura do Técnico)*
+*(Equipe técnica e assistentes sociais)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_profissional` | Identificador único do técnico | Gerado no cadastro da equipe técnica | Numérico (PK) | Sequencial | Sim |
-| `nome` | Nome completo do profissional | Identificação do responsável técnico | Categórico | Texto | Sim |
-| `funcao` | Cargo/função exercida na ONG | Controla níveis de acesso a dados sensíveis | Categórico | Texto | Sim |
-| `registro_profissional` | Número no conselho de classe | Validação legal (ex.: CRESS/CRP) | Categórico | Texto | Sim |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_profissional` | Identificador do profissional | PK do profissional | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
+| `nome` | Nome completo | Identificação da equipe | Categórico | `VARCHAR(150)` | Não | Sim | Não (L/E: Admin) |
+| `funcao` | Cargo / Função | Nível de acesso | Categórico | `VARCHAR(50)` | Não | Sim | Não (L/E: Admin) |
+| `registro_profissional` | Conselho de classe | Ex: CRESS / CRP | Categórico | `VARCHAR(30)` | Não | Sim | Não (L/E: Admin) |
+
+---
 
 ### 4.8 Entidade: PIA (Plano Individual de Atendimento)
-*(Reflete o acompanhamento continuado exigido pela RN04 e RF05)*
+*(Acompanhamento continuado e evolução social - RN04)*
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_pia` | Identificador único do plano de atendimento | Gerado a cada novo plano de acompanhamento | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário titular do plano | Vincula o PIA ao beneficiário assistido | Numérico (FK) | Existir em Beneficiário | Sim |
-| `id_profissional` | Técnico responsável pela elaboração | Identifica o profissional habilitado | Numérico (FK) | Existir em Profissional | Sim |
-| `data_criacao` | Data de início ou atualização do plano | Rastreabilidade temporal da evolução | Data | DD/MM/AAAA | Sim |
-| `metas_objetivos` | Metas de autonomia e evolução traçadas | Acompanhamento da superação da vulnerabilidade | Categórico | Texto livre | Sim |
-| `prazo_reavaliacao` | Previsão para reavaliação do quadro | Controle de andamento continuado | Data | DD/MM/AAAA | Não |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_pia` | Identificador do plano | PK do PIA | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Assist. Social) |
+| `id_beneficiario` | Beneficiário titular | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Assist. Social) |
+| `id_profissional` | Técnico responsável | FK para Profissional | Numérico | `BIGINT` | FK | Sim | Não (L/E: Assist. Social) |
+| `data_criacao` | Data de elaboração | Registro de início | Data | `DATE` | Não | Sim | Não (L/E: Assist. Social) |
+| `metas_objetivos` | Metas de autonomia | Planejamento continuado | Categórico | `TEXT` | Não | Sim | **Sim** (L/E: Assist. Social) |
+| `prazo_reavaliacao` | Previsão de retorno | Agendamento de revisão | Data | `DATE` | Não | Não | Não (L/E: Assist. Social) |
 
-### 4.9 Entidade: Entrega_Cesta (Controle de Doações e Auxílios)
-*(Reflete a concessão variável de cestas básicas - RN05 e RN06)*
+---
 
-| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| `id_entrega` | Identificador único da entrega de auxílio | Controla o histórico de concessões | Numérico (PK) | Sequencial | Sim |
-| `id_beneficiario` | Beneficiário recebedor do auxílio | Evita duplicidades sem nova triagem (RN06) | Numérico (FK) | Existir em Beneficiário | Sim |
-| `id_profissional` | Profissional que autorizou/registrou a entrega | Auditoria e responsabilidade técnica | Numérico (FK) | Existir em Profissional | Sim |
-| `data_entrega` | Data em que a cesta/doação foi entregue | Rastreabilidade do ciclo de distribuição | Data | DD/MM/AAAA | Sim |
-| `quantidade_cestas` | Quantidade de cestas básicas concedidas | Concessão variável conforme estoque (RN05) | Numérico | Inteiro | Sim |
-| `itens_adicionais` | Descrição de itens extras doados (ex: roupas, leite) | Registro detalhado da doação | Categórico | Texto livre | Não |
+### 4.9 Entidade: Entrega_Cesta
+*(Registro e auditoria de doações diretas - RN05 e RN06)*
+
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_entrega` | Identificador da entrega | PK da entrega | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Todos) |
+| `id_beneficiario` | Beneficiário recebedor | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
+| `id_profissional` | Técnico autorizador | FK para Profissional | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
+| `data_entrega` | Data de concessão | Controle de ciclo/ periodicidade | Data | `DATE` | Index | Sim | Não (L/E: Todos) |
+| `quantidade_cestas` | Volume concedido | Gestão de doação | Numérico | `INT` | Não | Sim | Não (L/E: Todos) |
+| `itens_adicionais` | Doações complementares | Registro de doações extras | Categórico | `TEXT` | Não | Não | Não (L/E: Todos) |
+
+---
+
+### 4.10 Fluxo de Dados Resumido Entre Entidades
+O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus dados socioeconômicos e dependentes nas entidades **TRABALHO**, **COMPOSIÇÃO_FAMILIAR** e **REFERÊNCIA_FAMILIAR**. Cada interação presencial gera um **ATENDIMENTO** conduzido por um **PROFISSIONAL_RESPONSÁVEL**, que por sua vez pode derivar um ou mais **ENCAMINHAMENTOS_ATENDIMENTO** para a rede externa, registrar a concessão de auxílios diretos em **ENTREGA_CESTA**, ou estruturar o acompanhamento de longo prazo criando um **PIA**. 
 
 ---
 
