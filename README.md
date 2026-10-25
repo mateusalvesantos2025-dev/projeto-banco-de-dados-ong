@@ -89,11 +89,11 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 > Visão 2: O que o sistema precisa fazer e ter para resolver as necessidades da ONG.
 
 ### 2.1 Requisitos Funcionais (RF)
-* **RF01 — Cadastro de Beneficiários:** O sistema deve permitir o registo completo de beneficiários e seus dependentes, validando a unicidade por CPF ou NIS.
+* **RF01 — Cadastro de Beneficiários:** O sistema deve permitir o registro completo de beneficiários e seus dependentes, validando a unicidade por CPF ou NIS.
 * **RF02 — Registo de Triagem Socioassistencial:** O sistema deve armazenar as fichas de triagem preenchidas pela assistente social, contendo dados socioeconómicos, situação familiar e laudos.
 * **RF03 — Gestão de Atendimentos e Encaminhamentos:** O sistema deve registrar os atendimentos realizados e os encaminhamentos efetuados para a rede externa de apoio.
-* **RF04 — Registo de Concessão de Auxílios:** O sistema deve permitir o registo da distribuição de cestas básicas e doações de forma variável conforme a necessidade e a disponibilidade.
-* **RF05 — Acompanhamento Continuado (PIA):** O sistema deve suportar o registo e a evolução do Plano Individual de Atendimento (PIA) conduzido pela equipe técnica.
+* **RF04 — Registo de Concessão de Auxílios:** O sistema deve permitir o registro da distribuição de cestas básicas e doações de forma variável conforme a necessidade e a disponibilidade.
+* **RF05 — Acompanhamento Continuado (PIA):** O sistema deve suportar o registro e a evolução do Plano Individual de Atendimento (PIA) conduzido pela equipe técnica.
 * **RF06 — Consulta e Histórico:** O sistema deve permitir a consulta ao histórico de atendimentos e triagens anteriores de um beneficiário cadastrado.
 
 ### 2.2 Requisitos Não Funcionais (RNF)
