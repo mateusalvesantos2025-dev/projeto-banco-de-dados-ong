@@ -15,14 +15,6 @@
 
 O fluxo operacional da Organização Social Nossa Senhora de Fátima baseia-se no atendimento de portas abertas para a população em situação de vulnerabilidade. A partir da entrevista presencial realizada pela assistente social, é feito o preenchimento da ficha de triagem (coleta de dados pessoais, ocupacionais, composição familiar e demandas sociais). 
 
-```mermaid
-graph TD
-    A["Atendimento Inicial / Porta Aberta"] --> B["Triagem Socioassistencial e Anamnese"]
-    B --> C{"Avaliação de Vulnerabilidade"}
-    C -->|Necessidade Material| D["Concessão de Cesta Básica / Entrega_Cesta"]
-    C -->|Demanda de Longo Prazo| E["Elaboração do PIA / Acompanhamento"]
-    C -->|Rede Externa| F["Encaminhamentos Externos"]```
-
 Adicionalmente, a instituição gerencia o recebimento de doações de mantimentos de parceiros estratégicos (como o Banco de Alimentos e o projeto Cidade Invisível), a distribuição variável de cestas básicas conforme o diagnóstico de vulnerabilidade e o planejamento de atividades socioeducativas e de lazer para os assistidos.
 
 Abaixo estão mapeados os processos do negócio e as regras operacionais identificadas na organização, bem como a cobertura atual prevista no modelo de dados conceitual.
