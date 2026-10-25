@@ -265,6 +265,30 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | `funcao` | Cargo/função exercida na ONG | Controla níveis de acesso a dados sensíveis | Categórico | Texto | Sim |
 | `registro_profissional` | Número no conselho de classe | Validação legal (ex.: CRESS/CRP) | Categórico | Texto | Sim |
 
+### 4.8 Entidade: PIA (Plano Individual de Atendimento)
+*(Reflete o acompanhamento continuado exigido pela RN04 e RF05)*
+
+| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| `id_pia` | Identificador único do plano de atendimento | Gerado a cada novo plano de acompanhamento | Numérico (PK) | Sequencial | Sim |
+| `id_beneficiario` | Beneficiário titular do plano | Vincula o PIA ao beneficiário assistido | Numérico (FK) | Existir em Beneficiário | Sim |
+| `id_profissional` | Técnico responsável pela elaboração | Identifica o profissional habilitado | Numérico (FK) | Existir em Profissional | Sim |
+| `data_criacao` | Data de início ou atualização do plano | Rastreabilidade temporal da evolução | Data | DD/MM/AAAA | Sim |
+| `metas_objetivos` | Metas de autonomia e evolução traçadas | Acompanhamento da superação da vulnerabilidade | Categórico | Texto livre | Sim |
+| `prazo_reavaliacao` | Previsão para reavaliação do quadro | Controle de andamento continuado | Data | DD/MM/AAAA | Não |
+
+### 4.9 Entidade: Entrega_Cesta (Controle de Doações e Auxílios)
+*(Reflete a concessão variável de cestas básicas - RN05 e RN06)*
+
+| Atributo | Descrição | Regra de negócio associada | Tipo | Domínio / Formato | Obrig. |
+| :--- | :--- | :--- | :--- | :--- | :---: |
+| `id_entrega` | Identificador único da entrega de auxílio | Controla o histórico de concessões | Numérico (PK) | Sequencial | Sim |
+| `id_beneficiario` | Beneficiário recebedor do auxílio | Evita duplicidades sem nova triagem (RN06) | Numérico (FK) | Existir em Beneficiário | Sim |
+| `id_profissional` | Profissional que autorizou/registrou a entrega | Auditoria e responsabilidade técnica | Numérico (FK) | Existir em Profissional | Sim |
+| `data_entrega` | Data em que a cesta/doação foi entregue | Rastreabilidade do ciclo de distribuição | Data | DD/MM/AAAA | Sim |
+| `quantidade_cestas` | Quantidade de cestas básicas concedidas | Concessão variável conforme estoque (RN05) | Numérico | Inteiro | Sim |
+| `itens_adicionais` | Descrição de itens extras doados (ex: roupas, leite) | Registro detalhado da doação | Categórico | Texto livre | Não |
+
 ---
 
 ## 5. Modelagem Conceitual - Entidades e Relacionamentos
