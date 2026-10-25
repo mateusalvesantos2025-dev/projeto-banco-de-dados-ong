@@ -21,7 +21,7 @@ graph TD
     B --> C{"Avaliação de Vulnerabilidade"}
     C -->|Necessidade Material| D["Concessão de Cesta Básica / Entrega_Cesta"]
     C -->|Demanda de Longo Prazo| E["Elaboração do PIA / Acompanhamento"]
-    C -->|Rede Externa| F["Encaminhamentos Externos"]
+    C -->|Rede Externa| F["Encaminhamentos Externos"]```
 
 Adicionalmente, a instituição gerencia o recebimento de doações de mantimentos de parceiros estratégicos (como o Banco de Alimentos e o projeto Cidade Invisível), a distribuição variável de cestas básicas conforme o diagnóstico de vulnerabilidade e o planejamento de atividades socioeducativas e de lazer para os assistidos.
 
