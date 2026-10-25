@@ -302,14 +302,22 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 * **`ATENDIMENTO`**: Registra as sessões de triagem, demandas iniciais e profissionais responsáveis.
 * **`PROFISSIONAL_RESPONSAVEL`**: Cadastra a equipa técnica que realiza os atendimentos na ONG.
 * **`ENCAMINHAMENTO_ATENDIMENTO`**: Registra os direcionamentos e encaminhamentos externos gerados a partir de um atendimento.
+* **`PIA`**: Registra o Plano Individual de Atendimento e as metas de acompanhamento continuado da família.
+* **`ENTREGA_CESTA`**: Armazena o registro histórico da distribuição de cestas básicas e auxílios materiais aos beneficiários.
 
-### Relacionamentos e Cardinalidades Corrigidas
+
+### Relacionamentos e Cardinalidades
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO**: Um beneficiário pode possuir registros de trabalho associados ao seu perfil ocupacional, e cada registo de trabalho pertence a um único beneficiário.
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR**: Cada membro da composição familiar pertence obrigatoriamente a um único beneficiário titular, e um beneficiário pode possuir vários membros familiares cadastrados.
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR**: Um beneficiário titular pode registar referências de apoio, e cada referência está vinculada a um único beneficiário.
 * **BENEFICIÁRIO (1,1) --- SOLICITA --- (0,n) ATENDIMENTO**: Um beneficiário pode solicitar múltiplos atendimentos ao longo do tempo, e cada atendimento está vinculado a um único beneficiário solicitante.
 * **PROFISSIONAL_RESPONSAVEL (1,1) --- CONDUZ --- (0,n) ATENDIMENTO**: Um profissional da equipa técnica pode conduzir vários atendimentos, e cada atendimento é conduzido por um único profissional responsável.
 * **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO**: Um atendimento pode gerar um ou mais encaminhamentos externos, resolvido estruturalmente pela tabela associativa.
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) PIA**: Um beneficiário pode possuir planos de atendimento continuado ao longo de sua evolução na ONG, e cada PIA pertence a um único beneficiário.
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- ELABORA --- (0,n) PIA**: Um profissional técnico pode elaborar múltiplos planos de atendimento, e cada PIA é elaborado por um único profissional responsável.
+* **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENTREGA_CESTA**: Um beneficiário pode receber múltiplas entregas de cestas básicas ao longo do tempo, e cada entrega está vinculada a um único beneficiário.
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) ENTREGA_CESTA**: Um profissional pode registrar várias entregas de auxílios, e cada entrega é registrada por um único profissional.
+
 
 ---
 
@@ -331,8 +339,11 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 * **ATENDIMENTO:** Mapeia os encontros entre a equipe técnica e o assistido através da chave `id_atendimento`, vinculando o `id_profissional`, a `data_atendimento` e a `demanda_inicial`.
 * **PROFISSIONAL_RESPONSAVEL:** Controla o cadastro da equipe com `id_profissional`, `nome`, `nome_social`, `funcao` e `registro_profissional`.
 * **ENCAMINHAMENTO_ATENDIMENTO:** Tabela associativa que mapeia as ações institucionais através das chaves estrangeiras provenientes de `ATENDIMENTO` para assegurar a integridade referencial.
+* **PIA:** Entidade essencial para cumprir a regra de negócio **RN04** e o requisito funcional **RF05**. Permite registrar a evolução temporal, objetivos e metas traçadas pela assistente social para a autonomia da família atendida, desvinculando o acompanhamento contínuo de um simples histórico de atendimento pontual.
+* **ENTREGA_CESTA:** Entidade criada para gerenciar de forma transparente a principal atividade de auxílio direto da ONG (conforme **RN05** e **RN06**). Evita que a concessão de cestas básicas seja tratada apenas como um "tipo de encaminhamento", permitindo auditar quantidades, datas e evitar duplicidades indevidas no mesmo ciclo sem avaliação prévia.
 
-### Relacionamentos e Cardinalidades Corrigidas
+
+### Relacionamentos e Cardinalidades
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO:** Um beneficiário pode possuir registros de trabalho associados ao seu perfil ocupacional, e cada registro de trabalho pertence a um único beneficiário.
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR:** Cada membro da composição familiar pertence obrigatoriamente a um único beneficiário titular, e um beneficiário pode possuir vários membros familiares cadastrados.
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR:** Um beneficiário titular pode registrar referências de apoio, e cada referência está vinculada a um único beneficiário.
