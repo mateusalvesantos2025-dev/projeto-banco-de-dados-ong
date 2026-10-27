@@ -447,7 +447,7 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 * **PROFISSIONAL_RESPONSAVEL (1,1) --- CONDUZ --- (0,n) ATENDIMENTO:** Cada atendimento é assinado por 1 único profissional (1,1). O técnico pode não ter conduzido nenhum atendimento ainda (0) ou conduzir vários (0,n).
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) PIA:** Cada Plano Individual pertence a 1 beneficiário (1,1), que pode não ter PIA ativo (0) ou possuir múltiplos planos ao longo do tempo (0,n).
 * **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENTREGA_CESTA:** Cada entrega de cesta é destinada a 1 beneficiário (1,1). O assistido pode não ter recebido cestas ainda (0) ou ter um histórico de entregas periódicas (0,n).
-* **ATENDIMENTO (1,n) --- GERA --- (1,n) ENCAMINHAMENTO_ATENDIMENTO:** Um atendimento registrado pode originar um ou mais encaminhamentos externos (1,n), associados obrigatoriamente a pelo menos um atendimento de origem (1,n).
+* **ATENDIMENTO (1,1) --- GERA --- (0,n) ENCAMINHAMENTO_ATENDIMENTO:** Cada registro de encaminhamento deriva obrigatoriamente de exatamente 1 atendimento de origem (1,1). Por sua vez, um atendimento presencial pode resolver a demanda sem gerar encaminhamentos (0) ou desdobrar-se em múltiplos encaminhamentos externos (0,n).
 
 ### Decisões de Abstração e Alternativas Rejeitadas
 * **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
