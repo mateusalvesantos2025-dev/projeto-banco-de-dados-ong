@@ -240,16 +240,16 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ---
 
-### 4.3 Entidade: Membro_Familia
-*(Integrantes do grupo familiar que residem no domicílio)*
+### 4.3 Entidade: Composição Familiar (`composicao_familiar`)
+*(Ficha da ONG, pág. 2: Composição Familiar. Limite da ficha: até 5 membros por beneficiário)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
 | :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_membro` | Identificador do dependente | PK do membro familiar | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
-| `id_beneficiario` | Titular da família | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Admin) |
-| `nome` | Nome do familiar | Identificação do dependente | Categórico | `VARCHAR(150)` | Não | Sim | Não (L/E: Admin) |
-| `idade` | Idade em anos | Dimensionamento de auxílio | Numérico | `INT` | Não | Sim | Não (L/E: Admin) |
-| `parentesco_vinculo` | Grau de parentesco | Relação com o titular | Categórico | `VARCHAR(50)` | Não | Sim | Não (L/E: Admin) |
+| `id_membro` | Identificador do membro | PK do membro familiar | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Titular da família | FK para Beneficiário (máx. 5) | Identificador (FK) | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `nome` | Nome civil do familiar | Identificação do dependente | Texto | `VARCHAR(150)` | Não | Sim | Pessoal |
+| `idade` | Idade em anos | Dimensionamento de auxílio | Numérico | `TINYINT UNSIGNED` | Não | Sim | Pessoal |
+| `parentesco_vinculo` | Grau de parentesco | Relação com o titular | Categórico | `VARCHAR(50)` | Não | Sim | Pessoal |
 
 ---
 
@@ -279,14 +279,15 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ---
 
-### 4.6 Entidade: Encaminhamento_Atendimento
-*(Direcionamentos gerados a partir do atendimento)*
+### 4.6 Entidade: Encaminhamento (`encaminhamento_atendimento`)
+*(Ficha da ONG, pág. 2: Encaminhamentos Realizados. Possui identificador próprio)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
 | :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_atendimento` | Atendimento de origem | PK composta / FK Atendimento | Numérico | `BIGINT` | PK/FK | Sim | Não (L/E: Admin) |
-| `tipo_encaminhamento` | Categoria da ação | PK composta / Opção padronizada | Categórico | `VARCHAR(100)` | PK | Sim | Não (L/E: Admin) |
-| `detalhe_outros` | Especificação técnica | Detalhamento complementar | Categórico | `TEXT` | Não | Não | Não (L/E: Admin) |
+| `id_encaminhamento` | Identificador único | PK própria da entidade | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_atendimento` | Atendimento de origem | FK para Atendimento | Identificador (FK) | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `tipo_encaminhamento` | Categoria do encaminhamento | Lista fechada de opções | Categórico | `VARCHAR(60)` | Unique | Sim | Sigiloso |
+| `detalhe_outros` | Especificação técnica | Usado apenas se tipo for "Outros" | Texto | `TEXT` | Não | Cond. | Sigiloso |
 
 ---
 
