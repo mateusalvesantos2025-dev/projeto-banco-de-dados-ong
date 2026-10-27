@@ -181,6 +181,28 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 * **Convenção de Nomenclatura:** Nomes de tabelas e atributos em minúsculo com separação por sublinhado (`snake_case`). Chaves primárias iniciadas com `id_`.
 * **Política de Indexação:** Além das Chaves Primárias (PK) e Estrangeiras (FK), são criados índices B-Tree para otimização de busca frequente nos campos `cpf`, `nis` e `nome_completo`.
 * **Governança de Dados e LGPD:**
+  
+* #### Governança de Dados, LGPD e Matriz de Papéis
+> Diretrizes de conformidade jurídica, retenção e permissões de acesso baseadas nas normativas da LGPD e do SuAS.
+
+**Classificação dos Dados:**
+* **Interno:** Chaves, datas de controlo e dados operacionais (ex: `id_beneficiario`, `quantidade_cestas`).
+* **Pessoal:** Dados pessoais comuns nos termos do Art. 5º, I da LGPD (ex: `nome`, `cpf`, `telefone`).
+* **Sensível:** Dados pessoais sensíveis nos termos do Art. 5º, II da LGPD (ex: `cor_raca`, `orientacao_sexual`, `tem_alergias`).
+* **Sigiloso:** Dados protegidos pelo sigilo profissional da triagem e assistência social (ex: `renda`, `demanda_inicial`, `metas_do_pia`).
+
+**Retenção e Expurgo:**
+* **Prazo de Retenção:** Os cadastros e prontuários são mantidos por **5 anos** após o último atendimento do beneficiário, em conformidade com as diretrizes do SuAS/CRAS.
+* **Anonimização:** Após o prazo de retenção ou revogação de consentimento pelo titular, os dados identificáveis são anonimizados, preservando apenas os agregados estatísticos para prestação de contas (RN08).
+
+**Matriz de Papéis por Operação (I: Inserir, L: Ler, A: Alterar, N: Anonimizar):**
+| Categoria de Dados | TÉCNICO (Assistente Social / Psicólogo) | ADMIN (Coordenação / Presidência) | VOLUNTÁRIO (Recepção / Apoio) |
+| :--- | :---: | :---: | :---: |
+| **Internos e Pessoais** (Cadastro, Família, Trabalho) | I, L, A | I, L, A | L |
+| **Sensíveis** (Raça, Deficiência, Alergias) | I, L, A | - | - |
+| **Sigiloso** (Renda, Prontuários, PIA) | I, L, A | - | - |
+| **Entrega de Cestas** (`entrega_cesta`) | I, L, A | L | I, L |
+
   * **Base Legal:** Art. 7º, I (Consentimento do Titular) e Art. 11, II, "a" (Cumprimento de obrigação legal/estatutária) da LGPD.
   * **Retenção de Dados:** Prontuários e fichas socioassistenciais são mantidos por 5 anos após o último atendimento do beneficiário, conforme diretrizes do SuAS/CRAS, sendo submetidos a expurgo ou anonimização após esse período.
   * **Papéis e Permissões:** 
