@@ -385,6 +385,16 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 | `unidade` | Unidade do valor | R$, dias | Categórico | `VARCHAR(4)` | Não | Sim | Interno |
 | `data_atualizacao` | Data da última alteração | Preenchido pelo banco | Data | `DATETIME` | Não | Sim | Interno |
 
+### 4.12 Fluxo de Dados Resumido do Sistema
+> Mapeamento do ciclo de vida da informação desde a recepção até o expurgo LGPD.
+
+1. **Recepção e Termo LGPD:** O assistido assina o termo de consentimento LGPD e é registrado em `beneficiario` (`data_consentimento` preenchida e `situacao_cadastro = 'ATIVO'`).
+2. **Triagem Socioassistencial:** O profissional habilitado conduz a entrevista e gera um registro em `atendimento`, inserindo a demanda inicial e calculando a renda per capita da família, além de atualizar o perfil em `trabalho`, `composicao_familiar` e `referencia_familiar`.
+3. **Desdobramentos do Atendimento:** A partir do atendimento, o sistema permite derivar encaminhamentos externos (`encaminhamento_atendimento`), conceder cestas básicas (`entrega_cesta`, validando elegibilidade de renda e intervalo de entrega) e iniciar o acompanhamento continuado (`pia`).
+4. **Consultas e Relatórios:** O histórico do assistido pode ser consultado para acompanhamento (RF06), gerando relatórios agregados e anonimizados para prestação de contas aos órgãos parceiros (RN08).
+5. **Auditoria em Tempo Real:** Qualquer inserção, alteração, anonimização ou consulta a dados sensíveis é gravada na tabela de suporte `log_acesso`.
+6. **Encerrando o Ciclo (LGPD):** Após 5 anos do último atendimento, ou por solicitação do titular, o cadastro é submetido à rotina de anonimização (`situacao_cadastro = 'ANONIMIZADO'`).
+
 ---
 
 ## 5. Modelagem Conceitual - Entidades e Relacionamentos
