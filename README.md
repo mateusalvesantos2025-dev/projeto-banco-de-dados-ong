@@ -333,6 +333,35 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 ### 4.10 Fluxo de Dados Resumido Entre Entidades
 O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus dados socioeconômicos e dependentes nas entidades **TRABALHO**, **COMPOSIÇÃO_FAMILIAR** e **REFERÊNCIA_FAMILIAR**. Cada interação presencial gera um **ATENDIMENTO** conduzido por um **PROFISSIONAL_RESPONSÁVEL**, que por sua vez pode derivar um ou mais **ENCAMINHAMENTOS_ATENDIMENTO** para a rede externa, registrar a concessão de auxílios diretos em **ENTREGA_CESTA**, ou estruturar o acompanhamento de longo prazo criando um **PIA**. 
 
+## 4.11 Tabelas Técnicas de Apoio
+> Tabelas de apoio ao sistema. Não são entidades do negócio da ONG, por isso não aparecem no DER e não possuem chave estrangeira.
+
+### Entidade Técnica: Log de Acesso (`log_acesso`)
+*(Auditoria - RNF06 e Governança LGPD)*
+
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_log` | Identificador do log | Sequencial | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `data_hora` | Data e hora da operação | Preenchido pelo banco | Data | `DATETIME` | Index | Sim | Interno |
+| `usuario` | Login de quem fez a operação | Vem de `@app_usuario` | Categórico | `VARCHAR(60)` | Index | Sim | Pessoal |
+| `papel` | Papel do usuário | TECNICO, ADMIN, VOLUNTARIO | Categórico | `VARCHAR(10)` | Não | Sim | Interno |
+| `operacao` | Tipo de operação | LEITURA, INSERCAO, ALTERACAO, ANONIMIZACAO | Categórico | `VARCHAR(12)` | Não | Sim | Interno |
+| `tabela_afetada` | Tabela da operação | Rastreabilidade | Categórico | `VARCHAR(30)` | Index | Sim | Interno |
+| `id_registro` | ID da linha afetada | Rastreabilidade | Identificador | `BIGINT UNSIGNED` | Index | Sim | Interno |
+| `campos_alterados` | Campos modificados | Sem valores (proteção LGPD) | Texto | `TEXT` | Não | Não | Interno |
+| `ip_origem` | IP de origem | Vem de `@app_ip` | Categórico | `VARCHAR(45)` | Não | Sim | Pessoal |
+
+### Entidade Técnica: Parâmetros das Regras (`parametro_regra`)
+*(Limites das regras de cesta - RN06)*
+
+| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
+| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_parametro` | Identificador do parâmetro | Sequencial | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `nome_parametro` | Nome do parâmetro | Lido pelo trigger de validação | Categórico | `VARCHAR(40)` | Unique | Sim | Interno |
+| `valor` | Valor em vigor | Renda máxima ou dias | Numérico | `DECIMAL(10,2)` | Não | Sim | Interno |
+| `unidade` | Unidade do valor | R$, dias | Categórico | `VARCHAR(4)` | Não | Sim | Interno |
+| `data_atualizacao` | Data da última alteração | Preenchido pelo banco | Data | `DATETIME` | Não | Sim | Interno |
+
 ---
 
 ## 5. Modelagem Conceitual - Entidades e Relacionamentos
