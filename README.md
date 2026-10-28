@@ -51,6 +51,7 @@ flowchart TD
     M[Recebimento de Lote Prefeitura / Doadores] --> N[Registrar Entrada em RECEBIMENTO_DOACAO]
     N --> F
 
+
 ---
 
 ### Tabela dos Processos do Negócio (Tabela I)
