@@ -59,7 +59,7 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | Obrigatoriedade de registro do profissional responsável (CRESS/CRP) | Triagem | Coberta (via Entidade Profissional) |
 | Periodicidade de entrega de cesta conforme doações | Doação | Parcial (registrada no fluxo de atendimento) |
 | Controle de estoque físico de alimentos | Doação | Ausente (fora do escopo do modelo de dados) |
-| Prestação de contas e relatórios para órgãos parceiros (CRAS/SAS) | Relatório | Ausente (requer agregação em fase futura) |
+| Prestação de contas e relatórios para órgãos parceiros (CRAS/SAS) | Relatório | Coberta (RN08) |
 
 *Legenda: Coberta = Regra mapeada com suporte direto nas entidades e atributos do modelo; Parcial = Presente no fluxo mas sem automação de estoque; Ausente = Regra sem cobertura no modelo conceitual atual.*
 
