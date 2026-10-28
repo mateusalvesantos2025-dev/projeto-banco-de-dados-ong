@@ -99,12 +99,12 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 * **RF06 — Consulta e Histórico:** O sistema deve permitir a consulta ao histórico de atendimentos e triagens anteriores de um beneficiário cadastrado.
 
 ### 2.2 Requisitos Não Funcionais (RNF)
-* **RNF01 — Segurança e Sigilo de Dados:** O acesso às informações sensíveis e prontuários da triagem deve ser restrito a operadores autorizados, em conformidade com a LGPD.
-* **RNF02 — Desempenho de Consulta:** As consultas de beneficiários por CPF/NIS ou nome devem retornar resultados em no máximo 2 segundos.
-* **RNF03 — Integridade Relacional:** O banco de dados deve assegurar a integridade referencial por meio de chaves primárias e estrangeiras obrigatórias.
-* **RNF04 — Disponibilidade e Acesso Local:** O sistema deve garantir a persistência segura dos dados utilizando um SGBD relacional padronizado.
-* **RNF05 — Portabilidade do Modelo:** O diagrama entidade-relacionamento (DER) e o dicionário de dados devem ser documentados em formatos acessíveis (PDF, Markdown e imagens).
-* **RNF06 — Auditoria de Registros:** O sistema deve manter o registo de data e operador associado aos lançamentos de triagem e atendimento.
+* **RNF01 — Segurança e Sigilo de Dados (LGPD):** O sistema deve aplicar controle de acesso baseado em papéis (RBAC), garantindo que dados sensíveis e laudos socioassistenciais sejam acessíveis exclusivamente por profissionais autorizados.
+* **RNF02 — Desempenho e Escalabilidade:** As consultas de beneficiários por CPF, NIS ou nome devem retornar resultados em até 2 segundos, mantendo a estabilidade mesmo com o crescimento gradual do volume de atendimentos.
+* **RNF03 — Integridade Relacional:** O banco de dados deve assegurar a integridade referencial estrita por meio de chaves primárias e estrangeiras obrigatórias.
+* **RNF04 — Disponibilidade e Tolerância a Falhas:** O SGBD deve garantir disponibilidade contínua durante o horário de atendimento da instituição, contando com rotinas automatizadas de backup diário e plano de recuperação de dados.
+* **RNF05 — Usabilidade e Interface:** A interface do sistema deve ser intuitiva, ágil e de fácil navegação para otimizar o preenchimento de fichas por assistentes sociais e voluntários da recepção.
+* **RNF06 — Auditoria de Registros:** O sistema deve registrar automaticamente a data, hora, usuário e tipo de operação (inserção, alteração ou exclusão/anonimização) para garantir rastreabilidade nos prontuários.
 
 
 ---
