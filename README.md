@@ -30,16 +30,16 @@ Adicionalmente, a instituição gerencia o recebimento de doações de mantiment
 ### Fluxograma do Processo Operacional
 
 ```mermaid
-graph TD
-    A[Cidadão Procura a ONG] --> B[Recepção e Acolhimento]
-    B --> C[Entrevista e Triagem Socioassistencial]
-    C --> D{Avaliação de Vulnerabilidade}
-    D -->|Necessita Encaminhamento| E[Registro de Encaminhamento Externo]
-    D -->|Elegível para Auxílio| F[Concessão de Cesta Básica / Auxílio]
-    D -->|Demanda Complexa| G[Criação do PIA - Plano Individual]
-    E --> H[Prestação de Contas e Relatórios]
-    F --> H
-    G --> H
+flowchart TD
+    nodeA["Cidadao Procura a ONG"] --> nodeB["Recepcao e Acolhimento"]
+    nodeB --> nodeC["Entrevista e Triagem Socioassistencial"]
+    nodeC --> nodeD{"Avaliacao de Vulnerabilidade"}
+    nodeD -->|"Necessita Encaminhamento"| nodeE["Registro de Encaminhamento Externo"]
+    nodeD -->|"Elegivel para Auxilio"| nodeF["Concessao de Cesta Basica / Auxilio"]
+    nodeD -->|"Demanda Complexa"| nodeG["Criacao do PIA - Plano Individual"]
+    nodeE --> nodeH["Prestacao de Contas e Relatorios"]
+    nodeF --> nodeH
+    nodeG --> nodeH
 
 ---
 
