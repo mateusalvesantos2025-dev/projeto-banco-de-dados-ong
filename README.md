@@ -123,10 +123,10 @@ flowchart TD
 > Visão 2: O que o sistema precisa fazer e ter para resolver as necessidades da ONG.
 
 ### 2.1 Requisitos Funcionais (RF)
-* **RF01 — Cadastro de Beneficiários:** O sistema deve permitir o registro completo de beneficiários e seus dependentes, validando a unicidade por CPF ou NIS.
-* **RF02 — Registo de Triagem Socioassistencial:** O sistema deve armazenar as fichas de triagem preenchidas pela assistente social, contendo dados socioeconómicos, situação familiar e laudos.
+* **RF01 — Cadastro de Beneficiários:** O sistema deve permitir o registro completo de beneficiários e seus dependentes, validando a unicidade por CPF ou NIS quando informados.
+* **RF02 — Registro de Triagem Socioassistencial:** O sistema deve armazenar as fichas de triagem preenchidas pela assistente social, contendo dados socioeconômicos, situação familiar e laudos.
 * **RF03 — Gestão de Atendimentos e Encaminhamentos:** O sistema deve registrar os atendimentos realizados e os encaminhamentos efetuados para a rede externa de apoio.
-* **RF04 — Registo de Concessão de Auxílios:** O sistema deve permitir o registro da distribuição de cestas básicas e doações de forma variável conforme a necessidade e a disponibilidade.
+* **RF04 — Registro de Concessão de Auxílios:** O sistema deve permitir o registro da distribuição de cestas básicas e doações de forma variável conforme a necessidade e a disponibilidade.
 * **RF05 — Acompanhamento Continuado (PIA):** O sistema deve suportar o registro e a evolução do Plano Individual de Atendimento (PIA) conduzido pela equipe técnica.
 * **RF06 — Consulta e Histórico:** O sistema deve permitir a consulta ao histórico de atendimentos e triagens anteriores de um beneficiário cadastrado.
 
@@ -227,11 +227,12 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 ### 4.0 Convenções de Engenharia de Dados e Governança
 
 * **SGBD Alvo:** MySQL v8.0+
-* **Encoding e Collation:** `UTF-8` / `utf8mb4_unicode_ci`
+* **Encoding e Collation:** Conjunto de caracteres `utf8mb4` e collation `utf8mb4_unicode_ci` (suporte completo a caracteres especiais e emojis).
 * **Notação Formal:** Modelo Entidade-Relacionamento (Notação Chen / Merise)
 * **Convenção de Nomenclatura:** Nomes de tabelas e atributos em minúsculo com separação por sublinhado (`snake_case`). Chaves primárias iniciadas com `id_`.
 * **Compatibilidade de Tipos:** Todas as chaves primárias (PK) e chaves estrangeiras (FK) utilizam o tipo padronizado `BIGINT UNSIGNED` para assegurar a integridade referencial no MySQL.
 * **Política de Indexação:** Além das Chaves Primárias (PK) e Estrangeiras (FK), são criados índices B-Tree para otimização de busca frequente nos campos `cpf`, `nis` e `nome_completo`.
+* **Validações de Regra de Negócio:** Restrições quantitativas (como o limite de até 5 membros em `composicao_familiar` e 3 em `referencia_familiar` da RN10) serão validadas na camada de aplicação (backend) durante a inserção.
 
 #### Governança de Dados, LGPD e Matriz de Papéis
 > Diretrizes de conformidade jurídica, retenção e permissões de acesso baseadas nas normativas da LGPD e do SuAS.
@@ -291,6 +292,8 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 | `recebe_bpc` | Recebimento de BPC | `VARCHAR(50)` | Não | Não | Sigiloso |
 | `situacao_cadastro` | Status do cadastro | `VARCHAR(20)` (ATIVO/ANONIMIZADO) | Não | Sim | Interno |
 | `data_consentimento` | Data do aceite LGPD | `DATE` | Não | Sim | Interno |
+| `cadunico_ativo` | Possui Cadastro Único ativo | `TINYINT(1)` | Não | Sim | Sigiloso |
+| `data_atualizacao_cadunico` | Última atualização CadÚnico | `DATE` | Não | Não | Sigiloso |
 
 ---
 
