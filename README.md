@@ -410,6 +410,8 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 * **`ENCAMINHAMENTO_ATENDIMENTO`**: Registra os direcionamentos e encaminhamentos externos gerados a partir de um atendimento.
 * **`PIA`**: Registra o Plano Individual de Atendimento e as metas de acompanhamento continuado da família.
 * **`ENTREGA_CESTA`**: Armazena o registro histórico da distribuição de cestas básicas e auxílios materiais aos beneficiários.
+* **`RECEBIMENTO_DOACAO`**: Armazena o registro histórico de entradas de mantimentos e doações oriundas de parceiros estratégicos (como Banco de Alimentos e Cidade Invisível).
+
 
 
 ### Relacionamentos e Cardinalidades
@@ -423,6 +425,8 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 * **PROFISSIONAL_RESPONSAVEL (1,1) --- ELABORA --- (0,n) PIA**: Um profissional técnico pode elaborar múltiplos planos de atendimento, e cada PIA é elaborado por um único profissional responsável.
 * **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENTREGA_CESTA**: Um beneficiário pode receber múltiplas entregas de cestas básicas ao longo do tempo, e cada entrega está vinculada a um único beneficiário.
 * **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) ENTREGA_CESTA**: Um profissional pode registrar várias entregas de auxílios, e cada entrega é registrada por um único profissional.
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) RECEBIMENTO_DOACAO**: Um profissional pode registrar várias doações recebidas de parceiros, e cada registro de doação é efetuado por um único profissional responsável.
+
 
 
 ---
@@ -447,6 +451,8 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 * **ENCAMINHAMENTO_ATENDIMENTO:** Tabela associativa que mapeia as ações institucionais através das chaves estrangeiras provenientes de `ATENDIMENTO` para assegurar a integridade referencial.
 * **PIA:** Entidade essencial para cumprir a regra de negócio **RN04** e o requisito funcional **RF05**. Permite registrar a evolução temporal, objetivos e metas traçadas pela assistente social para a autonomia da família atendida, desvinculando o acompanhamento contínuo de um simples histórico de atendimento pontual.
 * **ENTREGA_CESTA:** Entidade criada para gerenciar de forma transparente a principal atividade de auxílio direto da ONG (conforme **RN05** e **RN06**). Evita que a concessão de cestas básicas seja tratada apenas como um "tipo de encaminhamento", permitindo auditar quantidades, datas e evitar duplicidades indevidas no mesmo ciclo sem avaliação prévia.
+* **RECEBIMENTO_DOACAO:** Criada para suprir a lacuna de rastreabilidade de entradas de mantimentos. Armazena a data, o parceiro doador, os itens recebidos e a quantidade, permitindo auditar o fluxo de arrecadação sem a necessidade de um controle complexo de estoque físico.
+
 
 
 ### Justificativa das Cardinalidades do Modelo
@@ -458,6 +464,8 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 * **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) PIA:** Cada Plano Individual pertence a 1 beneficiário (1,1), que pode não ter PIA ativo (0) ou possuir múltiplos planos ao longo do tempo (0,n).
 * **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENTREGA_CESTA:** Cada entrega de cesta é destinada a 1 beneficiário (1,1). O assistido pode não ter recebido cestas ainda (0) ou ter um histórico de entregas periódicas (0,n).
 * **ATENDIMENTO (1,1) --- GERA --- (0,n) ENCAMINHAMENTO_ATENDIMENTO:** Cada registro de encaminhamento deriva obrigatoriamente de exatamente 1 atendimento de origem (1,1). Por sua vez, um atendimento presencial pode resolver a demanda sem gerar encaminhamentos (0) ou desdobrar-se em múltiplos encaminhamentos externos (0,n).
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) RECEBIMENTO_DOACAO:** Garante a autoria e a responsabilidade institucional pelo registro de entrada das doações no sistema, vinculando o operador técnico a cada lote recebido.
+
 
 ### Decisões de Abstração e Alternativas Rejeitadas
 * **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
