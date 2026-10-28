@@ -463,34 +463,33 @@ O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus da
 ### Escolha das Entidades e Atribuição de Atributos
 * **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado para detalhamento geográfico.
 * **TRABALHO:** Entidade isolada para armazenar as informações socioeconômicas e ocupacionais (`renda_atual`, `situacao_ocupacional`, `empresa_trabalho`, `ocupacao_atual`, `telefone_trabalho`), garantindo a normalização adequada em relação aos dados pessoais do beneficiário.
-* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `nome_social`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, identificada unicamente por `id_membro`.
-* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `nome_social`, `parentesco_vinculo`, `telefone` e endereço da pessoa de contato externo para emergências.
+* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, respeitando o limite estrutural de até 5 membros.
+* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `parentesco_vinculo` e `telefone` da pessoa de contato externo para emergências (até 3 referências), desvinculada de endereço residencial próprio.
 * **ATENDIMENTO:** Mapeia os encontros entre a equipe técnica e o assistido através da chave `id_atendimento`, vinculando o `id_profissional`, a `data_atendimento` e a `demanda_inicial`.
-* **PROFISSIONAL_RESPONSAVEL:** Controla o cadastro da equipe com `id_profissional`, `nome`, `nome_social`, `funcao` e `registro_profissional`.
-* **ENCAMINHAMENTO_ATENDIMENTO:** Tabela associativa que mapeia as ações institucionais através das chaves estrangeiras provenientes de `ATENDIMENTO` para assegurar a integridade referencial.
-* **PIA:** Entidade essencial para cumprir a regra de negócio **RN04** e o requisito funcional **RF05**. Permite registrar a evolução temporal, objetivos e metas traçadas pela assistente social para a autonomia da família atendida, desvinculando o acompanhamento contínuo de um simples histórico de atendimento pontual.
-* **ENTREGA_CESTA:** Entidade criada para gerenciar de forma transparente a principal atividade de auxílio direto da ONG (conforme **RN05** e **RN06**). Evita que a concessão de cestas básicas seja tratada apenas como um "tipo de encaminhamento", permitindo auditar quantidades, datas e evitar duplicidades indevidas no mesmo ciclo sem avaliação prévia.
-* **RECEBIMENTO_DOACAO:** Criada para suprir a lacuna de rastreabilidade de entradas de mantimentos. Armazena a data, o parceiro doador, os itens recebidos e a quantidade, permitindo auditar o fluxo de arrecadação sem a necessidade de um controle complexo de estoque físico.
-
+* **PROFISSIONAL_RESPONSAVEL:** Controla o cadastro da equipe técnica com `id_profissional`, `nome`, `funcao` e `registro_profissional` (ex.: CRESS ou CRP).
+* **ENCAMINHAMENTO_ATENDIMENTO:** Entidade dependente vinculada por chave estrangeira a `ATENDIMENTO`, mapeando as ações e direcionamentos institucionais externos.
+* **PIA:** Entidade essencial para cumprir a regra de negócio **RN04** e o requisito funcional **RF05**. Permite registrar a evolução temporal, objetivos e metas traçadas pela assistente social para a autonomia da família atendida.
+* **ENTREGA_CESTA:** Entidade criada para gerenciar de forma transparente a principal atividade de auxílio direto da ONG (conforme **RN05** e **RN06**), auditando quantidades e datas de auxílios.
+* **RECEBIMENTO_DOACAO:** Criada para suprir a rastreabilidade de entradas de mantimentos recebidos de parceiros estratégicos (como o Banco de Alimentos), registrando data, itens e volumes doados.
 
 
 ### Justificativa das Cardinalidades do Modelo
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO:** Todo registro ocupacional pertence obrigatoriamente a exatamente 1 beneficiário titular (1,1). Já o beneficiário pode ter 0 (desempregado/sem registro) ou múltiplos registros de histórico profissional (0,n).
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR:** Cada dependente está associado a exatamente 1 titular (1,1). O beneficiário pode morar sozinho (0) ou possuir vários dependentes cadastrados (0,n).
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR:** Cada contato de emergência pertence a 1 beneficiário (1,1), e este pode não registrar referências (0) ou indicar múltiplos contatos (0,n).
-* **BENEFICIÁRIO (1,1) --- SOLICITA --- (0,n) ATENDIMENTO:** Cada atendimento é de 1 único beneficiário (1,1). O beneficiário pode estar recém-cadastrado sem atendimento (0) ou possuir vários atendimentos no histórico (0,n).
-* **PROFISSIONAL_RESPONSAVEL (1,1) --- CONDUZ --- (0,n) ATENDIMENTO:** Cada atendimento é assinado por 1 único profissional (1,1). O técnico pode não ter conduzido nenhum atendimento ainda (0) ou conduzir vários (0,n).
-* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) PIA:** Cada Plano Individual pertence a 1 beneficiário (1,1), que pode não ter PIA ativo (0) ou possuir múltiplos planos ao longo do tempo (0,n).
-* **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENTREGA_CESTA:** Cada entrega de cesta é destinada a 1 beneficiário (1,1). O assistido pode não ter recebido cestas ainda (0) ou ter um histórico de entregas periódicas (0,n).
-* **ATENDIMENTO (1,1) --- GERA --- (0,n) ENCAMINHAMENTO_ATENDIMENTO:** Cada registro de encaminhamento deriva obrigatoriamente de exatamente 1 atendimento de origem (1,1). Por sua vez, um atendimento presencial pode resolver a demanda sem gerar encaminhamentos (0) ou desdobrar-se em múltiplos encaminhamentos externos (0,n).
-* **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) RECEBIMENTO_DOACAO:** Garante a autoria e a responsabilidade institucional pelo registro de entrada das doações no sistema, vinculando o operador técnico a cada lote recebido.
-
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) TRABALHO:** Todo registro ocupacional pertence obrigatoriamente a exatamente 1 beneficiário titular (1,1). Já o beneficiário pode ter 0 ou múltiplos registros históricos (0,n).
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) COMPOSIÇÃO_FAMILIAR:** Cada dependente está associado a exatamente 1 titular (1,1), podendo o beneficiário possuir vários membros familiares cadastrados (0,n).
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) REFERÊNCIA_FAMILIAR:** Cada contato de emergência pertence a 1 beneficiário (1,1), que pode indicar múltiplos contatos (0,n).
+* **BENEFICIÁRIO (1,1) --- SOLICITA --- (0,n) ATENDIMENTO:** Cada atendimento é de 1 único beneficiário (1,1), e este pode possuir vários atendimentos no histórico (0,n).
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- CONDUZ --- (0,n) ATENDIMENTO:** Cada atendimento é assinado por 1 único profissional (1,1), e o técnico pode conduzir vários atendimentos (0,n).
+* **ATENDIMENTO (1,1) --- GERA --- (0,n) ENCAMINHAMENTO_ATENDIMENTO:** Cada registro de encaminhamento deriva obrigatoriamente de 1 atendimento de origem (1,1), podendo um atendimento gerar nenhum ou múltiplos encaminhamentos externos (0,n).
+* **BENEFICIÁRIO (1,1) --- POSSUI --- (0,n) PIA:** Cada Plano Individual pertence a 1 beneficiário (1,1), que pode possuir múltiplos planos ao longo do tempo (0,n).
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- ELABORA --- (0,n) PIA:** Cada PIA é elaborado por 1 único profissional responsável (1,1), que pode gerenciar múltiplos planos (0,n).
+* **BENEFICIÁRIO (1,1) --- RECEBE --- (0,n) ENTREGA_CESTA:** Cada entrega de cesta é destinada a 1 beneficiário (1,1), compondo um histórico de entregas periódicas (0,n).
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) ENTREGA_CESTA:** Cada entrega de auxílio é registrada por 1 único profissional autorizador (1,1).
+* **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) RECEBIMENTO_DOACAO:** Cada lote de doação recebido de parceiros é registrado no sistema por 1 único profissional responsável (1,1).
 
 ### Decisões de Abstração e Alternativas Rejeitadas
 * **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
-* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter os membros da família, dados de trabalho ou encaminhamentos na própria tabela de beneficiários geraria campos repetitivos ou dados atômicos violados (1ª Forma Normal). A criação de entidades separadas garante escalabilidade e previne redundâncias.
-* **Correção de Cardinalidades Ambíguas:** Eliminaram-se as cardinalidades duplas `(1,n)` em ambas as pontas apontadas na avaliação anterior, substituindo-as por associações estruturalmente corretas `(1,1) para (0,n)` em relações de 1 para N.
-* **Histórico Atemporal:** Transformar atendimentos e encaminhamentos em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do atendimento do cidadão sem sobrescrever dados históricos.
+* **Normalização de Listas e Tabelas Secundárias (1FN):** Manter membros da família ou dados de trabalho na mesma tabela geraria repetição de dados, sendo solucionado com entidades dedicadas.
+* **Histórico Atemporal:** Transformar atendimentos, encaminhamentos e entregas em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do cidadão sem sobrescrever dados históricos.
 
 ---
 
