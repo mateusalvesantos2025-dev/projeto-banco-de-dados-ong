@@ -288,6 +288,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 | `id_membro` | Identificador do membro | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
 | `id_beneficiario` | Titular da família | `BIGINT UNSIGNED` | FK | Sim | Interno |
 | `nome` | Nome civil do familiar | `VARCHAR(150)` | Não | Sim | Pessoal |
+| `nome_social` | Nome de preferência/social | `VARCHAR(150)` | Não | Não | Pessoal |
 | `idade` | Idade em anos | `TINYINT UNSIGNED` | Não | Sim | Pessoal |
 | `parentesco_vinculo` | Grau de parentesco | `VARCHAR(50)` | Não | Sim | Pessoal |
 
@@ -301,6 +302,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 | `id_referencia` | Identificador do contato | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
 | `id_beneficiario` | Beneficiário vinculado | `BIGINT UNSIGNED` | FK | Sim | Interno |
 | `nome` | Nome do contato | `VARCHAR(150)` | Não | Sim | Pessoal |
+| `nome_social` | Nome de preferência/social | `VARCHAR(150)` | Não | Não | Pessoal |
 | `parentesco_vinculo` | Relação/vínculo | `VARCHAR(50)` | Não | Não | Pessoal |
 | `telefone` | Telefone de contato | `VARCHAR(20)` | Não | Não | Pessoal |
 
@@ -441,8 +443,8 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 ### Escolha das Entidades e Atribuição de Atributos
 * **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado para detalhamento geográfico.
 * **TRABALHO:** Entidade isolada para armazenar as informações socioeconômicas e ocupacionais (`renda_atual`, `situacao_ocupacional`, `empresa_trabalho`, `ocupacao_atual`, `telefone_trabalho`), garantindo a normalização adequada em relação aos dados pessoais do beneficiário.
-* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, respeitando o limite estrutural de até 5 membros.
-* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `parentesco_vinculo` e `telefone` da pessoa de contato externo para emergências (até 3 referências), desvinculada de endereço residencial próprio.
+* **COMPOSIÇÃO_FAMILIAR:** Guarda `nome`, `nome_social`, `idade` e `parentesco_vinculo` dos moradores da mesma residência, identificada unicamente por `id_membro`, respeitando o limite estrutural de até 5 membros.
+* **REFERÊNCIA_FAMILIAR:** Guarda `nome`, `nome_social`, `parentesco_vinculo` e `telefone` da pessoa de contato externo para emergências (até 3 referências), desvinculada de endereço residencial próprio.
 * **ATENDIMENTO:** Mapeia os encontros entre a equipe técnica e o assistido através da chave `id_atendimento`, vinculando o `id_profissional`, a `data_atendimento` e a `demanda_inicial`.
 * **PROFISSIONAL_RESPONSAVEL:** Controla o cadastro da equipe técnica com `id_profissional`, `nome`, `funcao` e `registro_profissional` (ex.: CRESS ou CRP).
 * **ENCAMINHAMENTO_ATENDIMENTO:** Entidade dependente vinculada por chave estrangeira a `ATENDIMENTO`, mapeando as ações e direcionamentos institucionais externos.
