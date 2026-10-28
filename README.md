@@ -19,6 +19,45 @@ Adicionalmente, a instituição gerencia o recebimento de doações de mantiment
 
 Abaixo estão mapeados os processos do negócio e as regras operacionais identificadas na organização, bem como a cobertura atual prevista no modelo de dados conceitual.
 
+### Fluxograma do Processo Socioassistencial e Concessão de Auxílios
+
+```mermaid
+flowchart TD
+    %% Estilos
+    classDef inicio fill:#2196F3,stroke:#0D47A1,stroke-width:2px,color:#fff;
+    classDef processo fill:#FFF3E0,stroke:#E65100,stroke-width:1px,color:#000;
+    classDef decisao fill:#FFF9C4,stroke:#FBC02D,stroke-width:2px,color:#000;
+    classDef acao fill:#E8F5E9,stroke:#1B5E20,stroke-width:1px,color:#000;
+    classDef fim fill:#ECEFF1,stroke:#37474F,stroke-width:1px,color:#000;
+
+    %% Acolhimento e Cadastro
+    A[Acolhimento Presencial / Porta Aberta] :::inicio --> B[Coleta de Consentimento LGPD] :::processo
+    B --> C[Cadastro / Atualização em BENEFICIARIO] :::processo
+    C --> D[Anamnese Social & Triagem - ATENDIMENTO] :::processo
+
+    %% Decisão de Elegibilidade
+    D --> E{Possui CadÚnico ativo <br/>& Formalmente Desempregado?} :::decisao
+
+    %% Caminho Concessão de Cestas
+    E -- Sim --> F[Verificar Disponibilidade em Estoque<br/> Doações Esporádicas / Lote Prefeitura 150 Cestas] :::processo
+    F --> G[Registrar Concessão em ENTREGA_CESTA] :::acao
+
+    %% Caminho Encaminhamentos
+    E -- Não / Demanda Geral --> H[Verificar Outras Demandas Socioassistenciais] :::processo
+    G --> H
+    H --> I{Necessita Apoio Externo<br/> ou Continuado?} :::decisao
+
+    I -- Encaminhamento Externo --> J[Registrar ENCAMINHAMENTO_ATENDIMENTO<br/>Saúde, Habitação, Jurídico] :::acao
+    I -- Acompanhamento Continuado --> K[Elaborar / Atualizar PIA] :::acao
+    I -- Nenhum/Concluído --> L[Finalizar Registro do Atendimento] :::fim
+
+    J --> L
+    K --> L
+
+    %% Entrada Paralela de Mantimentos
+    M[Recebimento de Lote Prefeitura / Doadores] :::inicio --> N[Registrar Entrada em RECEBIMENTO_DOACAO] :::acao
+    N --> F
+
 ---
 
 ### Tabela dos Processos do Negócio (Tabela I)
