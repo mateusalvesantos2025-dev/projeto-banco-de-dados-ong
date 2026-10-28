@@ -111,7 +111,7 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 # 3. Regras de Negócio (RN)
 
- As regras de negócio abaixo definem as restrições operacionais, validações de dados e requisitos legais que orientam a modelagem do banco de dados e a rotina da instituição.
+As regras de negócio abaixo definem as restrições operacionais, validações de dados e requisitos legais que orientam a modelagem do banco de dados e a rotina da instituição.
 
 ---
 
@@ -158,16 +158,37 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 ---
 
 ### RN07 — Consentimento, Retenção e Ciclo de Vida de Dados (LGPD)
-* **Descrição:** O cadastro de informações socioeconômicas e laudos exige o consentimento expresso do titular (ou responsável legal), mantendo o histórico de prontuários arquivado pelo período estipulado pelas normativas do terceiro setor e de assistência social, com posterior descarte seguro.
+* **Descrição:** O cadastro de informações socioeconômicas e laudos exige o consentimento expresso do titular (ou responsável legal), mantendo o histórico de prontuários arquivado pelo período estipulado pelas normativas do terceiro setor e de assistência social (5 anos), com posterior descarte seguro ou anonimização.
 * **Motivação:** Garantir conformidade jurídica, respaldo legal na prestação de contas e respeito à privacidade dos assistidos.
 * **Tipo:** Legislação e Governança de Dados.
 
 ---
 
 ### RN08 — Prestação de Contas e Relatórios Socioassistenciais
-* **Descrição:** O sistema deve permitir a agregação de dados consolidados sobre o volume de atendimentos, perfil dos assistidos e número de cestas distribuídas para a elaboração de relatórios destinados a órgãos parceiros (CRAS, SAS e doadores).
+* **Descrição:** O sistema deve permitir a agregação de dados consolidados sobre o volume de atendimentos, perfil dos assistidos, doações recebidas e número de cestas distribuídas para a elaboração de relatórios destinados a órgãos parceiros (CRAS, SAS e doadores).
 * **Motivação:** Atender às obrigações estatutárias da ONG e prestar contas de forma transparente sobre a aplicação dos recursos e doações recebidas.
 * **Tipo:** Governança e Relatoria.
+
+---
+
+### RN09 — Validade e Integridade Físico-Sanitária dos Alimentos
+* **Descrição:** Todos os alimentos e cestas básicas recebidos de doadores parceiros devem passar por verificação de prazo de validade e integridade física antes de serem registrados no sistema e disponibilizados para doação aos beneficiários.
+* **Motivação:** Assegurar a segurança alimentar, a qualidade e a saúde dos assistidos pela instituição.
+* **Tipo:** Regra de Controle e Qualidade de Doações.
+
+---
+
+### RN10 — Limite Estrutural Familiar e de Referências
+* **Descrição:** Conforme a estrutura da ficha de cadastro da ONG, o sistema limita o registro direto na tabela de composição familiar a até 5 membros dependentes e a até 3 pessoas de contato/emergência na tabela de referências familiares.
+* **Motivação:** Manter o alinhamento com o formulário físico de triagem e garantir a padronização no dimensionamento dos atendimentos e auxílios.
+* **Tipo:** Validação de Dados / Restrição Estrutural.
+
+---
+
+### RN11 — Obrigatoriedade de Registro do Profissional Responsável (CRESS/CRP)
+* **Descrição:** Todo atendimento socioassistencial, elaboração de PIA, concessão de auxílios e registro de doações deve obrigatoriamente estar vinculado a um profissional habilitado da equipe técnica cadastrado com seu respectivo registro no conselho de classe (ex.: CRESS ou CRP).
+* **Motivação:** Garantir a responsabilidade técnica e legal pelas decisões e acompanhamentos sociais realizados na instituição.
+* **Tipo:** Validação Operacional e Conformidade Técnica.
 
 ---
 
