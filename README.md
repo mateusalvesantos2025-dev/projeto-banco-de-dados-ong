@@ -54,7 +54,8 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | Acompanhamento continuado (PIA) vinculado ao histórico | Acompanhamento | Coberta (RN04) |
 | Limite estrutural de membros na composição familiar e referências | Validação | Coberta (RN10 / Dicionário de Dados) |
 | Avaliação social obrigatória para concessão de auxílios | Triagem | Coberta (via Atendimento e Encaminhamentos) |
-| Concessão variável de cestas conforme doações e vulnerabilidade | Doação | Coberta (RN05 / Registrada no Atendimento) |
+| Concessão variável de cestas (doações esporádicas e lote bimestral da Prefeitura) | Doação | Coberta (RN05 / Registrada no Atendimento) |
+| Critério de elegibilidade prioritária (desemprego e CadÚnico ativo) e histórico | Doação | Coberta (RN06 / Histórico de Atendimentos) |
 | Controle de duplicidade e histórico na entrega de auxílios | Doação | Coberta (RN06 / Histórico de Atendimentos) |
 | Obrigatoriedade de registro do profissional responsável (CRESS/CRP) | Triagem | Coberta (RN11 / Entidade Profissional) |
 | Validade e integridade físico-sanitária das doações de alimentos | Doação | Coberta (RN09) |
@@ -145,16 +146,16 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-### RN05 — Concessão Variável de Cestas Básicas e Doações
-* **Descrição:** A distribuição de cestas básicas e itens de doação não possui quantidade fixa por beneficiário; ela varia estritamente em função da disponibilidade de estoque/doações de parceiros e do grau de necessidade apurado na triagem.
-* **Motivação:** Refletir a realidade operacional da ONG, onde a oferta depende de doadores externos e a demanda é priorizada pela assistente social.
+### RN05 — Concessão Variável e Origem dos Mantimentos (Doações e Prefeitura)
+* **Descrição:** A distribuição de cestas básicas não possui quantidade fixa por beneficiário. O estoque da ONG é composto por duas frentes: doações esporádicas de mantimentos vindas de parceiros e doadores particulares (de forma não fixa), e um lote institucional de 150 cestas básicas recebido a cada 2 meses (bimestralmente) oriundo de parceria com a Prefeitura.
+* **Motivação:** Refletir com precisão a flutuação do estoque da instituição, que mescla doações irregulares/voluntárias com o repasse programado do poder público.
 * **Tipo:** Regra Operacional de Doação.
 
 ---
 
-### RN06 — Critério de Elegibilidade e Periodicidade de Auxílios
-* **Descrição:** A concessão de cestas básicas por família observa critérios de elegibilidade baseados na renda per capita apurada na triagem e respeita um intervalo mínimo de periodicidade entre as entregas, salvo em situações de calamidade avaliadas pela equipe.
-* **Motivação:** Assegurar a distribuição justa, transparente e rotativa dos recursos limitados da instituição entre as famílias cadastradas.
+### RN06 — Critério de Elegibilidade Prioritária para Auxílios
+* **Descrição:** Para ter prioridade na concessão de cestas básicas e auxílios materiais, a família assistida deve obrigatoriamente atender a dois critérios principais apurados na triagem: estar em situação de desemprego formal (sem registro ativo em carteira) e possuir o Cadastro Único (CadÚnico) ativo e atualizado. Exceções emergenciais de calamidade podem ser avaliadas discricionariamente pela assistente social.
+* **Motivação:** Assegurar que os recursos limitados da instituição (como o lote bimestral da Prefeitura) sejam direcionados estritamente às famílias em maior vulnerabilidade social e formalmente enquadradas nas diretrizes do SuAS.
 * **Tipo:** Regra de Controle de Doação.
 
 ---
@@ -476,7 +477,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 ## 8. Uso de Inteligência Artificial
 > Registro detalhado do uso de ferramentas de Inteligência Artificial no apoio à estruturação técnico-acadêmica, modelagem conceitual e validação de dados do projeto.
 
-* **Ferramentas de IA utilizadas:** Google Gemini, OpenAI ChatGPT e Anthropic Claude.
+* **Ferramentas de IA utilizadas:** Google Gemini (versão gratuita), OpenAI ChatGPT (versão gratuita) e Anthropic Claude (versão Claude Pro).
 * **Etapas de uso:** 
   * Estruturação e formatação da documentação técnica em Markdown e transcrição do Dicionário de Dados.
   * Compreensão profunda e refinamento dos fluxos operacionais e regras de negócio da Organização Social.
