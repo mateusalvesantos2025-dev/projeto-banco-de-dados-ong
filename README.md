@@ -32,7 +32,7 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | Encaminhamento para redes externas (saúde, habitação, jurídica) | Atendimento | Coberta |
 | Acompanhamento familiar continuado via PIA | Acompanhamento | Coberta (suportado pela entidade PIA) |
 | Avaliação, montagem e concessão de cestas básicas e auxílios | Doação/Auxílio | Coberta (suportado pela entidade Entrega_Cesta) |
-| Recebimento de doações de parceiros (Banco de Alimentos, etc.) | Arrecadação | Coberta (registrado no fluxo de doações e auxílios) |
+| Recebimento de doações de parceiros (Banco de Alimentos, etc.) | Arrecadação | Coberta (suportado pela entidade Recebimento_Doacao) |
 | Controle de passeios e eventos socioeducativos | Atendimento | Parcial (registrado via ficha de atendimento) |
 | Gestão e histórico de prontuários do beneficiário | Gestão | Coberta (através de chaves e histórico de atendimentos) |
 | Gestão de estoque físico de alimentos e doações | Físico | Ausente (fora do escopo do modelo conceitual relacional) |
@@ -52,11 +52,13 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 | Sigilo de triagem e acesso restrito (LGPD) | Triagem | Coberta (RN02) |
 | Triagem socioassistencial obrigatória antes do encaminhamento | Triagem | Coberta (RN03) |
 | Acompanhamento continuado (PIA) vinculado ao histórico | Acompanhamento | Coberta (RN04) |
-| Limite de membros na composição familiar e referências | Validação | Coberta (via Dicionário e Tabelas Relacionadas) |
+| Limite estrutural de membros na composição familiar e referências | Validação | Coberta (RN10 / Dicionário de Dados) |
 | Avaliação social obrigatória para concessão de auxílios | Triagem | Coberta (via Atendimento e Encaminhamentos) |
 | Concessão variável de cestas conforme doações e vulnerabilidade | Doação | Coberta (RN05 / Registrada no Atendimento) |
 | Controle de duplicidade e histórico na entrega de auxílios | Doação | Coberta (RN06 / Histórico de Atendimentos) |
-| Obrigatoriedade de registro do profissional responsável (CRESS/CRP) | Triagem | Coberta (via Entidade Profissional) |
+| Obrigatoriedade de registro do profissional responsável (CRESS/CRP) | Triagem | Coberta (RN11 / Entidade Profissional) |
+| Validade e integridade físico-sanitária das doações de alimentos | Doação | Coberta (RN09) |
+| Consentimento, retenção e ciclo de vida de dados (LGPD) | Legislação | Coberta (RN07) |
 | Periodicidade de entrega de cesta conforme doações | Doação | Parcial (registrada no fluxo de atendimento) |
 | Controle de estoque físico de alimentos | Doação | Ausente (fora do escopo do modelo de dados) |
 | Prestação de contas e relatórios para órgãos parceiros (CRAS/SAS) | Relatório | Coberta (RN08) |
@@ -200,7 +202,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 * **Encoding e Collation:** `UTF-8` / `utf8mb4_unicode_ci`
 * **Notação Formal:** Modelo Entidade-Relacionamento (Notação Relacional / Pé de Galinha)
 * **Convenção de Nomenclatura:** Nomes de tabelas e atributos em minúsculo com separação por sublinhado (`snake_case`). Chaves primárias iniciadas com `id_`.
-* **Compatibilidade de Tipos:** Todas as chaves primárias (PK) e chaves estrangeiras (FK) utilizam o tipo estpadronizado `BIGINT UNSIGNED` para assegurar a integridade referencial no MySQL.
+* **Compatibilidade de Tipos:** Todas as chaves primárias (PK) e chaves estrangeiras (FK) utilizam o tipo padronizado `BIGINT UNSIGNED` para assegurar a integridade referencial no MySQL.
 * **Política de Indexação:** Além das Chaves Primárias (PK) e Estrangeiras (FK), são criados índices B-Tree para otimização de busca frequente nos campos `cpf`, `nis` e `nome_completo`.
 
 #### Governança de Dados, LGPD e Matriz de Papéis
@@ -489,7 +491,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
   * *"Organize a documentação técnica e estruture as tabelas do dicionário de dados conceitual no esqueleto Markdown exigido."*
 * **Resposta recebida:** As ferramentas de IA retornaram análises detalhadas apontando a necessidade de isolamento de atributos socioeconômicos na entidade `TRABALHO`, a substituição das cardinalidades ambíguas de `(1,n)` para `(1,1) --- (0,n)`, a inclusão de controle de acessos alinhado à LGPD e diretrizes do SuAS, além de minutas de tabelas em Markdown para o Dicionário de Dados com convenções de nomenclatura (`snake_case`) e chaves sintéticas.
 * **Fontes e verificações:** O grupo submeteu as propostas das IAs a uma curadoria rigorosa, cruzando cada sugestão diretamente com a ficha física real da ONG, com a teoria de modelagem relacional de banco de dados e com as observações apontadas na avaliação docente.
-* **Rejeições/Correções:** Diversas sugestões iniciais geradas pelas IAs precisaram de ajustes manuais, como a readequação de nomes deatributos para o padrão `snake_case`, a correção de cardinalidades que vieram inicialmente ambíguas e a adaptação de termos genéricos para a realidade específica da assistência social brasileira (CRAS, CADÚnico, PIA).
+* **Rejeições/Correções:** Diversas sugestões iniciais geradas pelas IAs precisaram de ajustes manuais, como a readequação de nomes de atributos para o padrão `snake_case`, a correção de cardinalidades que vieram inicialmente ambíguas e a adaptação de termos genéricos para a realidade específica da assistência social brasileira (CRAS, CADÚnico, PIA).
 * **Justificativa da Escolha Final e Reflexão Crítica:** O uso conjunto de LLMs (Gemini, ChatGPT e Claude) atuou como uma camada preliminar de auditoria e estruturação documental. Contudo, a decisão arquitetural final foi estritamente humana e baseada nos critérios normativos de modelagem de dados e nas exigências técnicas da assistência social. Todas as sugestões das IAs foram submetidas ao crivo do grupo: rejeitamos a criação de tabelas desnecessárias (como estoque físico, fora do escopo do modelo conceitual) e mantivemos o foco nas entidades centrais exigidas pela rotina presencial da ONG e pelo professor (como PIA e Entrega de Cestas), garantindo a fidelidade às diretrizes do SuAS/LGPD.
 
 ---
