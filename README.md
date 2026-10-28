@@ -196,224 +196,202 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ### 4.0 Convenções de Engenharia de Dados e Governança
 
-* **SGBD Alvo e Versão:** PostgreSQL (v15+) / MySQL (v8.0+)
+* **SGBD Alvo:** MySQL v8.0+
 * **Encoding e Collation:** `UTF-8` / `utf8mb4_unicode_ci`
-* **Notação Formal:** Modelo Entidade-Relacionamento (Notação Chen / Merise)
+* **Notação Formal:** Modelo Entidade-Relacionamento (Notação Relacional / Pé de Galinha)
 * **Convenção de Nomenclatura:** Nomes de tabelas e atributos em minúsculo com separação por sublinhado (`snake_case`). Chaves primárias iniciadas com `id_`.
+* **Compatibilidade de Tipos:** Todas as chaves primárias (PK) e chaves estrangeiras (FK) utilizam o tipo estpadronizado `BIGINT UNSIGNED` para assegurar a integridade referencial no MySQL.
 * **Política de Indexação:** Além das Chaves Primárias (PK) e Estrangeiras (FK), são criados índices B-Tree para otimização de busca frequente nos campos `cpf`, `nis` e `nome_completo`.
-* **Governança de Dados e LGPD:**
-  
-* #### Governança de Dados, LGPD e Matriz de Papéis
+
+#### Governança de Dados, LGPD e Matriz de Papéis
 > Diretrizes de conformidade jurídica, retenção e permissões de acesso baseadas nas normativas da LGPD e do SuAS.
 
 **Classificação dos Dados:**
-* **Interno:** Chaves, datas de controlo e dados operacionais (ex: `id_beneficiario`, `quantidade_cestas`).
-* **Pessoal:** Dados pessoais comuns nos termos do Art. 5º, I da LGPD (ex: `nome`, `cpf`, `telefone`).
-* **Sensível:** Dados pessoais sensíveis nos termos do Art. 5º, II da LGPD (ex: `cor_raca`, `orientacao_sexual`, `tem_alergias`).
-* **Sigiloso:** Dados protegidos pelo sigilo profissional da triagem e assistência social (ex: `renda`, `demanda_inicial`, `metas_do_pia`).
+* **Interno:** Chaves, datas de controle e dados operacionais (ex: `id_beneficiario`, `quantidade_cestas`).
+* **Pessoal:** Dados pessoais comuns nos termos do Art. 5º, I da LGPD (ex: `nome_completo`, `cpf`, `telefone`, `endereco`).
+* **Sensível:** Dados pessoais sensíveis nos termos do Art. 5º, II da LGPD (ex: `cor_raca`, `orientacao_sexual`, `pessoa_com_deficiencia`, `tem_alergias`).
+* **Sigiloso:** Dados protegidos pelo sigilo profissional da triagem e assistência social (ex: `renda_atual`, `demanda_inicial`, `metas_objetivos`).
 
-**Retenção e Expurgo:**
-* **Prazo de Retenção:** Os cadastros e prontuários são mantidos por **5 anos** após o último atendimento do beneficiário, em conformidade com as diretrizes do SuAS/CRAS.
-* **Anonimização:** Após o prazo de retenção ou revogação de consentimento pelo titular, os dados identificáveis são anonimizados, preservando apenas os agregados estatísticos para prestação de contas (RN08).
+**Bases Legais e Diretrizes:**
+* **Dados Pessoais Comuns:** Art. 7º, I (Consentimento) e Art. 7º, V (Execução de contrato/procedimentos).
+* **Dados Sensíveis:** Art. 11, I (Consentimento do titular ou do responsável legal) e Art. 11, II, "a" (Cumprimento de obrigação legal/estatutária).
+* **Retenção e Expurgo:** Os cadastros e prontuários são mantidos por **5 anos** após o último atendimento do beneficiário, em conformidade com as diretrizes do SuAS/CRAS, sendo submetidos a anonimização ou expurgo seguro após este período.
 
 **Matriz de Papéis por Operação (I: Inserir, L: Ler, A: Alterar, N: Anonimizar):**
 | Categoria de Dados | TÉCNICO (Assistente Social / Psicólogo) | ADMIN (Coordenação / Presidência) | VOLUNTÁRIO (Recepção / Apoio) |
 | :--- | :---: | :---: | :---: |
 | **Internos e Pessoais** (Cadastro, Família, Trabalho) | I, L, A | I, L, A | L |
-| **Sensíveis** (Raça, Deficiência, Alergias) | I, L, A | - | - |
-| **Sigiloso** (Renda, Prontuários, PIA) | I, L, A | - | - |
+| **Sensíveis** (Raça, Deficiência, Alergias) | I, L, A | L | - |
+| **Sigiloso** (Renda, Prontuários, PIA) | I, L, A | L | - |
 | **Entrega de Cestas** (`entrega_cesta`) | I, L, A | L | I, L |
-
-  * **Base Legal:** Art. 7º, I (Consentimento do Titular) e Art. 11, II, "a" (Cumprimento de obrigação legal/estatutária) da LGPD.
-  * **Retenção de Dados:** Prontuários e fichas socioassistenciais são mantidos por 5 anos após o último atendimento do beneficiário, conforme diretrizes do SuAS/CRAS, sendo submetidos a expurgo ou anonimização após esse período.
-  * **Papéis e Permissões:** 
-    * `Admin / Assistente Social`: Acesso total (Leitura, Escrita, Alteração) a dados cadastrais e prontuários sensíveis.
-    * `Operador / Voluntário`: Acesso restrito (Apenas Leitura/Registro de Entregas) sem visualização de laudos e diagnósticos confidenciais.
 
 ---
 
 ### 4.1 Entidade: Beneficiário
 *(Centraliza a identificação do cidadão assistido)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_beneficiario` | Identificador único | PK do beneficiário | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
-| `nis` | Identificação Social | Registro CadÚnico | Categórico | `VARCHAR(15)` | Index | Não | Não (L/E: Admin) |
-| `cras_creas_sas` | Equipamento vinculado | Acompanhamento externo | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
-| `nome_completo` | Nome civil | Identificação principal | Categórico | `VARCHAR(150)` | Index | Sim | Não (L/E: Todos) |
-| `nome_social` | Nome de preferência | Respeito à identidade | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Todos) |
-| `sexo` | Sexo biológico/declarado | Marcação cadastral | Categórico | `CHAR(1)` | Não | Sim | Não (L/E: Admin) |
-| `orientacao_sexual` | Orientação autodeclarada | Estatística / Perfil | Categórico | `VARCHAR(30)` | Não | Não | **Sim** (L/E: Assist. Social) |
-| `data_nascimento` | Data de nascimento | Faixa etária e benefícios | Data | `DATE` | Não | Sim | Não (L/E: Admin) |
-| `naturalidade` | Cidade/UF de origem | Perfil demográfico | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
-| `cor_raca` | Cor/raça autodeclarada | Fins estatísticos | Categórico | `VARCHAR(20)` | Não | Não | **Sim** (L/E: Assist. Social) |
-| `pessoa_com_deficiencia` | Condição de PCD / CID | Priorização e auxílio | Categórico | `VARCHAR(100)` | Não | Não | **Sim** (L/E: Assist. Social) |
-| `tem_alergias` | Restrições alimentares | Segurança na doação | Categórico | `VARCHAR(150)` | Não | Não | **Sim** (L/E: Assist. Social) |
-| `cpf` | Registro de CPF | Validação (RN01) | Categórico | `VARCHAR(14)` | Index/Unique | Não | **Sim** (L/E: Admin) |
-| `rg_numero` | Documento RG | Identificação civil | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
-| `rg_orgao_uf_emissor` | Órgão emissor RG | Detalhe do documento | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
-| `rg_data_emissao` | Data de emissão RG | Validade do documento | Data | `DATE` | Não | Não | Não (L/E: Admin) |
-| `estado_civil` | Estado civil | Perfil familiar | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
-| `endereco` | Endereço residencial | Localização territorial | Categórico | `VARCHAR(200)` | Não | Sim | **Sim** (L/E: Admin) |
-| `bairro` | Bairro | Mapeamento territorial | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
-| `cep` | Código postal | Localização geográfica | Categórico | `VARCHAR(9)` | Não | Não | Não (L/E: Admin) |
-| `telefone` | Telefone principal | Contato e recados | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
-| `nome_mae` | Nome da mãe | Filiação | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Admin) |
-| `nome_pai` | Nome do pai | Filiação | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Admin) |
-| `escolaridade` | Nível de instrução | Encaminhamento EJA/cursos | Categórico | `VARCHAR(50)` | Não | Não | Não (L/E: Admin) |
-| `estuda_atualmente` | Vínculo escolar atual | Diagnóstico social | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
-| `recebe_transferencia_renda` | Programas de transferência | Análise de vulnerabilidade | Categórico | `VARCHAR(100)` | Não | Não | **Sim** (L/E: Assist. Social) |
-| `recebe_bpc` | Recebimento de BPC | Análise de vulnerabilidade | Categórico | `VARCHAR(50)` | Não | Não | **Sim** (L/E: Assist. Social) |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_beneficiario` | Identificador único | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `nis` | Identificação Social | `VARCHAR(15)` | Index | Não | Pessoal |
+| `cras_creas_sas` | Equipamento vinculado | `VARCHAR(100)` | Não | Não | Interno |
+| `nome_completo` | Nome civil | `VARCHAR(150)` | Index | Sim | Pessoal |
+| `nome_social` | Nome de preferência | `VARCHAR(150)` | Não | Não | Pessoal |
+| `sexo` | Sexo biológico/declarado | `CHAR(1)` | Não | Sim | Pessoal |
+| `orientacao_sexual` | Orientação autodeclarada | `VARCHAR(30)` | Não | Não | Sensível |
+| `data_nascimento` | Data de nascimento | `DATE` | Não | Sim | Pessoal |
+| `naturalidade` | Cidade/UF de origem | `VARCHAR(100)` | Não | Não | Pessoal |
+| `cor_raca` | Cor/raça autodeclarada | `VARCHAR(20)` | Não | Não | Sensível |
+| `pessoa_com_deficiencia` | Condição de PCD / CID | `VARCHAR(100)` | Não | Não | Sensível |
+| `tem_alergias` | Restrições alimentares | `VARCHAR(150)` | Não | Não | Sensível |
+| `cpf` | Registro de CPF | `VARCHAR(14)` | Index/Unique | Não | Pessoal |
+| `rg_numero` | Documento RG | `VARCHAR(20)` | Não | Não | Pessoal |
+| `rg_orgao_uf_emissor` | Órgão emissor RG | `VARCHAR(20)` | Não | Não | Pessoal |
+| `rg_data_emissao` | Data de emissão RG | `DATE` | Não | Não | Pessoal |
+| `estado_civil` | Estado civil | `VARCHAR(20)` | Não | Não | Pessoal |
+| `endereco` | Endereço residencial | `VARCHAR(200)` | Não | Sim | Pessoal |
+| `bairro` | Bairro | `VARCHAR(100)` | Não | Não | Pessoal |
+| `cep` | Código postal | `VARCHAR(9)` | Não | Não | Pessoal |
+| `telefone` | Telefone principal | `VARCHAR(20)` | Não | Não | Pessoal |
+| `nome_mae` | Nome da mãe | `VARCHAR(150)` | Não | Não | Pessoal |
+| `nome_pai` | Nome do pai | `VARCHAR(150)` | Não | Não | Pessoal |
+| `escolaridade` | Nível de instrução | `VARCHAR(50)` | Não | Não | Pessoal |
+| `estuda_atualmente` | Vínculo escolar atual | `VARCHAR(100)` | Não | Não | Pessoal |
+| `recebe_transferencia_renda`| Programas sociais | `VARCHAR(100)` | Não | Não | Sigiloso |
+| `recebe_bpc` | Recebimento de BPC | `VARCHAR(50)` | Não | Não | Sigiloso |
+| `situacao_cadastro` | Status do cadastro | `VARCHAR(20)` (ATIVO/ANONIMIZADO) | Não | Sim | Interno |
+| `data_consentimento` | Data do aceite LGPD | `DATE` | Não | Sim | Interno |
 
 ---
 
 ### 4.2 Entidade: Trabalho
-*(Perfil ocupacional e socioeconômico)*
+*(Perfil ocupacional e socioeconômico - isolado para normalização 1FN/2FN)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_trabalho` | Identificador único | PK do registro | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
-| `id_beneficiario` | Beneficiário vinculado | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Admin) |
-| `situacao_ocupacional` | Condição de trabalho | Análise socioeconômica | Categórico | `VARCHAR(50)` | Não | Sim | Não (L/E: Admin) |
-| `profissao_habilidades` | Habilidades e cursos | Encaminhamento profissional | Categórico | `TEXT` | Não | Não | Não (L/E: Admin) |
-| `renda_atual` | Renda mensal individual | Avaliação de renda per capita | Numérico | `DECIMAL(10,2)` | Não | Não | **Sim** (L/E: Assist. Social) |
-| `empresa_trabalho` | Nome do empregador | Vínculo de trabalho | Categórico | `VARCHAR(150)` | Não | Não | Não (L/E: Admin) |
-| `ocupacao_atual` | Função exercida | Perfil profissional | Categórico | `VARCHAR(100)` | Não | Não | Não (L/E: Admin) |
-| `telefone_trabalho` | Telefone comercial | Contato de trabalho | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_trabalho` | Identificador único | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Beneficiário vinculado | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `situacao_ocupacional` | Condição de trabalho | `VARCHAR(50)` | Não | Sim | Pessoal |
+| `profissao_habilidades` | Habilidades e cursos | `TEXT` | Não | Não | Pessoal |
+| `renda_atual` | Renda mensal individual | `DECIMAL(10,2)` | Não | Não | Sigiloso |
+| `empresa_trabalho` | Nome do empregador | `VARCHAR(150)` | Não | Não | Pessoal |
+| `ocupacao_atual` | Função exercida | `VARCHAR(100)` | Não | Não | Pessoal |
+| `telefone_trabalho` | Telefone comercial | `VARCHAR(20)` | Não | Não | Pessoal |
 
 ---
 
 ### 4.3 Entidade: Composição Familiar (`composicao_familiar`)
-*(Ficha da ONG, pág. 2: Composição Familiar. Limite da ficha: até 5 membros por beneficiário)*
+*(Membros dependentes que residem no mesmo domicílio - até 5 membros)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_membro` | Identificador do membro | PK do membro familiar | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
-| `id_beneficiario` | Titular da família | FK para Beneficiário (máx. 5) | Identificador (FK) | `BIGINT UNSIGNED` | FK | Sim | Interno |
-| `nome` | Nome civil do familiar | Identificação do dependente | Texto | `VARCHAR(150)` | Não | Sim | Pessoal |
-| `idade` | Idade em anos | Dimensionamento de auxílio | Numérico | `TINYINT UNSIGNED` | Não | Sim | Pessoal |
-| `parentesco_vinculo` | Grau de parentesco | Relação com o titular | Categórico | `VARCHAR(50)` | Não | Sim | Pessoal |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_membro` | Identificador do membro | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Titular da família | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `nome` | Nome civil do familiar | `VARCHAR(150)` | Não | Sim | Pessoal |
+| `idade` | Idade em anos | `TINYINT UNSIGNED` | Não | Sim | Pessoal |
+| `parentesco_vinculo` | Grau de parentesco | `VARCHAR(50)` | Não | Sim | Pessoal |
 
 ---
 
-### 4.4 Entidade: Referencia_Familiar
-*(Pessoas de contato externo e emergência)*
+### 4.4 Entidade: Referência Familiar (`referencia_familiar`)
+*(Contatos externos e de emergência - até 3 referências)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_referencia` | Identificador do contato | PK da referência | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
-| `id_beneficiario` | Beneficiário vinculado | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Admin) |
-| `nome` | Nome do contato | Referência de emergência | Categórico | `VARCHAR(150)` | Não | Sim | Não (L/E: Admin) |
-| `parentesco_vinculo` | Relação/vínculo | Ex: Amigo, Vizinho | Categórico | `VARCHAR(50)` | Não | Não | Não (L/E: Admin) |
-| `telefone` | Telefone de contato | Comunicação de emergência | Categórico | `VARCHAR(20)` | Não | Não | Não (L/E: Admin) |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_referencia` | Identificador do contato | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Beneficiário vinculado | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `nome` | Nome do contato | `VARCHAR(150)` | Não | Sim | Pessoal |
+| `parentesco_vinculo` | Relação/vínculo | `VARCHAR(50)` | Não | Não | Pessoal |
+| `telefone` | Telefone de contato | `VARCHAR(20)` | Não | Não | Pessoal |
 
 ---
 
 ### 4.5 Entidade: Atendimento
 *(Registro das entrevistas e anamneses sociais)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_atendimento` | Identificador da sessão | PK do atendimento | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Todos) |
-| `id_beneficiario` | Beneficiário atendido | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
-| `id_profissional` | Técnico condutor | FK para Profissional | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
-| `data_atendimento` | Data do atendimento | Rastreabilidade temporal | Data | `DATE` | Index | Sim | Não (L/E: Todos) |
-| `demanda_inicial` | Necessidade relatada | Diagnóstico da triagem | Categórico | `TEXT` | Não | Sim | **Sim** (L/E: Assist. Social) |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_atendimento` | Identificador da sessão | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Beneficiário atendido | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `id_profissional` | Técnico condutor | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `data_atendimento` | Data do atendimento | `DATE` | Index | Sim | Interno |
+| `demanda_inicial` | Necessidade relatada | `TEXT` | Não | Sim | Sigiloso |
 
 ---
 
 ### 4.6 Entidade: Encaminhamento (`encaminhamento_atendimento`)
-*(Ficha da ONG, pág. 2: Encaminhamentos Realizados. Possui identificador próprio)*
+*(Direcionamentos para redes externas derivados de um atendimento)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_encaminhamento` | Identificador único | PK própria da entidade | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
-| `id_atendimento` | Atendimento de origem | FK para Atendimento | Identificador (FK) | `BIGINT UNSIGNED` | FK | Sim | Interno |
-| `tipo_encaminhamento` | Categoria do encaminhamento | Lista fechada de opções | Categórico | `VARCHAR(60)` | Unique | Sim | Sigiloso |
-| `detalhe_outros` | Especificação técnica | Usado apenas se tipo for "Outros" | Texto | `TEXT` | Não | Cond. | Sigiloso |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_encaminhamento` | Identificador único | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_atendimento` | Atendimento de origem | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `tipo_encaminhamento` | Categoria do encaminhamento | `VARCHAR(60)` | Não | Sim | Sigiloso |
+| `detalhe_outros` | Especificação técnica | `TEXT` | Não | Cond. | Sigiloso |
 
 ---
 
-### 4.7 Entidade: Profissional_Responsavel
-*(Equipe técnica e assistentes sociais)*
+### 4.7 Entidade: Profissional Responsável (`profissional_responsavel`)
+*(Equipe técnica da ONG - CRESS/CRP)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_profissional` | Identificador do profissional | PK do profissional | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Admin) |
-| `nome` | Nome completo | Identificação da equipe | Categórico | `VARCHAR(150)` | Não | Sim | Não (L/E: Admin) |
-| `funcao` | Cargo / Função | Nível de acesso | Categórico | `VARCHAR(50)` | Não | Sim | Não (L/E: Admin) |
-| `registro_profissional` | Conselho de classe | Ex: CRESS / CRP | Categórico | `VARCHAR(30)` | Não | Sim | Não (L/E: Admin) |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_profissional` | Identificador do profissional | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `nome` | Nome completo | `VARCHAR(150)` | Não | Sim | Pessoal |
+| `funcao` | Cargo / Função | `VARCHAR(50)` | Não | Sim | Interno |
+| `registro_profissional` | Conselho de classe (CRESS/CRP) | `VARCHAR(30)` | Não | Sim | Interno |
 
 ---
 
 ### 4.8 Entidade: PIA (Plano Individual de Atendimento)
-*(Acompanhamento continuado e evolução social - RN04)*
+*(Acompanhamento continuado e evolução social)*
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_pia` | Identificador do plano | PK do PIA | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Assist. Social) |
-| `id_beneficiario` | Beneficiário titular | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Assist. Social) |
-| `id_profissional` | Técnico responsável | FK para Profissional | Numérico | `BIGINT` | FK | Sim | Não (L/E: Assist. Social) |
-| `data_criacao` | Data de elaboração | Registro de início | Data | `DATE` | Não | Sim | Não (L/E: Assist. Social) |
-| `metas_objetivos` | Metas de autonomia | Planejamento continuado | Categórico | `TEXT` | Não | Sim | **Sim** (L/E: Assist. Social) |
-| `prazo_reavaliacao` | Previsão de retorno | Agendamento de revisão | Data | `DATE` | Não | Não | Não (L/E: Assist. Social) |
-
----
-
-### 4.9 Entidade: Entrega_Cesta
-*(Registro e auditoria de doações diretas - RN05 e RN06)*
-
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Sensível / Papéis |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_entrega` | Identificador da entrega | PK da entrega | Numérico | `BIGINT AUTO_INCREMENT` | PK | Sim | Não (L/E: Todos) |
-| `id_beneficiario` | Beneficiário recebedor | FK para Beneficiário | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
-| `id_profissional` | Técnico autorizador | FK para Profissional | Numérico | `BIGINT` | FK | Sim | Não (L/E: Todos) |
-| `data_entrega` | Data de concessão | Controle de ciclo/ periodicidade | Data | `DATE` | Index | Sim | Não (L/E: Todos) |
-| `quantidade_cestas` | Volume concedido | Gestão de doação | Numérico | `INT` | Não | Sim | Não (L/E: Todos) |
-| `itens_adicionais` | Doações complementares | Registro de doações extras | Categórico | `TEXT` | Não | Não | Não (L/E: Todos) |
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_pia` | Identificador do plano | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Beneficiário titular | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `id_profissional` | Técnico responsável | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `data_criacao` | Data de elaboração | `DATE` | Não | Sim | Interno |
+| `metas_objetivos` | Metas de autonomia | `TEXT` | Não | Sim | Sigiloso |
+| `prazo_reavaliacao` | Previsão de retorno | `DATE` | Não | Não | Interno |
 
 ---
 
-### 4.10 Fluxo de Dados Resumido Entre Entidades
-O fluxo inicia-se no cadastro central do **BENEFICIÁRIO**, que desdobra seus dados socioeconômicos e dependentes nas entidades **TRABALHO**, **COMPOSIÇÃO_FAMILIAR** e **REFERÊNCIA_FAMILIAR**. Cada interação presencial gera um **ATENDIMENTO** conduzido por um **PROFISSIONAL_RESPONSÁVEL**, que por sua vez pode derivar um ou mais **ENCAMINHAMENTOS_ATENDIMENTO** para a rede externa, registrar a concessão de auxílios diretos em **ENTREGA_CESTA**, ou estruturar o acompanhamento de longo prazo criando um **PIA**. 
+### 4.9 Entidade: Entrega de Cesta (`entrega_cesta`)
+*(Registro e auditoria de doações diretas)*
 
-## 4.11 Tabelas Técnicas de Apoio
-> Tabelas de apoio ao sistema. Não são entidades do negócio da ONG, por isso não aparecem no DER e não possuem chave estrangeira.
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_entrega` | Identificador da entrega | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_beneficiario` | Beneficiário recebedor | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `id_profissional` | Técnico autorizador | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `data_entrega` | Data de concessão | `DATE` | Index | Sim | Interno |
+| `quantidade_cestas` | Volume concedido | `INT` | Não | Sim | Interno |
+| `itens_adicionais` | Doações complementares | `TEXT` | Não | Não | Interno |
 
-### Entidade Técnica: Log de Acesso (`log_acesso`)
-*(Auditoria - RNF06 e Governança LGPD)*
+---
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_log` | Identificador do log | Sequencial | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
-| `data_hora` | Data e hora da operação | Preenchido pelo banco | Data | `DATETIME` | Index | Sim | Interno |
-| `usuario` | Login de quem fez a operação | Vem de `@app_usuario` | Categórico | `VARCHAR(60)` | Index | Sim | Pessoal |
-| `papel` | Papel do usuário | TECNICO, ADMIN, VOLUNTARIO | Categórico | `VARCHAR(10)` | Não | Sim | Interno |
-| `operacao` | Tipo de operação | LEITURA, INSERCAO, ALTERACAO, ANONIMIZACAO | Categórico | `VARCHAR(12)` | Não | Sim | Interno |
-| `tabela_afetada` | Tabela da operação | Rastreabilidade | Categórico | `VARCHAR(30)` | Index | Sim | Interno |
-| `id_registro` | ID da linha afetada | Rastreabilidade | Identificador | `BIGINT UNSIGNED` | Index | Sim | Interno |
-| `campos_alterados` | Campos modificados | Sem valores (proteção LGPD) | Texto | `TEXT` | Não | Não | Interno |
-| `ip_origem` | IP de origem | Vem de `@app_ip` | Categórico | `VARCHAR(45)` | Não | Sim | Pessoal |
+### 4.10 Entidade: Recebimento de Doação (`recebimento_doacao`)
+*(Registro de entrada de mantimentos enviados por parceiros)*
 
-### Entidade Técnica: Parâmetros das Regras (`parametro_regra`)
-*(Limites das regras de cesta - RN06)*
+| Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
+| :--- | :--- | :--- | :---: | :---: | :--- |
+| `id_recebimento` | Identificador da doação | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
+| `id_profissional` | Técnico recebedor | `BIGINT UNSIGNED` | FK | Sim | Interno |
+| `parceiro_doador` | Nome do doador (ex: Banco de Alimentos) | `VARCHAR(100)` | Não | Sim | Interno |
+| `data_recebimento` | Data de entrada | `DATE` | Index | Sim | Interno |
+| `descricao_itens` | Descrição dos itens doados | `TEXT` | Não | Sim | Interno |
+| `quantidade_total` | Volume/peso recebido | `INT` | Não | Sim | Interno |
 
-| Atributo | Descrição | Regra / Função | Tipo Conceitual | Tipo Físico | Índice | Obrig. | Classe |
-| :--- | :--- | :--- | :--- | :--- | :---: | :---: | :--- |
-| `id_parametro` | Identificador do parâmetro | Sequencial | Identificador | `BIGINT UNSIGNED AUTO_INCREMENT` | PK | Sim | Interno |
-| `nome_parametro` | Nome do parâmetro | Lido pelo trigger de validação | Categórico | `VARCHAR(40)` | Unique | Sim | Interno |
-| `valor` | Valor em vigor | Renda máxima ou dias | Numérico | `DECIMAL(10,2)` | Não | Sim | Interno |
-| `unidade` | Unidade do valor | R$, dias | Categórico | `VARCHAR(4)` | Não | Sim | Interno |
-| `data_atualizacao` | Data da última alteração | Preenchido pelo banco | Data | `DATETIME` | Não | Sim | Interno |
+---
 
-### 4.12 Fluxo de Dados Resumido do Sistema
-> Mapeamento do ciclo de vida da informação desde a recepção até o expurgo LGPD.
+### 4.11 Ciclo de Vida do Fluxo de Dados
 
 1. **Recepção e Termo LGPD:** O assistido assina o termo de consentimento LGPD e é registrado em `beneficiario` (`data_consentimento` preenchida e `situacao_cadastro = 'ATIVO'`).
-2. **Triagem Socioassistencial:** O profissional habilitado conduz a entrevista e gera um registro em `atendimento`, inserindo a demanda inicial e calculando a renda per capita da família, além de atualizar o perfil em `trabalho`, `composicao_familiar` e `referencia_familiar`.
-3. **Desdobramentos do Atendimento:** A partir do atendimento, o sistema permite derivar encaminhamentos externos (`encaminhamento_atendimento`), conceder cestas básicas (`entrega_cesta`, validando elegibilidade de renda e intervalo de entrega) e iniciar o acompanhamento continuado (`pia`).
-4. **Consultas e Relatórios:** O histórico do assistido pode ser consultado para acompanhamento (RF06), gerando relatórios agregados e anonimizados para prestação de contas aos órgãos parceiros (RN08).
-5. **Auditoria em Tempo Real:** Qualquer inserção, alteração, anonimização ou consulta a dados sensíveis é gravada na tabela de suporte `log_acesso`.
+2. **Triagem Socioassistencial:** O profissional habilitado conduz a entrevista e gera um registro em `atendimento`, inserindo a demanda inicial, além de atualizar o perfil em `trabalho`, `composicao_familiar` e `referencia_familiar`.
+3. **Desdobramentos do Atendimento:** A partir do atendimento, o sistema permite derivar encaminhamentos externos (`encaminhamento_atendimento`), conceder cestas básicas (`entrega_cesta`, validando elegibilidade e intervalo) e iniciar o acompanhamento continuado (`pia`).
+4. **Entrada de Mantimentos:** As doações enviadas por instituições parceiras são registradas em `recebimento_doacao` pelo profissional responsável.
+5. **Consultas e Relatórios:** O histórico do assistido pode ser consultado para acompanhamento (RF06), gerando relatórios agregados e anonimizados para prestação de contas aos órgãos parceiros (RN08).
 6. **Encerrando o Ciclo (LGPD):** Após 5 anos do último atendimento, ou por solicitação do titular, o cadastro é submetido à rotina de anonimização (`situacao_cadastro = 'ANONIMIZADO'`).
 
 ---
