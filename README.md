@@ -194,13 +194,11 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-## 4. Dicionário de Dados e Especificação Técnica
-
 ### 4.0 Convenções de Engenharia de Dados e Governança
 
 * **SGBD Alvo:** MySQL v8.0+
 * **Encoding e Collation:** `UTF-8` / `utf8mb4_unicode_ci`
-* **Notação Formal:** Modelo Entidade-Relacionamento (Notação Relacional / Pé de Galinha)
+* **Notação Formal:** Modelo Entidade-Relacionamento (Notação Chen / Merise)
 * **Convenção de Nomenclatura:** Nomes de tabelas e atributos em minúsculo com separação por sublinhado (`snake_case`). Chaves primárias iniciadas com `id_`.
 * **Compatibilidade de Tipos:** Todas as chaves primárias (PK) e chaves estrangeiras (FK) utilizam o tipo padronizado `BIGINT UNSIGNED` para assegurar a integridade referencial no MySQL.
 * **Política de Indexação:** Além das Chaves Primárias (PK) e Estrangeiras (FK), são criados índices B-Tree para otimização de busca frequente nos campos `cpf`, `nis` e `nome_completo`.
@@ -215,16 +213,16 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 * **Sigiloso:** Dados protegidos pelo sigilo profissional da triagem e assistência social (ex: `renda_atual`, `demanda_inicial`, `metas_objetivos`).
 
 **Bases Legais e Diretrizes:**
-* **Dados Pessoais Comuns:** Art. 7º, I (Consentimento) e Art. 7º, V (Execução de contrato/procedimentos).
-* **Dados Sensíveis:** Art. 11, I (Consentimento do titular ou do responsável legal) e Art. 11, II, "a" (Cumprimento de obrigação legal/estatutária).
+* **Dados Pessoais Comuns:** Art. 7º, I (Consentimento do Titular) da LGPD.
+* **Dados Sensíveis:** Art. 11, I (Consentimento expresso do titular ou responsável legal) e Art. 11, II, "a" (Cumprimento de obrigação legal por legislação federal/estadual do SuAS).
 * **Retenção e Expurgo:** Os cadastros e prontuários são mantidos por **5 anos** após o último atendimento do beneficiário, em conformidade com as diretrizes do SuAS/CRAS, sendo submetidos a anonimização ou expurgo seguro após este período.
 
 **Matriz de Papéis por Operação (I: Inserir, L: Ler, A: Alterar, N: Anonimizar):**
 | Categoria de Dados | TÉCNICO (Assistente Social / Psicólogo) | ADMIN (Coordenação / Presidência) | VOLUNTÁRIO (Recepção / Apoio) |
 | :--- | :---: | :---: | :---: |
 | **Internos e Pessoais** (Cadastro, Família, Trabalho) | I, L, A | I, L, A | L |
-| **Sensíveis** (Raça, Deficiência, Alergias) | I, L, A | L | - |
-| **Sigiloso** (Renda, Prontuários, PIA) | I, L, A | L | - |
+| **Sensíveis** (Raça, Deficiência, Alergias) | I, L, A | - | - |
+| **Sigiloso** (Renda, Prontuários, PIA) | I, L, A | - | - |
 | **Entrega de Cestas** (`entrega_cesta`) | I, L, A | L | I, L |
 
 ---
