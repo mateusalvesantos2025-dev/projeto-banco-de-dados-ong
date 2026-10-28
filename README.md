@@ -23,33 +23,33 @@ Abaixo estão mapeados os processos do negócio e as regras operacionais identif
 
 ```mermaid
 flowchart TD
-    %% Acolhimento e Cadastro
     A[Acolhimento Presencial / Porta Aberta] --> B[Coleta de Consentimento LGPD]
     B --> C[Cadastro / Atualização em BENEFICIARIO]
-    C --> D[Anamnese Social & Triagem - ATENDIMENTO]
+    C --> D[Anamnese Social e Triagem - ATENDIMENTO]
 
-    %% Decisão de Elegibilidade
-    D --> E{Possui CadÚnico ativo<br/>& Formalmente Desempregado?}
+    D --> E{Possui CadÚnico ativo e Desempregado?}
 
-    %% Caminho Concessão de Cestas
-    E -- Sim --> F[Verificar Disponibilidade em Estoque<br/>Doações Esporádicas / Lote Prefeitura 150 Cestas]
+    E -- Sim --> F[Verificar Disponibilidade em Estoque: Doações Esporádicas / Lote 150 Cestas]
     F --> G[Registrar Concessão em ENTREGA_CESTA]
 
-    %% Caminho Encaminhamentos
     E -- Não / Demanda Geral --> H[Verificar Outras Demandas Socioassistenciais]
     G --> H
-    H --> I{Necessita Apoio Externo<br/>ou Continuado?}
+    H --> I{Necessita Apoio Externo ou Continuado?}
 
-    I -- Encaminhamento Externo --> J[Registrar ENCAMINHAMENTO_ATENDIMENTO<br/>Saúde, Habitação, Jurídico]
+    I -- Encaminhamento Externo --> J[Registrar ENCAMINHAMENTO_ATENDIMENTO: Saúde, Habitação, Jurídico]
     I -- Acompanhamento Continuado --> K[Elaborar / Atualizar PIA]
     I -- Nenhum/Concluído --> L[Finalizar Registro do Atendimento]
 
     J --> L
     K --> L
 
-    %% Entrada Paralela de Mantimentos
     M[Recebimento de Lote Prefeitura / Doadores] --> N[Registrar Entrada em RECEBIMENTO_DOACAO]
     N --> F
+```
+
+---
+
+### Tabela dos Processos do Negócio (Tabela I)
 
 
 ---
