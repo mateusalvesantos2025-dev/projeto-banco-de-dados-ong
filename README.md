@@ -47,10 +47,6 @@ flowchart TD
     N --> F
 ```
 
----
-
-### Tabela dos Processos do Negócio (Tabela I)
-
 
 ---
 
