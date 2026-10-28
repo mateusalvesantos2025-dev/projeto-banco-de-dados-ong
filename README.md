@@ -19,28 +19,6 @@ Adicionalmente, a instituição gerencia o recebimento de doações de mantiment
 
 Abaixo estão mapeados os processos do negócio e as regras operacionais identificadas na organização, bem como a cobertura atual prevista no modelo de dados conceitual.
 
-# 0. Processo
-
-## Triagem dos dados e DER
-
-O fluxo operacional da Organização Social Nossa Senhora de Fátima baseia-se no atendimento de portas abertas para a população em situação de vulnerabilidade. A partir da entrevista presencial realizada pela assistente social, é feito o preenchimento da ficha de triagem (coleta de dados pessoais, ocupacionais, composição familiar e demandas sociais). 
-
-Adicionalmente, a instituição gerencia o recebimento de doações de mantimentos de parceiros estratégicos (como o Banco de Alimentos e o projeto Cidade Invisível), a distribuição variável de cestas básicas conforme o diagnóstico de vulnerabilidade e o planejamento de atividades socioeducativas e de lazer para os assistidos.
-
-### Fluxograma do Processo Operacional
-
-```mermaid
-flowchart TD
-    nodeA["Cidadao Procura a ONG"] --> nodeB["Recepcao e Acolhimento"]
-    nodeB --> nodeC["Entrevista e Triagem Socioassistencial"]
-    nodeC --> nodeD{"Avaliacao de Vulnerabilidade"}
-    nodeD -->|"Necessita Encaminhamento"| nodeE["Registro de Encaminhamento Externo"]
-    nodeD -->|"Elegivel para Auxilio"| nodeF["Concessao de Cesta Basica / Auxilio"]
-    nodeD -->|"Demanda Complexa"| nodeG["Criacao do PIA - Plano Individual"]
-    nodeE --> nodeH["Prestacao de Contas e Relatorios"]
-    nodeF --> nodeH
-    nodeG --> nodeH
-
 ---
 
 ### Tabela dos Processos do Negócio (Tabela I)
