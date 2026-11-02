@@ -295,7 +295,11 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 ### Decisões de Abstração e Alternativas Rejeitadas
 * **Uso de PKs Sintéticas (`id_*`):** Rejeitou-se o uso de `cpf` ou `nis` como Chave Primária (PK) em `BENEFICIÁRIO`, pois indivíduos em extrema vulnerabilidade podem não possuir esses documentos no primeiro atendimento.
 * **Normalização de Listas e Tabelas Secundárias (1FN):** Manter membros da família ou dados de trabalho na mesma tabela geraria repetição de dados, sendo solucionado com entidades dedicadas.
-* **Histórico Atemporal:** Transformar atendimentos, encaminhamentos e entregas em entidades independentes vinculadas por chaves estrangeiras permite rastrear a evolução do cidadão sem sobrescrever dados históricos.
+### Justificativa de Chaves (Primárias, Estrangeiras e Índices)
+
+* **Chaves Primárias (PK):** Optou-se pelo uso padronizado de chaves sintéticas numéricas (`BIGINT UNSIGNED AUTO_INCREMENT`, iniciadas por `id_`) em todas as entidades (ex: `id_beneficiario`, `id_atendimento`). A escolha evita o uso de dados naturais mutáveis ou sensíveis (como CPF ou NIS), garantindo estabilidade relacional mesmo que o assistido não possua documentação completa no primeiro acolhimento.
+* **Chaves Estrangeiras (FK):** As chaves estrangeiras foram implementadas para assegurar a integridade referencial estrita (`CONSTRAINT FOREIGN KEY`) em todas as relações de dependência e cardinalidade (ex: o vínculo de `atendimento` com `beneficiario` e `profissional_responsavel`), refletindo fielmente o fluxo de dependência operacional da ONG.
+* **Índices e Chaves Secundárias (B-Tree):** Foram criados índices adicionais não-únicos em colunas de alta frequência de busca e filtragem nas consultas diárias da recepção, especificamente em `cpf`, `nis`, `nome_completo` da tabela `beneficiario`, além de datas de controle em `atendimento` e `entrega_cesta`, otimizando o desempenho conforme o RNF02.
 
 ---
 
