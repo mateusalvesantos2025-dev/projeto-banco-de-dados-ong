@@ -1,4 +1,6 @@
-### 4.0 Convenções de Engenharia de Dados e Governança
+## Dicionário de Dados Conceitual
+
+### 1.0 Convenções de Engenharia de Dados e Governança
 
 * **SGBD Alvo:** MySQL v8.0+
 * **Encoding e Collation:** Conjunto de caracteres `utf8mb4` e collation `utf8mb4_unicode_ci` (suporte completo a caracteres especiais e emojis).
@@ -32,7 +34,7 @@
 
 ---
 
-### 4.1 Entidade: Beneficiário
+### 1.1 Entidade: Beneficiário
 *(Centraliza a identificação do cidadão assistido)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -71,7 +73,7 @@
 
 ---
 
-### 4.2 Entidade: Trabalho
+### 1.2 Entidade: Trabalho
 *(Perfil ocupacional e socioeconômico - isolado para normalização 1FN/2FN)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -87,7 +89,7 @@
 
 ---
 
-### 4.3 Entidade: Composição Familiar (`composicao_familiar`)
+### 1.3 Entidade: Composição Familiar (`composicao_familiar`)
 *(Membros dependentes que residem no mesmo domicílio - até 5 membros)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -101,7 +103,7 @@
 
 ---
 
-### 4.4 Entidade: Referência Familiar (`referencia_familiar`)
+### 1.4 Entidade: Referência Familiar (`referencia_familiar`)
 *(Contatos externos e de emergência - até 3 referências)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -115,7 +117,7 @@
 
 ---
 
-### 4.5 Entidade: Atendimento
+### 1.5 Entidade: Atendimento
 *(Registro das entrevistas e anamneses sociais)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -128,7 +130,7 @@
 
 ---
 
-### 4.6 Entidade: Encaminhamento (`encaminhamento_atendimento`)
+### 1.6 Entidade: Encaminhamento (`encaminhamento_atendimento`)
 *(Direcionamentos para redes externas derivados de um atendimento)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -140,7 +142,7 @@
 
 ---
 
-### 4.7 Entidade: Profissional Responsável (`profissional_responsavel`)
+### 1.7 Entidade: Profissional Responsável (`profissional_responsavel`)
 *(Equipe técnica da ONG - CRESS/CRP)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -152,7 +154,7 @@
 
 ---
 
-### 4.8 Entidade: PIA (Plano Individual de Atendimento)
+### 1.8 Entidade: PIA (Plano Individual de Atendimento)
 *(Acompanhamento continuado e evolução social)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -166,7 +168,7 @@
 
 ---
 
-### 4.9 Entidade: Entrega de Cesta (`entrega_cesta`)
+### 1.9 Entidade: Entrega de Cesta (`entrega_cesta`)
 *(Registro e auditoria de doações diretas)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -180,7 +182,7 @@
 
 ---
 
-### 4.10 Entidade: Recebimento de Doação (`recebimento_doacao`)
+### 1.10 Entidade: Recebimento de Doação (`recebimento_doacao`)
 *(Registro de entrada de mantimentos enviados por parceiros)*
 
 | Atributo | Descrição | Domínio / Tipo Físico | Índice | Obrig. | Classe LGPD |
@@ -194,7 +196,7 @@
 
 ---
 
-### 4.11 Ciclo de Vida do Fluxo de Dados
+### 1.11 Ciclo de Vida do Fluxo de Dados
 
 1. **Recepção e Termo LGPD:** O assistido assina o termo de consentimento LGPD e é registrado em `beneficiario` (`data_consentimento` preenchida e `situacao_cadastro = 'ATIVO'`).
 2. **Triagem Socioassistencial:** O profissional habilitado conduz a entrevista e gera um registro em `atendimento`, inserindo a demanda inicial, além de atualizar o perfil em `trabalho`, `composicao_familiar` e `referencia_familiar`.
