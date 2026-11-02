@@ -1,7 +1,7 @@
 # Projeto de Modelagem Conceitual (DER) - Organização Social Nossa Senhora de Fátima
 
 **Integrantes / Autores:**
-* Gabriel Simões da Silva (RGM 47327383)
+* Gabriel Simões da Silva (RGM 4732733) - @Gabriel-Simoes2006
 * Henrique Novais de Oliveira (RGM 47046996)
 * Leandro Miranda da Silva (RGM 47397349)
 * Mateus Alves dos Santos (RGM 47435887)
