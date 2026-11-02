@@ -326,6 +326,8 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 Para transformar os dados operacionais coletados nas rotinas de triagem, atendimentos e concessão de auxílios em informações estratégicas de gestão, definiu-se uma proposta analítica baseada em Business Intelligence (BI) e Inteligência Artificial (IA), totalmente integrada ao banco de dados relacional.
 
+---
+
 ## 9. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
