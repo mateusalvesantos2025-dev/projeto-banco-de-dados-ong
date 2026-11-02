@@ -328,6 +328,17 @@ Para transformar os dados operacionais coletados nas rotinas de triagem, atendim
 
 ---
 
+## 8.1. Informações Estratégicas e Visão de Gestão
+
+A implementação do banco de dados permite à diretoria técnica da ONG migrar de um modelo de decisões reativas para uma gestão baseada em evidências. As principais informações estratégicas extraídas contemplam:
+
+* *Mapeamento de Vulnerabilidade e Perfil Demográfico:* Identificação da distribuição dos assistidos por bairro, situação ocupacional, faixa etária e dependência de programas sociais (CadÚnico, Bolsa Família, BPC).
+* *Gargalos e Efetividade da Rede Externa:* Avaliação do volume de encaminhamentos gerados para serviços de saúde, habitação e apoio jurídico, medindo a dependência da comunidade em relação às redes públicas (CRAS/CREAS/SAS).
+* *Eficiência na Distribuição de Insumos:* Monitoramento do fluxo de doações recebidas de parceiros estratégicos (ex.: Banco de Alimentos, Prefeitura) em contraste com o ritmo de concessão de cestas básicas às famílias elegíveis.
+* *Acompanhamento da Autonomia Familiar:* Mensuração da evolução das famílias inseridas no Plano Individual de Atendimento (PIA), avaliando o atingimento de metas e o tempo necessário para superação da situação de extrema vulnerabilidade.
+
+---
+
 ## 9. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
