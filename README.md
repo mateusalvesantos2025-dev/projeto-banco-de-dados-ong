@@ -224,8 +224,8 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-## 5. Modelagem Conceitual - Entidades e Relacionamentos
-> Visão 5.1: Modelo Conceitual do BD
+## 4. Modelagem Conceitual - Entidades e Relacionamentos
+> Visão 4.1: Modelo Conceitual do BD
 
 ### Entidades Reconhecidas
 * **`BENEFICIÁRIO`**: Centraliza os dados individuais e cadastrais do cidadão atendido.
@@ -256,15 +256,15 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-## 6. Diagrama Entidade-Relacionamento (DER)
-> Visão 6.1: O seu DER para a ONG
+## 5. Diagrama Entidade-Relacionamento (DER)
+> Visão 5.1: O seu DER para a ONG
 
 ![Diagrama Entidade-Relacionamento](diagrama-der.jpg)
 
 ---
 
-## 7. Justificativa Técnica
-> Visão 7.1: Explicar as escolhas da modelagem do BD para a ONG.
+## 6. Justificativa Técnica
+> Visão 6.1: Explicar as escolhas da modelagem do BD para a ONG.
 
 ### Escolha das Entidades e Atribuição de Atributos
 * **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado para detalhamento geográfico.
@@ -299,7 +299,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-## 8. Uso de Inteligência Artificial
+## 7. Uso de Inteligência Artificial
 > Registro detalhado do uso de ferramentas de Inteligência Artificial no apoio à estruturação técnico-acadêmica, modelagem conceitual e validação de dados do projeto.
 
 * **Ferramentas de IA utilizadas:** Google Gemini (versão gratuita), OpenAI ChatGPT (versão gratuita) e Anthropic Claude (versão Claude Pro).
@@ -322,13 +322,13 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-## 9. Conclusão e Avaliação dos Integrantes
+## 8. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
 O desenvolvimento e refinamento iterativo da modelagem conceitual para a Organização Social Nossa Senhora de Fátima permitiu ao grupo vivenciar na prática a transição de um processo puramente manual (baseado em papel) para uma arquitetura de dados relacional moderna, normalizada e estruturada. O projeto possibilitou transpor os desafios teóricos para a realidade prática, corrigindo inconsistências estruturais — como o isolamento adequado de perfis ocupacionais e o ajuste rigoroso de cardinalidades. O sistema proposto solucionará os principais problemas apontados pela equipe técnica: a perda de agilidade nos atendimentos, a dificuldade no acompanhamento histórico dos beneficiários e a estrita adequação às diretrizes da LGPD no tratamento de dados sensíveis e socioeconômicos.
 
 ---
 
-## 10. Referências
+## 9. Referências
 * ORGANIZAÇÃO SOCIAL NOSSA SENHORA DE FÁTIMA. **Ficha de Cadastro e Triagem Socioassistencial**. São Paulo, 2026. Entrevista e pesquisa de campo concedidas à equipe acadêmica.
 
