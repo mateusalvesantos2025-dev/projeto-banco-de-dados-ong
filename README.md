@@ -322,13 +322,13 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-# 8. Proposta de Arquitetura Analítica para BI e IA
+## 8. Proposta de Arquitetura Analítica para BI e IA
 
 Para transformar os dados operacionais coletados nas rotinas de triagem, atendimentos e concessão de auxílios em informações estratégicas de gestão, definiu-se uma proposta analítica baseada em Business Intelligence (BI) e Inteligência Artificial (IA), totalmente integrada ao banco de dados relacional.
 
 ---
 
-## 8.1. Informações Estratégicas e Visão de Gestão
+### 8.1. Informações Estratégicas e Visão de Gestão
 
 A implementação do banco de dados permite à diretoria técnica da ONG migrar de um modelo de decisões reativas para uma gestão baseada em evidências. As principais informações estratégicas extraídas contemplam:
 
