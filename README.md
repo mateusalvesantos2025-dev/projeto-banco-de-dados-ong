@@ -343,6 +343,32 @@ A implementação do banco de dados permite à diretoria técnica da ONG migrar 
 
 ---
 
+## 8.2. Indicadores e Métricas Gerenciais (KPIs)
+
+Foram estruturados indicadores-chave de desempenho (KPIs) objetivos para monitorar a saúde operacional e o impacto social das ações da ONG:
+
+1. *KPI 01 — Volume Bimestral de Concessão de Cestas Básicas:*
+   * *Fórmula:* $\sum \text{quantidade\_cestas}$ (no período de 60 dias).
+   * *Período:* Bimestral.
+   * *Meta:* Manter o equilíbrio com o lote oficial repassado pela Prefeitura (150 cestas/bimestre) e doações de parceiros, garantindo atendimento de 100% das famílias prioritárias ativas.
+
+2. *KPI 02 — Taxa de Famílias em Cobertura Prioritária (Desemprego + CadÚnico Ativo):*
+   * *Fórmula:* $(\text{Famílias Prioritárias Atendidas} / \text{Total de Famílias Atendidas}) \times 100$.
+   * *Período:* Mensal.
+   * *Meta:* $\ge 85\%$ dos auxílios direcionados estritamente a beneficiários em conformidade com os critérios da RN06.
+
+3. *KPI 03 — Média de Atendimentos Socioassistenciais por Profissional:*
+   * *Fórmula:* $\text{Total de Atendimentos} / \text{Total de Profissionais Habilitados}$.
+   * *Período:* Mensal.
+   * *Meta:* Equilibrar a carga de trabalho técnica entre a equipe interna e voluntários (CRESS/CRP), garantindo atendimento humanizado.
+
+4. *KPI 04 — Média de Membros por Composição Familiar Assistida:*
+   * *Fórmula:* $\text{Total de Membros Cadastrados em Composição} / \text{Total de Beneficiários Titulares}$.
+   * *Período:* Semestral.
+   * *Meta:* Dimensionar o impacto real do suporte alimentar e adequar a necessidade de insumos adicionais por domicílio.
+
+---
+
 ## 9. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
