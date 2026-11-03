@@ -344,10 +344,6 @@ INSERT INTO trabalho (id_trabalho, id_beneficiario, situacao_ocupacional, profis
 (58, 59, 'Aposentada / BPC', 'Diarista', 1600.00, NULL, NULL, NULL),
 (59, 60, 'Aposentada / BPC', 'Repositor(a)', 1600.00, NULL, NULL, NULL),
 (60, 61, 'Trabalho informal', 'Pintor', 950.00, NULL, 'Pintor (autônomo)', NULL);
--- ==========================================
--- 4.3 TRABALHO (Registos 61 a 120)
--- ==========================================
-INSERT INTO trabalho (id_trabalho, id_beneficiario, situacao_ocupacional, profissao, renda_mensal, local_trabalho, desc_bico, obs) VALUES
 (61, 62, 'Desempregado', 'Auxiliar de limpeza', 0.00, NULL, NULL, NULL),
 (62, 63, 'Aposentado / BPC', 'Repositor (a)', 1600.00, NULL, NULL, NULL),
 (63, 64, 'Desempregada', 'Manicure', 0.00, NULL, NULL, NULL),
@@ -408,10 +404,6 @@ INSERT INTO trabalho (id_trabalho, id_beneficiario, situacao_ocupacional, profis
 (118, 121, 'Desempregado', 'Reciclador (a)', 0.00, NULL, NULL, NULL),
 (119, 122, 'Empregado (CLT)', 'Motorista', 2100.00, 'Restaurante Sabor Caseiro', NULL, NULL),
 (120, 124, 'Desempregada', 'Auxiliar de limpeza', 0.00, NULL, NULL, NULL);
--- ==========================================
--- 4.3 TRABALHO (Registos 121 a 180)
--- ==========================================
-INSERT INTO trabalho (id_trabalho, id_beneficiario, situacao_ocupacional, profissao, renda_mensal, local_trabalho, desc_bico, obs) VALUES
 (121, 125, 'Desempregada', 'Eletricista', 0.00, NULL, NULL, NULL),
 (122, 126, 'Aposentada / BPC', 'Costureira (o)', 1600.00, NULL, NULL, NULL),
 (123, 127, 'Desempregada', 'Diarista', 0.00, NULL, NULL, NULL),
@@ -473,7 +465,7 @@ INSERT INTO trabalho (id_trabalho, id_beneficiario, situacao_ocupacional, profis
 (179, 186, 'Aposentado / BPC', 'Manicure', 1600.00, NULL, NULL, NULL),
 (180, 187, 'Aposentada / BPC', 'Cuidador (a) de idosos', 1600.00, NULL, NULL, NULL);
 -- ==========================================
--- 4.4 COMPOSIÇÃO FAMILIAR (Registos 1 a 120)
+-- 4.4 COMPOSIÇÃO FAMILIAR 
 -- ==========================================
 INSERT INTO composicao_familiar (id_composicao, id_beneficiario, nome_familiar, parentesco, data_nascimento, escolaridade, ocupacao, renda) VALUES
 (1, 1, 'Ana da Conceição Santos', 'Cônjuge', '1945-03-12', 'Ensino Fundamental Incompleto', 'Do lar', 0.00),
