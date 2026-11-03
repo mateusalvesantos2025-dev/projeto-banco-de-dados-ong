@@ -41,10 +41,12 @@ Conforme as diretrizes exigidas para o levantamento, detalham-se abaixo as respo
 
 ---
 
-## 3. Registo Fotográfico da Visita Presencial
+## 3. Registro Fotográfico da Visita Presencial
 
-Abaixo encontra-se o registo fotográfico obtido durante a visita presencial às dependências da instituição, autorizado pela gestão para compor a documentação do projeto:
+Abaixo encontra-se o registro fotográfico obtido durante a visita presencial às dependências da instituição, autorizado pela gestão para compor a documentação do projeto:
 
-![Foto da Visita Presencial à ONG](./visita_ong.jpg)
-
-(Nota: Certifique-se de substituir visita_ong.jpg pelo nome exato do ficheiro de imagem que salvará dentro da pasta levantamento/)
+![Foto da Visita Presencial à ONG - Imagem 1](levantamento/visita-ong-01.jpg)
+![Foto da Visita Presencial à ONG - Imagem 2](levantamento/visita-ong-02.jpg)
+![Foto da Visita Presencial à ONG - Imagem 3](levantamento/visita-ong-03.jpg)
+![Foto da Visita Presencial à ONG - Imagem 4](levantamento/visita-ong-04.jpg)
+![Foto da Visita Presencial à ONG - Imagem 5](levantamento/visita-ong-05.jpg)
