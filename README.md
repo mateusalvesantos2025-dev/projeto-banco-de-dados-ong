@@ -4,7 +4,7 @@
 * Gabriel Simões da Silva (RGM 4732733) - @Gabriel-Simoes2006
 * Henrique Novais de Oliveira (RGM 47046996) - @henriqueisabella11-creator
 * Leandro Miranda da Silva (RGM 47397349) - @mirandaleandro-creator
-* Mateus Alves dos Santos (RGM 47435887)
+* Mateus Alves dos Santos (RGM 47435887) - @mateusalvesantos2025-dev
 * Washington de Souza Silva (RGM 49080156)
 
 ---
