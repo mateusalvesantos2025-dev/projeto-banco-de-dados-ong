@@ -389,6 +389,32 @@ Com o banco de dados populado e histórico consolidado, propõe-se a aplicação
 
 ---
 
+## 8.5. Tabela de Rastreabilidade (Problema / KPI $\rightarrow$ Tabelas $\rightarrow$ Consulta SQL)
+
+Conforme as diretrizes técnicas do projeto, cada problema institucional mapeado e cada indicador estratégico (KPI) vincula-se diretamente às tabelas do banco de dados relacional e ao código de consulta SQL correspondente (`G01` a `G10` e `A01` a `A08` do script oficial):
+
+| Problema / KPI / Regra de Negócio | Descrição / Indicador | Tabelas Envolvidas | Consulta no Script SQL |
+| :--- | :--- | :--- | :---: |
+| **P1 / KPI 01** | Cobertura e volume bimestral de entregas de cestas por beneficiário | `entrega_cesta`, `beneficiario` | **G01** |
+| **P1 / KPI 02** | Perfil socioeconômico e elegibilidade prioritária (CadÚnico + Desemprego) | `beneficiario`, `trabalho` | **G02** |
+| **P1 / KPI 03** | Volume de atendimentos e carga de trabalho por profissional da equipe | `atendimento`, `profissional_responsavel` | **G03** |
+| **P1 / KPI 04** | Dimensionamento da composição familiar média por beneficiário assistido | `beneficiario`, `composicao_familiar` | **G04** |
+| **P1 / Gestão** | Mapeamento da rede de apoio externa e tipos de encaminhamento derivados | `encaminhamento_atendimento`, `atendimento` | **G05** |
+| **P1 / Logística** | Histórico de entrada e balanço de doações recebidas por parceiro doador | `recebimento_doacao`, `profissional_responsavel` | **G06** |
+| **P1 / Acompanhamento** | Monitoramento de metas e prazos de reavaliação do PIA por família | `pia`, `beneficiario`, `profissional_responsavel` | **G07** |
+| **P1 / Gestão** | Famílias com dependência acumulada de auxílios e múltiplos encaminhamentos | `beneficiario`, `entrega_cesta`, `atendimento` | **G08** |
+| **P1 / Demografia** | Mapeamento territorial de beneficiários por bairro e região atendida | `beneficiario` | **G09** |
+| **P1 / Auditoria (RN03)** | Identificação de entregas de cestas realizadas sem triagem prévia registrada | `entrega_cesta`, `atendimento` | **A01** |
+| **P1 / Auditoria (RN06)** | Verificação de entregas realizadas para famílias fora do critério prioritário | `entrega_cesta`, `beneficiario`, `trabalho` | **A02** |
+| **P1 / Auditoria (RN06)** | Detecção de duplicidade de entregas de cestas dentro do mesmo mês | `entrega_cesta` | **A03** |
+| **P1 / Auditoria (RN06)** | Alerta de cadastros com CadÚnico ativo sem atualização há mais de 24 meses | `beneficiario` | **A04** |
+| **P1 / Auditoria (RN07)** | Identificação de cadastros inativos/sem atendimento há mais de 5 anos (LGPD) | `beneficiario`, `atendimento` | **A05** |
+| **P1 / Auditoria (RN07)** | Rastreamento de consentimentos LGPD registrados após o primeiro atendimento | `beneficiario`, `atendimento` | **A06** |
+| **P1 / Auditoria (RN10)** | Inconsistência de limite estrutural em famílias com excesso de membros/referências | `composicao_familiar`, `referencia_familiar` | **A07** |
+| **P1 / Auditoria (RN11)** | Verificação de registros e atendimentos efetuados por equipe sem CRESS/CRP | `atendimento`, `profissional_responsavel` | **A08** |
+
+---
+
 ## 9. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
