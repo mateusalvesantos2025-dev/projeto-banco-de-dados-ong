@@ -5,7 +5,7 @@
 * Henrique Novais de Oliveira (RGM 47046996) - @henriqueisabella11-creator
 * Leandro Miranda da Silva (RGM 47397349) - @mirandaleandro-creator
 * Mateus Alves dos Santos (RGM 47435887) - @mateusalvesantos2025-dev
-* Washington de Souza Silva (RGM 49080156)
+* Washington de Souza Silva (RGM 49080156) - @washingtondesouzasilva1980-collab
 
 ---
 
