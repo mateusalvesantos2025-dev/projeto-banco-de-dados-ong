@@ -869,7 +869,7 @@ INSERT INTO composicao_familiar (id_composicao, id_beneficiario, nome_familiar, 
 (399, 95, 'Melissa Gomes', 'Neto(a)', '2002-09-11', 'Ensino Superior Incompleto', 'Estudante', 0.00),
 (400, 96, 'Arthur Andrade', 'Neto(a)', '2005-01-19', 'Ensino Médio Completo', 'Estudante', 0.00);
 -- ==========================================
--- 4.5 DOAÇÃO (Registos 1 a 50)
+-- 4.5 DOAÇÃO 
 -- ==========================================
 INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, descricao_itens, quantidade_peso_kg, valor_estimado, data_doacao, obs) VALUES
 (1, 1, 1, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2026-01-10', 'Entrega mensal regular'),
@@ -922,10 +922,6 @@ INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, de
 (48, 48, 3, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2026-05-23', NULL),
 (49, 49, 1, 'Kit de Higiene', 'Sabonete, pasta de dente, papel higiênico', 2.00, 45.00, '2026-05-26', NULL),
 (50, 50, 4, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2026-05-29', NULL);
--- ==========================================
--- 4.5 DOAÇÃO (Continuação - Registros 51 a 100)
--- ==========================================
-INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, descricao_itens, quantidade_peso_kg, valor_estimado, data_doacao, obs) VALUES
 (51, 51, 2, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2026-06-01', NULL),
 (52, 53, 5, 'Kit de Limpeza', 'Água sanitária, sabão em pó, desinfetante', 5.00, 60.00, '2026-06-03', NULL),
 (53, 54, 3, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2026-06-06', NULL),
@@ -976,10 +972,6 @@ INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, de
 (98, 100, 3, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2026-10-22', NULL),
 (99, 101, 1, 'Kit de Higiene', 'Sabonete, creme dental, shampoo', 2.00, 45.00, '2026-10-25', NULL),
 (100, 102, 4, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2026-10-28', NULL);
--- ==========================================
--- 4.5 DOAÇÃO (Registros 101 a 150)
--- ==========================================
-INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, descricao_itens, quantidade_peso_kg, valor_estimado, data_doacao, obs) VALUES
 (101, 103, 2, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2026-11-01', NULL),
 (102, 104, 5, 'Kit de Limpeza', 'Água sanitária, sabão em pó, desinfetante', 5.00, 60.00, '2026-11-03', NULL),
 (103, 105, 3, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2026-11-06', NULL),
@@ -1030,10 +1022,6 @@ INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, de
 (148, 153, 3, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2027-03-26', NULL),
 (149, 154, 1, 'Kit de Higiene', 'Sabonete, creme dental, shampoo', 2.00, 45.00, '2027-03-29', NULL),
 (150, 155, 4, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2027-04-01', NULL);
--- ==========================================
--- 4.5 DOAÇÃO (Continuação e Fim - Registros 151 a 200)
--- ==========================================
-INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, descricao_itens, quantidade_peso_kg, valor_estimado, data_doacao, obs) VALUES
 (151, 156, 2, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão, café, fubá', 15.50, 120.00, '2027-04-04', NULL),
 (152, 157, 5, 'Kit de Limpeza', 'Água sanitária, sabão em pó, desinfetante', 5.00, 60.00, '2027-04-07', NULL),
 (153, 158, 3, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2027-04-10', NULL),
@@ -1085,7 +1073,7 @@ INSERT INTO doacao (id_doacao, id_beneficiario, id_profissional, tipo_doacao, de
 (199, 206, 1, 'Kit de Higiene', 'Sabonete, creme dental, shampoo', 2.00, 45.00, '2027-08-26', NULL),
 (200, 207, 4, 'Cesta Básica', 'Arroz, feijão, óleo, açúcar, macarrão', 14.00, 110.00, '2027-08-29', NULL);
 -- ==========================================
--- 4.6 ATENDIMENTO (Registos 1 a 50)
+-- 4.6 ATENDIMENTO 
 -- ==========================================
 INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_atendimento, tipo_atendimento, resumo_atendimento, encaminhamento, status) VALUES
 (1, 1, 1, '2026-01-11', 'Atendimento Social', 'Acolhimento inicial e escuta qualificada sobre demandas familiares.', 'Encaminhado para CRAS local para atualização do CadÚnico.', 'Concluído'),
@@ -1138,10 +1126,6 @@ INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_
 (48, 48, 3, 'Atendimento Psicológico', 'Atendimento de suporte para gestão de estresse.', 'Orientações práticas fornecidas.', 'Concluído'),
 (49, 49, 1, 'Atendimento Social', 'Entrevista de acompanhamento trimestral.', 'Evolução positiva observada na dinâmica familiar.', 'Concluído'),
 (50, 50, 4, 'Orientação Jurídica', 'Consulta sobre regularização de imóvel.', 'Encaminhado para órgão municipal competente.', 'Concluído');
--- ==========================================
--- 4.6 ATENDIMENTO (Continuação - Registos 51 a 100)
--- ==========================================
-INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_atendimento, tipo_atendimento, resumo_atendimento, encaminhamento, status) VALUES
 (51, 51, 2, '2026-06-02', 'Atendimento Social', 'Entrevista para concessão de benefício de cesta básica.', 'Encaminhado ao almoxarifado para retirada.', 'Concluído'),
 (52, 53, 5, '2026-06-04', 'Visita Domiciliar', 'Acompanhamento das condições habitacionais e sanitárias.', 'Orientação sobre higiene e descarte de resíduos.', 'Concluído'),
 (53, 54, 3, '2026-06-07', 'Atendimento Psicológico', 'Sessão de apoio emocional por luto recente.', 'Manutenção das sessões de escuta.', 'Em andamento'),
@@ -1192,10 +1176,6 @@ INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_
 (98, 100, 3, '2026-10-23', 'Atendimento Psicológico', 'Atendimento emergencial por estresse familiar.', 'Redução de danos e acolhimento imediato.', 'Concluído'),
 (99, 101, 1, '2026-10-26', 'Visita Domiciliar', 'Verificação de demanda de doação recebida.', 'Relatório validado e arquivado.', 'Concluído'),
 (100, 102, 4, '2026-10-29', 'Atendimento Social', 'Revisão periódica de dados cadastrais no sistema.', 'Prontuário atualizado.', 'Concluído');
--- ==========================================
--- 4.6 ATENDIMENTO (Registros 101 a 150)
--- ==========================================
-INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_atendimento, tipo_atendimento, resumo_atendimento, encaminhamento, status) VALUES
 (101, 103, 2, '2026-11-02', 'Atendimento Social', 'Acolhimento para concessão de cesta básica mensal.', 'Encaminhado ao almoxarifado.', 'Concluído'),
 (102, 104, 5, '2026-11-04', 'Visita Domiciliar', 'Acompanhamento residencial e verificação de saneamento.', 'Orientação sobre prevenção de doenças sazonais.', 'Concluído'),
 (103, 105, 3, '2026-11-07', 'Atendimento Psicológico', 'Sessão de suporte emocional e manejo de ansiedade.', 'Manutenção do acompanhamento semanal.', 'Em andamento'),
@@ -1246,10 +1226,6 @@ INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_
 (148, 153, 3, '2027-03-27', 'Atendimento Psicológico', 'Sessão de suporte emocional para idoso.', 'Atendimento concluído com recomendações.', 'Concluído'),
 (149, 154, 1, '2027-03-30', 'Visita Domiciliar', 'Inspeção de rotina para atualização de prontuário.', 'Prontuário sem alterações necessárias.', 'Concluído'),
 (150, 155, 4, '2027-04-02', 'Atendimento Social', 'Atendimento para entrega de kit sanitário e higiene.', 'Doação efetuada.', 'Concluído');
--- ==========================================
--- 4.6 ATENDIMENTO (Continuação e Fim - Registros 151 a 200)
--- ==========================================
-INSERT INTO atendimento (id_atendimento, id_beneficiario, id_profissional, data_atendimento, tipo_atendimento, resumo_atendimento, encaminhamento, status) VALUES
 (151, 156, 2, '2027-04-05', 'Atendimento Social', 'Acolhimento social e avaliação socioeconômica para benefícios de apoio alimentar.', 'Concessão de cesta básica mensal.', 'Concluído'),
 (152, 157, 5, '2027-04-08', 'Visita Domiciliar', 'Verificação presencial das condições de habitação e saneamento básico no domicílio.', 'Encaminhado relatório social ao CRAS de referência.', 'Concluído'),
 (153, 158, 3, '2027-04-11', 'Atendimento Psicológico', 'Sessão individual de escuta qualificada e fortalecimento de autoestima.', 'Sessão de acompanhamento mensal mantida.', 'Em andamento'),
