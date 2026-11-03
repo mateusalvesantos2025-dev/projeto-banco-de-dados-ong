@@ -134,3 +134,33 @@ INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, n
 (98, '23042237378', 'CRAS Belém', 'Fernanda Barbosa Brito', NULL, 'F', NULL, '1978-09-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (99, NULL, 'CRAS Mooca', 'Valdir Brito Alves', NULL, 'M', NULL, '1952-05-09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (100, '13934677014', 'CRAS Mooca', 'Cristiane Mendes Vieira', NULL, 'F', 'Prefere não informar', '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+-- ==========================================
+-- 4.2 BENEFICIARIO (Continuação - Registros 101 a 150)
+-- ==========================================
+INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, nome_social, sexo, raca_cor, data_nascimento, naturalidade, endereco_cep, logradouro, numero, complemento, bairro, cidade, uf, telefone, consentimento_lgpd_data, cadunico_atualizado_em, obs) VALUES
+(101, NULL, 'CRAS Mooca', 'Márcia Farias Martins', NULL, 'F', NULL, '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(102, NULL, 'CREAS Mooca', 'Eduardo Dias Ribeiro', NULL, 'M', NULL, '1971-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(103, '14097832847', 'CREAS Mooca', 'Adriana Correia Souza', NULL, 'F', NULL, '1986-04-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(104, NULL, 'CRAS Belém', 'Gabriel Vieira Santos', NULL, 'M', 'Prefere não informar', '1978-09-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(105, '25142755106', 'CRAS Mooca', 'Valéria Brito Vieira', NULL, 'F', NULL, '1952-05-09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(106, '13924635393', 'CRAS Mooca', 'Carlos da Silva Nascimento', NULL, 'M', NULL, '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(107, '19956637704', NULL, 'Fábio Rocha Oliveira', NULL, 'M', NULL, '1965-02-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(108, '28612797792', 'CRAS Belém', 'Patricia Ramos Oliveira', NULL, 'F', NULL, '1963-10-22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(109, '26363443055', 'CRAS Mooca', 'Manoel Souza Santana', NULL, 'M', NULL, '1955-05-04', 'São Paulo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(110, NULL, NULL, 'Neide Lima Oliveira', NULL, 'F', NULL, '1977-03-15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(111, '22968422998', 'CRAS Belém', 'Lúcia Pereira Brito', NULL, 'F', NULL, '1993-01-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(112, '15293087291', 'CRAS Mooca', 'Débora Batista Almeida', NULL, 'F', NULL, '1960-06-22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(113, NULL, 'CREAS Mooca', 'Priscila Batista Moreira', NULL, 'F', NULL, '1963-04-15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(114, NULL, 'CRAS Mooca', 'Gabriela Oliveira Barbosa', NULL, 'F', NULL, '1998-06-16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(115, NULL, 'CRAS Mooca', 'Elaine Carvalho Nunes', NULL, 'F', NULL, '1991-09-08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(116, '21825409133', 'CRAS Mooca', 'Jéssica Alves Moura', NULL, 'F', NULL, '1999-02-02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(117, '10948500504', 'CRAS Mooca', 'Luciana Gomes Andrade', NULL, 'F', 'Prefere não informar', '1976-11-20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(118, '20163348607', 'CRAS Mooca', 'Francisca Mendes Ferreira', NULL, 'F', NULL, '1979-01-15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(119, NULL, 'CRAS Belém', 'Josefa Batista Silva', NULL, 'F', NULL, '1968-02-04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(120, '23534702461', 'CRAS Mooca', 'Edna Fernandes Rodrigues', NULL, 'F', NULL, '1979-01-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(121, NULL, NULL, 'Adilson Ribeiro Costa', NULL, 'M', NULL, '1969-05-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(122, '28007618619', 'CRAS Mooca', 'Marcos Dias Ferreira', NULL, 'M', 'Prefere não informar', '1971-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(123, '11549776701', 'CRAS Mooca', 'Jéssica de Souza Pereira', NULL, 'F', NULL, '1986-04-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(124, '17443630193', 'CRAS Mooca', 'Fernanda de Almeida Carvalho', NULL, 'F', NULL, '1978-09-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(125, '19336775942', 'CRAS Mooca', 'Adriana Farias Monteiro', NULL, 'F', NULL, '1952-05-09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(126, '29436696095', 'CRAS Belém', 'Luciana Ribeiro Machado', NULL, 'F', NULL, '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL,
