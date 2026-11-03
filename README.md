@@ -379,6 +379,16 @@ A estrutura do banco relacional foi desenhada para alimentar *dashboards* execut
 
 ---
 
+## 8.4. Aplicações Analíticas com Inteligência Artificial (IA)
+
+Com o banco de dados populado e histórico consolidado, propõe-se a aplicação de modelos de IA para otimizar as operações socioassistenciais:
+
+* **Modelo Preditivo de Demanda por Cestas Básicas:** Algoritmo de regressão para prever picos de demanda por auxílio alimentar com base em datas comemorativas, inflação de alimentos e histórico de atendimentos, otimizando os pedidos de doação aos parceiros com antecedência.
+* **Classificação Automática e Recomendação de Triagem:** Modelo de Processamento de Linguagem Natural (NLP) que analisa o texto do campo `demanda_inicial` nos atendimentos e sugere automaticamente os tipos de encaminhamento externos (`tipo_encaminhamento`) ou a necessidade de inclusão imediata no PIA.
+* **Detecção Preditiva de Vulnerabilidade Crítica:** Modelo de *Machine Learning* para identificar famílias com maior risco de insegurança alimentar severa (cruzando ausência de renda, tamanho da família e dependentes PCDs), priorizando chamadas preventivas da equipe de assistência social.
+
+---
+
 ## 9. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
