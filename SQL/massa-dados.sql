@@ -818,10 +818,6 @@ INSERT INTO composicao_familiar (id_composicao, id_beneficiario, nome_familiar, 
 (348, 44, 'Luiza Andrade', 'Neto(a)', '1999-02-14', 'Ensino Superior Completo', 'Secretária', 1800.00),
 (349, 45, 'Augusto Santana', 'Neto(a)', '2001-07-05', 'Ensino Médio Completo', 'Estudante', 0.00),
 (350, 46, 'Olivia Souza', 'Neto(a)', '2004-09-18', 'Ensino Médio Completo', 'Estudante', 0.00);
--- ==========================================
--- 4.4 COMPOSIÇÃO FAMILIAR (Continuação e Fim - Registros 351 a 400)
--- ==========================================
-INSERT INTO composicao_familiar (id_composicao, id_beneficiario, nome_familiar, parentesco, data_nascimento, escolaridade, ocupacao, renda) VALUES
 (351, 47, 'Helena Alves', 'Neto(a)', '2006-03-12', 'Ensino Médio Completo', 'Estudante', 0.00),
 (352, 48, 'Matheus Ribeiro', 'Filho(a)', '2010-08-20', 'Ensino Fundamental Incompleto', 'Estudante', 0.00),
 (353, 49, 'Laura Freitas', 'Filho(a)', '2012-05-14', 'Ensino Fundamental Incompleto', 'Estudante', 0.00),
