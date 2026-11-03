@@ -27,7 +27,7 @@ INSERT INTO profissional_responsavel (id_profissional, nome, funcao, registro_pr
 (4, 'Roberto Almeida Nogueira', 'Presidente', 'SEM REGISTRO - Presidência');
 
 -- ==========================================
--- 4.2 BENEFICIARIO (Registros 1 a 50)
+-- 4.2 BENEFICIARIO
 -- ==========================================
 INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, nome_social, sexo, raca_cor, data_nascimento, naturalidade) VALUES
 (1, NULL, 'CRAS Mooca', 'ANONIMIZADO-1', NULL, 'M', NULL, '1943-01-01', NULL),
@@ -80,10 +80,6 @@ INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, n
 (48, '26391679132', 'CRAS Belém', 'Fernanda Carvalho Ribeiro', NULL, 'F', NULL, '1987-12-19', NULL),
 (49, '28103451119', 'CRAS Mooca', 'Francisca Ramos Freitas', NULL, 'F', NULL, '1985-11-04', NULL),
 (50, NULL, 'CRAS Mooca', 'Thiago de Lima Pereira', NULL, 'M', NULL, '1979-04-17', NULL);
--- ==========================================
--- 4.2 BENEFICIARIO (Continuação - Registros 51 a 100)
--- ==========================================
-INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, nome_social, sexo, raca_cor, data_nascimento, naturalidade, endereco_cep, logradouro, numero, complemento, bairro, cidade, uf, telefone, consentimento_lgpd_data, cadunico_atualizado_em, obs) VALUES
 (51, '13018358012', NULL, 'Severino Nunes Oliveira', NULL, 'M', NULL, '1988-08-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (52, '11462790290', 'CRAS Belém', 'Jéssica Ribeiro Lima', NULL, 'F', NULL, '2001-02-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (53, '11667453276', 'CRAS Mooca', 'Tatiane Gonçalves Marques', NULL, 'F', 'Prefere não informar', '1959-10-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -134,10 +130,6 @@ INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, n
 (98, '23042237378', 'CRAS Belém', 'Fernanda Barbosa Brito', NULL, 'F', NULL, '1978-09-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (99, NULL, 'CRAS Mooca', 'Valdir Brito Alves', NULL, 'M', NULL, '1952-05-09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (100, '13934677014', 'CRAS Mooca', 'Cristiane Mendes Vieira', NULL, 'F', 'Prefere não informar', '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
--- ==========================================
--- 4.2 BENEFICIARIO (Continuação - Registros 101 a 150)
--- ==========================================
-INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, nome_social, sexo, raca_cor, data_nascimento, naturalidade, endereco_cep, logradouro, numero, complemento, bairro, cidade, uf, telefone, consentimento_lgpd_data, cadunico_atualizado_em, obs) VALUES
 (101, NULL, 'CRAS Mooca', 'Márcia Farias Martins', NULL, 'F', NULL, '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (102, NULL, 'CREAS Mooca', 'Eduardo Dias Ribeiro', NULL, 'M', NULL, '1971-05-18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (103, '14097832847', 'CREAS Mooca', 'Adriana Correia Souza', NULL, 'F', NULL, '1986-04-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
