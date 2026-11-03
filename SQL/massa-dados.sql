@@ -156,10 +156,30 @@ INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, n
 (124, '17443630193', 'CRAS Mooca', 'Fernanda de Almeida Carvalho', NULL, 'F', NULL, '1978-09-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (125, '19336775942', 'CRAS Mooca', 'Adriana Farias Monteiro', NULL, 'F', NULL, '1952-05-09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (126, '29436696095', 'CRAS Belém', 'Luciana Ribeiro Machado', NULL, 'F', NULL, '1962-02-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL,
--- ==========================================
--- 4.2 BENEFICIARIO (Continuação - Registros 151 a 200)
--- ==========================================
-INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, nome_social, sexo, raca_cor, data_nascimento, naturalidade, endereco_cep, logradouro, numero, complemento, bairro, cidade, uf, telefone, consentimento_lgpd_data, cadunico_atualizado_em, obs) VALUES
+(127, 2, 'Isabela Vieira', '90123456789', '1989-02-13', 'Feminino', '901234567', 'SSP', 'SP', '(11) 98765-4347', 'isabela.vieira@email.com', 'Rua das Margaridas, 127', 'Jardim Florido', 'São Paulo', 'SP', '01234-127', 'Urbana', 'Branca', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-15'),
+(128, 5, 'Rodrigo Pinto', '01234567890', '1969-10-14', 'Masculino', '012345678', 'SSP', 'SP', '(11) 98765-4348', 'rodrigo.pinto@email.com', 'Rua dos Cravos, 128', 'Jardim Florido', 'São Paulo', 'SP', '01234-128', 'Urbana', 'Parda', 'Divorciada(o)', 'Ensino Fundamental Completo', 'Ativo', '2026-01-16'),
+(129, 3, 'Amanda Machado', '12345678901', '1976-09-03', 'Feminino', '123456789', 'SSP', 'SP', '(11) 98765-4349', 'amanda.machado@email.com', 'Rua das Orquídeas, 129', 'Jardim Florido', 'São Paulo', 'SP', '01234-129', 'Urbana', 'Preta', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-17'),
+(130, 1, 'Diego Gonçalves', '23456789012', '1996-01-27', 'Masculino', '234567890', 'SSP', 'SP', '(11) 98765-4350', 'diego.goncalves@email.com', 'Rua das Rosas, 130', 'Jardim Florido', 'São Paulo', 'SP', '01234-130', 'Urbana', 'Branca', 'Solteira(o)', 'Ensino Superior Completo', 'Ativo', '2026-01-18'),
+(131, 4, 'Camila Carvalho', '34567890123', '1951-05-09', 'Feminino', '345678901', 'SSP', 'SP', '(11) 98765-4351', 'camila.carvalho@email.com', 'Rua das Lตั้ง, 131', 'Jardim Florido', 'São Paulo', 'SP', '01234-131', 'Urbana', 'Parda', 'Viúva(o)', 'Ensino Fundamental Incompleto', 'Ativo', '2026-01-19'),
+(132, 2, 'Lucas Lopes', '45678901234', '2003-09-07', 'Masculino', '456789012', 'SSP', 'SP', '(11) 98765-4352', 'lucas.lopes@email.com', 'Rua das Margaridas, 132', 'Jardim Florido', 'São Paulo', 'SP', '01234-132', 'Urbana', 'Branca', 'Solteira(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-20'),
+(133, 5, 'Fernanda Moreira', '56789012345', '1987-12-01', 'Feminino', '567890123', 'SSP', 'SP', '(11) 98765-4353', 'fernanda.moreira@email.com', 'Rua dos Cravos, 133', 'Jardim Florido', 'São Paulo', 'SP', '01234-133', 'Urbana', 'Parda', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-21'),
+(134, 3, 'Thiago Costa', '67890123456', '1997-02-02', 'Masculino', '678901234', 'SSP', 'SP', '(11) 98765-4354', 'thiago.costa@email.com', 'Rua das Orquídeas, 134', 'Jardim Florido', 'São Paulo', 'SP', '01234-134', 'Urbana', 'Preta', 'Solteira(o)', 'Ensino Superior Incompleto', 'Ativo', '2026-01-22'),
+(135, 1, 'Patrícia Costa', '78901234567', '1978-03-05', 'Feminino', '789012345', 'SSP', 'SP', '(11) 98765-4355', 'patricia.costa@email.com', 'Rua das Rosas, 135', 'Jardim Florido', 'São Paulo', 'SP', '01234-135', 'Urbana', 'Branca', 'Divorciada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-23'),
+(136, 4, 'Gustavo Freitas', '89012345678', '1967-05-10', 'Masculino', '890123456', 'SSP', 'SP', '(11) 98765-4356', 'gustavo.freitas@email.com', 'Rua das Lตั้ง, 136', 'Jardim Florido', 'São Paulo', 'SP', '01234-136', 'Urbana', 'Parda', 'Casada(o)', 'Ensino Fundamental Incompleto', 'Ativo', '2026-01-24'),
+(137, 2, 'Vanessa Oliveira', '90123456780', '1973-01-18', 'Feminino', '901234568', 'SSP', 'SP', '(11) 98765-4357', 'vanessa.oliveira@email.com', 'Rua das Margaridas, 137', 'Jardim Florido', 'São Paulo', 'SP', '01234-137', 'Urbana', 'Branca', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-25'),
+(138, 5, 'Marcelo Lima', '01234567891', '1974-08-11', 'Masculino', '012345679', 'SSP', 'SP', '(11) 98765-4358', 'marcelo.lima@email.com', 'Rua dos Cravos, 138', 'Jardim Florido', 'São Paulo', 'SP', '01234-138', 'Urbana', 'Parda', 'Divorciada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-26'),
+(139, 3, 'Beatriz Ramos', '12345678902', '1949-02-14', 'Feminino', '123456780', 'SSP', 'SP', '(11) 98765-4359', 'beatriz.ramos@email.com', 'Rua das Orquídeas, 139', 'Jardim Florido', 'São Paulo', 'SP', '01234-139', 'Urbana', 'Preta', 'Viúva(o)', 'Ensino Fundamental Incompleto', 'Ativo', '2026-01-27'),
+(140, 1, 'Felipe Cardoso', '23456789013', '1977-01-15', 'Masculino', '234567891', 'SSP', 'SP', '(11) 98765-4360', 'felipe.cardoso@email.com', 'Rua das Rosas, 140', 'Jardim Florido', 'São Paulo', 'SP', '01234-140', 'Urbana', 'Branca', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-28'),
+(141, 4, 'Letícia Cavalcanti', '34567890124', '1986-04-03', 'Feminino', '345678902', 'SSP', 'SP', '(11) 98765-4361', 'leticia.cavalcanti@email.com', 'Rua das Lตั้ง, 141', 'Jardim Florido', 'São Paulo', 'SP', '01234-141', 'Urbana', 'Parda', 'Solteira(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-29'),
+(142, 2, 'Daniel Souza', '45678901235', '1990-09-12', 'Masculino', '456789013', 'SSP', 'SP', '(11) 98765-4362', 'daniel.souza@email.com', 'Rua das Margaridas, 142', 'Jardim Florido', 'São Paulo', 'SP', '01234-142', 'Urbana', 'Branca', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-30'),
+(143, 5, 'Aline Teixeira', '56789012346', '1979-11-30', 'Feminino', '567890124', 'SSP', 'SP', '(11) 98765-4363', 'aline.teixeira@email.com', 'Rua dos Cravos, 143', 'Jardim Florido', 'São Paulo', 'SP', '01234-143', 'Urbana', 'Parda', 'Divorciada(o)', 'Ensino Médio Completo', 'Ativo', '2026-01-31'),
+(144, 3, 'Matheus Rocha', '67890123457', '1952-08-23', 'Masculino', '678901235', 'SSP', 'SP', '(11) 98765-4364', 'matheus.rocha@email.com', 'Rua das Orquídeas, 144', 'Jardim Florido', 'São Paulo', 'SP', '01234-144', 'Urbana', 'Preta', 'Casada(o)', 'Ensino Fundamental Incompleto', 'Ativo', '2026-02-01'),
+(145, 1, 'Sônia Mendes', '78901234568', '1977-12-04', 'Feminino', '789012346', 'SSP', 'SP', '(11) 98765-4365', 'sonia.mendes@email.com', 'Rua das Rosas, 145', 'Jardim Florido', 'São Paulo', 'SP', '01234-145', 'Urbana', 'Branca', 'Viúva(o)', 'Ensino Médio Completo', 'Ativo', '2026-02-02'),
+(146, 4, 'Renato dos Santos', '89012345679', '1959-05-02', 'Masculino', '890123457', 'SSP', 'SP', '(11) 98765-4366', 'renato.santos@email.com', 'Rua das Lตั้ง, 146', 'Jardim Florido', 'São Paulo', 'SP', '01234-146', 'Urbana', 'Parda', 'Casada(o)', 'Ensino Fundamental Incompleto', 'Ativo', '2026-02-03'),
+(147, 2, 'Tatiana Costa', '90123456781', '1981-05-22', 'Feminino', '901234569', 'SSP', 'SP', '(11) 98765-4367', 'tatiana.costa@email.com', 'Rua das Margaridas, 147', 'Jardim Florido', 'São Paulo', 'SP', '01234-147', 'Urbana', 'Branca', 'Divorciada(o)', 'Ensino Médio Completo', 'Ativo', '2026-02-04'),
+(148, 5, 'Eduardo Marques', '01234567892', '1975-03-17', 'Masculino', '012345670', 'SSP', 'SP', '(11) 98765-4368', 'eduardo.marques@email.com', 'Rua dos Cravos, 148', 'Jardim Florido', 'São Paulo', 'SP', '01234-148', 'Urbana', 'Parda', 'Casada(o)', 'Ensino Médio Completo', 'Ativo', '2026-02-05'),
+(149, 3, 'Carolina Souza', '12345678903', '1994-10-02', 'Feminino', '123456781', 'SSP', 'SP', '(11) 98765-4369', 'carolina.souza@email.com', 'Rua das Orquídeas, 149', 'Jardim Florido', 'São Paulo', 'SP', '01234-149', 'Urbana', 'Preta', 'Solteira(o)', 'Ensino Superior Completo', 'Ativo', '2026-02-06'),
+(150, 1, 'Fábio Moreira', '23456789014', '1966-08-09', 'Masculino', '234567892', 'SSP', 'SP', '(11) 98765-4370', 'fabio.moreira@email.com', 'Rua das Rosas, 150', 'Jardim Florido', 'São Paulo', 'SP', '01234-150', 'Urbana', 'Branca', 'Casada(o)', 'Ensino Fundamental Incompleto', 'Ativo', '2026-02-07');
 (151, '29486241151', 'CRAS Mooca', 'Juliana Lima Santos', NULL, 'F', NULL, '1996-10-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (152, '18328369912', 'CRAS Belém', 'Rosângela Rocha Silva', NULL, 'F', NULL, '1984-01-25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (153, '18728659313', 'CRAS Mooca', 'Rodrigo Fernandes Ramos', NULL, 'M', NULL, '1997-05-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -210,10 +230,6 @@ INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, n
 (198, NULL, 'CRAS Belém', 'Michele Marques Brito', NULL, 'F', 'Prefere não informar', '1961-04-10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (199, '17830653116', 'CRAS Mooca', 'Márcia Ramos Andrade', NULL, 'F', NULL, '2003-11-16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (200, NULL, NULL, 'Adilson Cardoso Barbosa', NULL, 'M', NULL, '1984-09-02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
--- ==========================================
--- 4.2 BENEFICIARIO (Continuação - Registros 201 a 250)
--- ==========================================
-INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, nome_social, sexo, raca_cor, data_nascimento, naturalidade, endereco_cep, logradouro, numero, complemento, bairro, cidade, uf, telefone, consentimento_lgpd_data, cadunico_atualizado_em, obs) VALUES
 (201, NULL, NULL, 'Leticia Ramos Correia', NULL, 'F', NULL, '1991-03-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (202, NULL, 'CRAS Mooca', 'Vera Moura Cavalcanti', NULL, 'F', NULL, '1991-05-12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (203, NULL, NULL, 'João Araújo Mendes', NULL, 'M', NULL, '1974-03-08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -265,7 +281,7 @@ INSERT INTO beneficiario (id_beneficiario, nis, cras_creas_sas, nome_completo, n
 (249, NULL, NULL, 'Camila Vieira Soares', NULL, 'F', NULL, '1991-02-13', 'Feira de Santana', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (250, '18902896100', 'CRAS Belém', 'Letícia Pinto Alves', NULL, 'F', NULL, '1971-10-14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 -- ==========================================
--- 4.3 TRABALHO (Registos 1 a 60)
+-- 4.3 TRABALHO 
 -- ==========================================
 INSERT INTO trabalho (id_trabalho, id_beneficiario, situacao_ocupacional, profissao, renda_mensal, local_trabalho, desc_bico, obs) VALUES
 (1, 1, 'Aposentado / BPC', NULL, 1600.00, NULL, NULL, NULL),
