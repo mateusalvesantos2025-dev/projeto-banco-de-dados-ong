@@ -369,6 +369,16 @@ Foram estruturados indicadores-chave de desempenho (KPIs) objetivos para monitor
 
 ---
 
+## 8.3. Potencial para BI (Business Intelligence)
+
+A estrutura do banco relacional foi desenhada para alimentar *dashboards* executivos (desenvolvidos em ferramentas como Power BI, Metabase ou Looker Studio) divididos em três painéis principais:
+
+* **Painel de Atendimento e Triagem:** Exibe mapas de calor do perfil socioeconômico, gráficos de distribuição por bairro e pirâmide etária dos assistidos.
+* **Painel de Logística de Alimentos e Doações:** Compara as entradas de mantimentos registradas em `recebimento_doacao` contra o volume de saídas em `entrega_cesta`, emitindo alertas de oscilação de estoque.
+* **Painel de Acompanhamento Técnico e PIA:** Monitora a quantidade de planos individuais ativos, datas de reavaliação pendentes e volume de encaminhamentos externos realizados.
+
+---
+
 ## 9. Conclusão e Avaliação dos Integrantes
 
 ### Considerações Finais
