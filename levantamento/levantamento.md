@@ -45,27 +45,17 @@ Conforme as diretrizes exigidas para o levantamento, detalham-se abaixo as respo
 
 Abaixo encontra-se o registro fotográfico obtido durante a visita presencial às dependências da instituição, autorizado pela gestão para compor a documentação do projeto:
 
-<br>
+![Foto da Visita Presencial 1](./visita-ong-01.jpg)
+*Legenda: Imagem 1*
 
-![Foto da Visita Presencial à ONG - Imagem 1](levantamento/visita-ong-01.jpg)  
-Legenda: Imagem 1
+![Foto da Visita Presencial 2](./visita-ong-02.jpg)
+*Legenda: Imagem 2*
 
-<br>
+![Foto da Visita Presencial 3](./visita-ong-03.jpg)
+*Legenda: Imagem 3*
 
-![Foto da Visita Presencial à ONG - Imagem 2](levantamento/visita-ong-02.jpg)  
-Legenda: Imagem 2
+![Foto da Visita Presencial 4](./visita-ong-04.jpg)
+*Legenda: Imagem 4*
 
-<br>
-
-![Foto da Visita Presencial à ONG - Imagem 3](levantamento/visita-ong-03.jpg)  
-Legenda: Imagem 3
-
-<br>
-
-![Foto da Visita Presencial à ONG - Imagem 4](levantamento/visita-ong-04.jpg)  
-Legenda: Imagem 4
-
-<br>
-
-![Foto da Visita Presencial à ONG - Imagem 5](levantamento/visita-ong-05.jpg)  
-Legenda: Imagem 5
+![Foto da Visita Presencial 5](./visita-ong-05.jpg)
+*Legenda: Imagem 5*
