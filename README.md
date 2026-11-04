@@ -255,6 +255,7 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 * **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) ENTREGA_CESTA**: Um profissional pode registrar várias entregas de auxílios, e cada entrega é registrada por um único profissional.
 * **PROFISSIONAL_RESPONSAVEL (1,1) --- REGISTRA --- (0,n) RECEBIMENTO_DOACAO**: Um profissional da equipe pode registrar a entrada de doações de parceiros no sistema, e cada lote doado está vinculado a um profissional autorizador.
 
+> 📌 Para a documentação detalhada de cada atributo, tipos de dados e regras de validação por coluna, consulte o **[Dicionário de Dados do Projeto](./dicionario.md)**.
 
 ---
 
