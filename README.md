@@ -318,10 +318,10 @@ Para garantir a integridade estrutural, eliminar redundâncias e evitar anomalia
 ### 6.2. Implementação SQL e Scripts do Banco de Dados
 > Visão 6.2: Scripts para criação, povoamento e testes no SGBD MySQL 8.0+.
 
-* 📜 **Script de Estrutura e Consultas (`script.sql`):** Contém as instruções completas de criação da base de dados (`CREATE DATABASE`), tabelas (`CREATE TABLE`), restrições de integridade (`CHECK`, `FOREIGN KEY`, `UNIQUE`), além de todas as consultas gerenciais (`G01`–`G10`) e de auditoria (`A01`–`A08`). 
+* **Script de Estrutura e Consultas (`script.sql`):** Contém as instruções completas de criação da base de dados (`CREATE DATABASE`), tabelas (`CREATE TABLE`), restrições de integridade (`CHECK`, `FOREIGN KEY`, `UNIQUE`), além de todas as consultas gerenciais (`G01`–`G10`) e de auditoria (`A01`–`A08`). 
   * 👉 **[Acessar arquivo SQL/script.sql](./SQL/script.sql)**
 
-* 💾 **Script de Massa de Dados (`massa-dados.sql`):** Contém o povoamento volumétrico fictício e verossímil da organização, utilizado para validar a integridade relacional e testar as consultas gerenciais e de auditoria.
+* **Script de Massa de Dados (`massa-dados.sql`):** Contém o povoamento volumétrico fictício e verossímil da organização, utilizado para validar a integridade relacional e testar as consultas gerenciais e de auditoria.
   * 👉 **[Acessar arquivo SQL/massa-dados.sql](./SQL/massa-dados.sql)**
 
 ---
