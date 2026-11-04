@@ -259,10 +259,18 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 
 ---
 
-## 5. Diagrama Entidade-Relacionamento (DER)
-> Visão 5.1: O DER para a ONG
+## 5. Diagramas do Sistema: DER e Modelo Lógico
+> Visão 5.1: O DER e o Modelo Lógico da ONG desenvolvidos no software brModelo.
+
+### Diagrama Entidade-Relacionamento (DER Conceitual)
+Elaborado no software **brModelo**, apresenta a visão de alto nível do sistema da ONG, mapeando as entidades do negócio (`BENEFICIÁRIO`, `ATENDIMENTO`, `ENTREGA_CESTA`, `PIA`, etc.) e as suas interações, cardinalidades e atributos, estruturando a base conceitual do projeto.
 
 ![Diagrama Entidade-Relacionamento](diagrama-der.jpg)
+
+### Modelo Lógico (Relacional)
+Também construído no software **brModelo**, traduz o DER conceitual para a estrutura relacional do MySQL, definindo formalmente as tabelas, tipos de dados de cada coluna, chaves primárias (`PK`) sintéticas e chaves estrangeiras (`FK`) para assegurar a integridade referencial entre os registos.
+
+![Modelo Lógico do Banco de Dados](modelo-logico.jpg)
 
 ---
 
