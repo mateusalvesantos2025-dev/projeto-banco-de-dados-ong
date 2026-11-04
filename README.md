@@ -1,4 +1,4 @@
-# Modelagem Lógica e Física de Banco de Dados — Organização Social Nossa Senhora de Fátima 
+# Projeto de Banco de Dados: Do Modelo Conceitual à Implementação SQL — Organização Social Nossa Senhora de Fátima 
 
 **Integrantes / Autores:**
 * Gabriel Simões da Silva (RGM 4732733) - @Gabriel-Simoes2006
@@ -11,7 +11,7 @@
 
 # 0. Processo
 
-## Triagem dos dados e DER
+## Triagem dos dados
 
 O fluxo operacional da Organização Social Nossa Senhora de Fátima baseia-se no atendimento de portas abertas para a população em situação de vulnerabilidade. A partir da entrevista presencial realizada pela assistente social, é feito o preenchimento da ficha de triagem (coleta de dados pessoais, ocupacionais, composição familiar e demandas sociais). 
 
@@ -109,6 +109,8 @@ flowchart TD
 * **Descreva o porte:** Organização de pequeno porte, atendendo fixamente cerca de 250 famílias cadastradas na região. Conta com o Presidente e 5 voluntários recorrentes de forma fixa.
 * **Serviços e como dados eram gerados:** Triagem e atendimento social presencial, encaminhamentos para moradia, saúde mental (AMA, CAPS, UBS), assistência jurídica e moradia universitária, além de distribuição de cestas básicas. Os dados eram gerados exclusivamente em formato manual através de fichas de atendimento impressas.
 * **Problema a ser resolvido:** Centralização e digitalização das informações dos beneficiários. O controle atual é 100% físico e impresso, o que gera gargalos na troca de informações, risco de desgaste do papel e dificuldade na busca de históricos de atendimentos. O novo sistema eliminará a dependência do papel, garantindo agilidade e conformidade com a LGPD.
+* **Levantamento detalhado e fotos da visita:** O relatório completo e o registro fotográfico encontram-se disponíveis na pasta [levantamento/](./levantamento/).
+
 
 ---
 
@@ -257,14 +259,24 @@ As regras de negócio abaixo definem as restrições operacionais, validações 
 ---
 
 ## 5. Diagrama Entidade-Relacionamento (DER)
-> Visão 5.1: O seu DER para a ONG
+> Visão 5.1: O DER para a ONG
 
 ![Diagrama Entidade-Relacionamento](diagrama-der.jpg)
 
 ---
 
+### 5.2. Processo de Normalização (1FN, 2FN e 3FN)
+
+Para garantir a integridade estrutural, eliminar redundâncias e evitar anomalias de inserção, atualização ou exclusão, o modelo relacional foi submetido rigorosamente às três primeiras formas normais (1FN, 2FN e 3FN):
+
+* **1ª Forma Normal (1FN):** Garantiu-se que todos os atributos contivessem apenas valores atômicos e indivisíveis. Atributos multivalorados ou listas repetitivas que constavam nas fichas físicas (como múltiplos membros da família ou contatos de emergência) foram extraídos para tabelas dedicadas (`composicao_familiar` e `referencia_familiar`), eliminando grupos repetitivos.
+* **2ª Forma Normal (2FN):** A modelagem assegurou que a 1FN fosse atendida e que todos os atributos não-chave fossem total e funcionalmente dependentes da chave primária inteira. Atributos socioeconômicos e ocupacionais que dependiam parcialmente do beneficiário foram isolados em uma entidade própria (`trabalho`), evitando redundâncias em cadastros secundários.
+* **3ª Forma Normal (3FN):** O modelo cumpriu a 2FN e eliminou todas as dependências transitivas, garantindo que nenhum atributo não-chave dependa de outro atributo não-chave. Todas as informações derivam exclusivamente das respectivas chaves primárias de suas entidades, resultando em um banco de dados limpo, normalizado e otimizado para o SGBD MySQL v8.0+.
+
+---
+
 ## 6. Justificativa Técnica
-> Visão 6.1: Explicar as escolhas da modelagem do BD para a ONG.
+> Visão 6.1: As escolhas da modelagem do BD para a ONG.
 
 ### Escolha das Entidades e Atribuição de Atributos
 * **BENEFICIÁRIO:** Entidade central do sistema. Armazena os dados demográficos e de identificação individual do assistido (`cpf`, `nis`, `nome_completo`, `data_nascimento`, `escolaridade`, `pessoa_com_deficiencia`, `orientacao_sexual`, etc.). O endereço foi modelado para detalhamento geográfico.
