@@ -1,4 +1,4 @@
-# Projeto de Modelagem Conceitual (DER) - Organização Social Nossa Senhora de Fátima
+# Modelagem Lógica e Física de Banco de Dados — Organização Social Nossa Senhora de Fátima 
 
 **Integrantes / Autores:**
 * Gabriel Simões da Silva (RGM 4732733) - @Gabriel-Simoes2006
@@ -343,7 +343,7 @@ A implementação do banco de dados permite à diretoria técnica da ONG migrar 
 
 ---
 
-## 8.2. Indicadores e Métricas Gerenciais (KPIs)
+### 8.2. Indicadores e Métricas Gerenciais (KPIs)
 
 Foram estruturados indicadores-chave de desempenho (KPIs) objetivos para monitorar a saúde operacional e o impacto social das ações da ONG:
 
@@ -369,7 +369,7 @@ Foram estruturados indicadores-chave de desempenho (KPIs) objetivos para monitor
 
 ---
 
-## 8.3. Potencial para BI (Business Intelligence)
+### 8.3. Potencial para BI (Business Intelligence)
 
 A estrutura do banco relacional foi desenhada para alimentar *dashboards* executivos (desenvolvidos em ferramentas como Power BI, Metabase ou Looker Studio) divididos em três painéis principais:
 
@@ -379,7 +379,7 @@ A estrutura do banco relacional foi desenhada para alimentar *dashboards* execut
 
 ---
 
-## 8.4. Aplicações Analíticas com Inteligência Artificial (IA)
+### 8.4. Aplicações Analíticas com Inteligência Artificial (IA)
 
 Com o banco de dados populado e histórico consolidado, propõe-se a aplicação de modelos de IA para otimizar as operações socioassistenciais:
 
@@ -389,7 +389,7 @@ Com o banco de dados populado e histórico consolidado, propõe-se a aplicação
 
 ---
 
-## 8.5. Tabela de Rastreabilidade (Problema / KPI $\rightarrow$ Tabelas $\rightarrow$ Consulta SQL)
+### 8.5. Tabela de Rastreabilidade (Problema / KPI $\rightarrow$ Tabelas $\rightarrow$ Consulta SQL)
 
 Conforme as diretrizes técnicas do projeto, cada problema institucional mapeado e cada indicador estratégico (KPI) vincula-se diretamente às tabelas do banco de dados relacional e ao código de consulta SQL correspondente (`G01` a `G10` e `A01` a `A08` do script oficial):
 
