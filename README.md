@@ -7,6 +7,16 @@
 * Mateus Alves dos Santos (RGM 47435887) - @mateusalvesantos2025-dev
 * Washington de Souza Silva (RGM 49080156) - @washingtondesouzasilva1980-collab
 
+* * *
+
+## Vídeo de Apresentação
+
+> Defesa do Modelo Lógico: do papel ao banco de dados, com a demonstração das consultas no MySQL Workbench.
+
+[▶️ Assistir no https://youtu.be/smOM2vWxMVs?is=0PQ62R1Ruaz3v9Fb
+
+* * *
+
 ---
 
 # 0. Processo
